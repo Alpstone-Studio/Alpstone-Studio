@@ -76,12 +76,12 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // ==========================================
-// SIMPLE FADE IN ON SCROLL
+// MODERN SCROLL ANIMATIONS
 // ==========================================
 
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -92,8 +92,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe service cards and portfolio items
-const animatedElements = document.querySelectorAll('.service-card, .portfolio-item');
+// Observe all elements with fade-in-up animation
+const animatedElements = document.querySelectorAll('.fade-in-up');
 animatedElements.forEach(el => {
     observer.observe(el);
 });
