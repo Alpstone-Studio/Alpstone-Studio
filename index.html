@@ -1,1 +1,982 @@
-empty first file
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpstone Studio - Branding Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .version-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .version-selector select {
+            padding: 10px 15px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .version {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .version.active {
+            display: block;
+        }
+
+        /* Version 1: Alpine Majesty - Montagnes classiques */
+        .alpine-majesty {
+            background: linear-gradient(135deg, #1a4d7a 0%, #2d5f7f 50%, #4a7a9e 100%);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .alpine-majesty .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .alpine-majesty .logo {
+            font-size: 4em;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .alpine-majesty .mountain-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        .alpine-majesty .tagline {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .alpine-majesty .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .alpine-majesty .feature-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Version 2: Swiss Precision - Minimaliste */
+        .swiss-precision {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 80px 20px;
+        }
+
+        .swiss-precision .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .swiss-precision .logo {
+            font-size: 3.5em;
+            font-weight: 200;
+            letter-spacing: 15px;
+            margin-bottom: 10px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-align: center;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 20px;
+        }
+
+        .swiss-precision .tagline {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 300;
+            margin: 40px 0;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .swiss-precision .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: #1a1a1a;
+            margin-top: 60px;
+        }
+
+        .swiss-precision .grid-item {
+            background: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        /* Version 3: Summit Luxury - Luxe moderne */
+        .summit-luxury {
+            background: linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: #d4af37;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .summit-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><polygon points="0,600 400,200 800,400 1200,100 1200,600" fill="%23ffffff" opacity="0.03"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .summit-luxury .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .summit-luxury .logo {
+            font-size: 5em;
+            font-weight: 300;
+            letter-spacing: 20px;
+            margin-bottom: 30px;
+            font-family: 'Garamond', serif;
+            text-transform: uppercase;
+        }
+
+        .summit-luxury .accent {
+            color: #d4af37;
+            font-size: 0.3em;
+            display: block;
+            letter-spacing: 5px;
+            margin-top: 20px;
+        }
+
+        .summit-luxury .description {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 40px auto;
+            line-height: 1.8;
+            color: #c0c0c0;
+            font-weight: 300;
+        }
+
+        /* Version 4: Crystal Peak - Clean & Premium */
+        .crystal-peak {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            padding: 80px 20px;
+        }
+
+        .crystal-peak .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .crystal-peak .logo-container {
+            background: white;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .crystal-peak .logo {
+            font-size: 2.5em;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .crystal-peak .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .crystal-peak .cards {
+            display: flex;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .crystal-peak .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .crystal-peak .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Version 5: Alpine Tech - Moderne & Technologique */
+        .alpine-tech {
+            background: #0f0f0f;
+            color: #00ff88;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alpine-tech::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 136, 0.03) 2px,
+                    rgba(0, 255, 136, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 136, 0.03) 2px,
+                    rgba(0, 255, 136, 0.03) 4px
+                );
+        }
+
+        .alpine-tech .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alpine-tech .logo {
+            font-size: 4em;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .alpine-tech .glitch {
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(0, 255, 136, 0.8), -2px 0 #ff00ff, 2px 0 #00ffff; }
+        }
+
+        .alpine-tech .terminal {
+            background: rgba(0, 20, 10, 0.8);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 60px;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+        }
+
+        .alpine-tech .terminal-line {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        .alpine-tech .prompt {
+            color: #00ff88;
+            margin-right: 10px;
+        }
+
+        /* Version 6: Heritage Premium - Traditionnel suisse */
+        .heritage-premium {
+            background: #8b0000;
+            color: #ffffff;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .heritage-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: white;
+        }
+
+        .heritage-premium::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: white;
+        }
+
+        .heritage-premium .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .heritage-premium .crest {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: #8b0000;
+            box-shadow: 0 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .heritage-premium .logo {
+            font-size: 3.5em;
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+        .heritage-premium .cross {
+            font-size: 2em;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .heritage-premium .motto {
+            font-size: 1.2em;
+            font-style: italic;
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        /* Version 7: Nordic Minimalism */
+        .nordic-minimal {
+            background: #fafafa;
+            color: #2d3436;
+            padding: 100px 20px;
+        }
+
+        .nordic-minimal .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nordic-minimal .logo {
+            font-size: 4.5em;
+            font-weight: 200;
+            letter-spacing: 25px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #2d3436;
+        }
+
+        .nordic-minimal .divider {
+            width: 100px;
+            height: 3px;
+            background: #74b9ff;
+            margin: 40px auto;
+        }
+
+        .nordic-minimal .content {
+            display: flex;
+            gap: 60px;
+            margin-top: 80px;
+            align-items: center;
+        }
+
+        .nordic-minimal .text {
+            flex: 1;
+            font-size: 1.1em;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .nordic-minimal .mountain-graphic {
+            flex: 1;
+            height: 300px;
+            background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 100%);
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        }
+
+        /* Version 8: Glacier Modern */
+        .glacier-modern {
+            background: linear-gradient(to bottom, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+            color: #0d47a1;
+            padding: 80px 20px;
+        }
+
+        .glacier-modern .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .glacier-modern .logo {
+            font-size: 5em;
+            font-weight: 100;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #42a5f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glacier-modern .ice-line {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #42a5f5, transparent);
+            margin: 30px auto;
+        }
+
+        .glacier-modern .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .glacier-modern .service {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(13,71,161,0.2);
+        }
+
+        /* Version 9: Luxury Monochrome */
+        .luxury-mono {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 100px 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .luxury-mono .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ffffff;
+            padding: 80px 40px;
+        }
+
+        .luxury-mono .logo {
+            font-size: 4em;
+            font-weight: 300;
+            letter-spacing: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 30px;
+        }
+
+        .luxury-mono .etabli {
+            font-size: 0.9em;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+            color: #999;
+        }
+
+        .luxury-mono .separator {
+            width: 50px;
+            height: 1px;
+            background: #ffffff;
+            margin: 40px auto;
+        }
+
+        /* Version 10: Vibrant Swiss */
+        .vibrant-swiss {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 25%, #c44569 50%, #a8c0ff 75%, #3742fa 100%);
+            color: white;
+            padding: 80px 20px;
+        }
+
+        .vibrant-swiss .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .vibrant-swiss .logo {
+            font-size: 5em;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .vibrant-swiss .shapes {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .vibrant-swiss .shape {
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .vibrant-swiss .shape:nth-child(1) { border-radius: 50%; }
+        .vibrant-swiss .shape:nth-child(2) { transform: rotate(45deg); }
+        .vibrant-swiss .shape:nth-child(3) { clip-path: polygon(50% 0%, 100% 100%, 0% 100%); }
+
+        .vibrant-swiss .shape:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .version-selector {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+            }
+
+            .nordic-minimal .content {
+                flex-direction: column;
+            }
+
+            .glacier-modern .services {
+                grid-template-columns: 1fr;
+            }
+
+            .alpine-majesty .logo,
+            .swiss-precision .logo,
+            .summit-luxury .logo,
+            .crystal-peak .logo,
+            .alpine-tech .logo {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="version-selector">
+        <select id="versionSelect" onchange="changeVersion()">
+            <option value="1">V1: Alpine Majesty 🏔️</option>
+            <option value="2">V2: Swiss Precision ⚙️</option>
+            <option value="3">V3: Summit Luxury ✨</option>
+            <option value="4">V4: Crystal Peak 💎</option>
+            <option value="5">V5: Alpine Tech 🌐</option>
+            <option value="6">V6: Heritage Premium 🇨🇭</option>
+            <option value="7">V7: Nordic Minimalism ❄️</option>
+            <option value="8">V8: Glacier Modern 🧊</option>
+            <option value="9">V9: Luxury Monochrome 🎩</option>
+            <option value="10">V10: Vibrant Swiss 🎨</option>
+        </select>
+    </div>
+
+    <!-- Version 1: Alpine Majesty -->
+    <div class="version alpine-majesty active" id="version1">
+        <div class="container">
+            <div class="mountain-icon">⛰️</div>
+            <h1 class="logo">ALPSTONE</h1>
+            <p class="tagline">Studio de développement web d'exception</p>
+            <p style="font-size: 1.2em; max-width: 700px; margin: 20px auto; line-height: 1.8;">
+                Au cœur de la Suisse romande, nous sculptons des expériences digitales aussi majestueuses que nos Alpes.
+            </p>
+            <div class="features">
+                <div class="feature-card">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">🎯</h3>
+                    <h3 style="margin-bottom: 10px;">Élégance</h3>
+                    <p>Design luxueux et raffiné</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">💎</h3>
+                    <h3 style="margin-bottom: 10px;">Qualité Suisse</h3>
+                    <p>Précision et excellence</p>
+                </div>
+                <div class="feature-card">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">💰</h3>
+                    <h3 style="margin-bottom: 10px;">Prix Accessibles</h3>
+                    <p>Luxe à portée de main</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 2: Swiss Precision -->
+    <div class="version swiss-precision" id="version2">
+        <div class="container">
+            <h1 class="logo">ALPSTONE</h1>
+            <p class="tagline">PRÉCISION · ÉLÉGANCE · INNOVATION</p>
+            <p style="text-align: center; max-width: 600px; margin: 40px auto; font-size: 1.1em; line-height: 1.8; color: #333;">
+                Nous concevons des sites web avec la précision d'une manufacture horlogère suisse.
+                Chaque pixel compte, chaque interaction est pensée.
+            </p>
+            <div class="grid">
+                <div class="grid-item">
+                    <h3 style="font-size: 2em; margin-bottom: 20px;">01</h3>
+                    <h4 style="margin-bottom: 10px; font-weight: 600;">STRATÉGIE</h4>
+                    <p style="color: #666;">Analyse et conception</p>
+                </div>
+                <div class="grid-item">
+                    <h3 style="font-size: 2em; margin-bottom: 20px;">02</h3>
+                    <h4 style="margin-bottom: 10px; font-weight: 600;">DESIGN</h4>
+                    <p style="color: #666;">Interface premium</p>
+                </div>
+                <div class="grid-item">
+                    <h3 style="font-size: 2em; margin-bottom: 20px;">03</h3>
+                    <h4 style="margin-bottom: 10px; font-weight: 600;">DÉVELOPPEMENT</h4>
+                    <p style="color: #666;">Code sur mesure</p>
+                </div>
+                <div class="grid-item">
+                    <h3 style="font-size: 2em; margin-bottom: 20px;">04</h3>
+                    <h4 style="margin-bottom: 10px; font-weight: 600;">EXCELLENCE</h4>
+                    <p style="color: #666;">Support continu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 3: Summit Luxury -->
+    <div class="version summit-luxury" id="version3">
+        <div class="container">
+            <h1 class="logo">
+                ALPSTONE
+                <span class="accent">STUDIO</span>
+            </h1>
+            <p class="description">
+                Depuis les sommets de la Suisse romande, nous créons des expériences web d'exception.
+                Notre vision allie le prestige des Alpes à l'innovation digitale,
+                offrant à vos clients une présence en ligne aussi impressionnante qu'abordable.
+            </p>
+            <div style="margin-top: 60px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; margin-bottom: 10px;">🏔️</div>
+                    <div style="font-size: 1.2em;">Altitude</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; margin-bottom: 10px;">👑</div>
+                    <div style="font-size: 1.2em;">Prestige</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
+                    <div style="font-size: 1.2em;">Performance</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 4: Crystal Peak -->
+    <div class="version crystal-peak" id="version4">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">A</div>
+            </div>
+            <h2 class="subtitle">Alpstone Studio</h2>
+            <p style="font-size: 1.2em; max-width: 700px; margin: 20px auto; line-height: 1.8;">
+                Votre partenaire digital en Suisse romande pour des sites web cristallins,
+                élégants et accessibles.
+            </p>
+            <div class="cards">
+                <div class="card">
+                    <h3 style="font-size: 2.5em; margin-bottom: 20px;">🎨</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.5em;">Design Premium</h3>
+                    <p style="color: #666; line-height: 1.6;">
+                        Interfaces modernes qui reflètent l'excellence de votre marque
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 2.5em; margin-bottom: 20px;">⚙️</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.5em;">Tech de Pointe</h3>
+                    <p style="color: #666; line-height: 1.6;">
+                        Solutions web performantes et évolutives
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 2.5em; margin-bottom: 20px;">💼</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.5em;">Prix Justes</h3>
+                    <p style="color: #666; line-height: 1.6;">
+                        Qualité suisse sans compromis sur le budget
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 5: Alpine Tech -->
+    <div class="version alpine-tech" id="version5">
+        <div class="container">
+            <h1 class="logo glitch">ALPSTONE_</h1>
+            <p style="text-align: center; font-size: 1.5em; margin-bottom: 20px; color: #00ff88;">
+                &lt;studio type="web" location="swiss_romande" /&gt;
+            </p>
+            <div class="terminal">
+                <div class="terminal-line">
+                    <span class="prompt">$</span> cat mission.txt
+                </div>
+                <div class="terminal-line" style="color: #fff; margin-left: 20px;">
+                    Développement web haut de gamme pour entreprises suisses
+                </div>
+                <div class="terminal-line" style="margin-top: 20px;">
+                    <span class="prompt">$</span> ls services/
+                </div>
+                <div class="terminal-line" style="color: #fff; margin-left: 20px;">
+                    design_premium.exe&nbsp;&nbsp;performance_optimale.exe&nbsp;&nbsp;prix_accessible.exe
+                </div>
+                <div class="terminal-line" style="margin-top: 20px;">
+                    <span class="prompt">$</span> echo $QUALITE
+                </div>
+                <div class="terminal-line" style="color: #00ff88; margin-left: 20px;">
+                    SWISS_MADE ✓
+                </div>
+                <div class="terminal-line" style="margin-top: 20px;">
+                    <span class="prompt">$</span> ./alpstone --mountain-mode --luxury-enabled
+                </div>
+                <div class="terminal-line" style="color: #00ff88; margin-left: 20px;">
+                    ✓ Votre projet web est prêt à conquérir les sommets_
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 6: Heritage Premium -->
+    <div class="version heritage-premium" id="version6">
+        <div class="container">
+            <div class="crest">⛰️</div>
+            <h1 class="logo">ALPSTONE</h1>
+            <div class="cross">✚</div>
+            <p class="motto">
+                "Tradition Suisse · Innovation Digitale"
+            </p>
+            <p style="font-size: 1.2em; max-width: 700px; margin: 40px auto; line-height: 1.9;">
+                Fondé sur les valeurs d'excellence et de qualité suisse, Alpstone Studio
+                perpétue la tradition du savoir-faire artisanal dans l'ère numérique.
+                Nous offrons à nos clients le prestige et la fiabilité helvétique
+                à des tarifs accessibles.
+            </p>
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div>
+                    <h3 style="font-size: 1.5em; margin-bottom: 10px;">Héritage</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Qualité intemporelle</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.5em; margin-bottom: 10px;">Excellence</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Standards élevés</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.5em; margin-bottom: 10px;">Accessibilité</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Prix démocratiques</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 7: Nordic Minimalism -->
+    <div class="version nordic-minimal" id="version7">
+        <div class="container">
+            <h1 class="logo">ALPSTONE</h1>
+            <div class="divider"></div>
+            <p style="text-align: center; font-size: 1.3em; max-width: 600px; margin: 0 auto; line-height: 2; font-weight: 300;">
+                L'essence du design suisse. Épuré, fonctionnel, intemporel.
+            </p>
+            <div class="content">
+                <div class="text">
+                    <p style="margin-bottom: 30px;">
+                        Dans la pure tradition du design scandinave et suisse, nous créons
+                        des sites web où chaque élément a sa raison d'être.
+                    </p>
+                    <p style="margin-bottom: 30px;">
+                        Pas de superflu. Que de l'essentiel.
+                    </p>
+                    <p>
+                        Pour les entreprises qui valorisent la clarté et l'authenticité.
+                    </p>
+                </div>
+                <div class="mountain-graphic"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 8: Glacier Modern -->
+    <div class="version glacier-modern" id="version8">
+        <div class="container">
+            <h1 class="logo">ALPSTONE</h1>
+            <div class="ice-line"></div>
+            <p style="font-size: 1.4em; max-width: 700px; margin: 20px auto; line-height: 1.8;">
+                Comme les glaciers qui sculptent nos montagnes, nous façonnons votre présence digitale
+                avec patience, précision et vision à long terme.
+            </p>
+            <div class="services">
+                <div class="service">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">🎯</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3em;">Stratégie</h3>
+                    <p style="color: #0d47a1; line-height: 1.6;">
+                        Vision claire et objectifs mesurables
+                    </p>
+                </div>
+                <div class="service">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">✨</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3em;">Création</h3>
+                    <p style="color: #0d47a1; line-height: 1.6;">
+                        Design qui capte l'attention
+                    </p>
+                </div>
+                <div class="service">
+                    <h3 style="font-size: 2em; margin-bottom: 15px;">🚀</h3>
+                    <h3 style="margin-bottom: 15px; font-size: 1.3em;">Évolution</h3>
+                    <p style="color: #0d47a1; line-height: 1.6;">
+                        Croissance continue de votre projet
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version 9: Luxury Monochrome -->
+    <div class="version luxury-mono" id="version9">
+        <div class="container">
+            <div class="etabli">EST. 2024</div>
+            <h1 class="logo">ALPSTONE</h1>
+            <div class="separator"></div>
+            <p style="font-size: 1.2em; line-height: 2; margin: 40px 0; font-weight: 300; letter-spacing: 1px;">
+                STUDIO DE DÉVELOPPEMENT WEB
+            </p>
+            <p style="font-size: 1em; line-height: 2; margin: 40px 0; font-weight: 300; color: #ccc;">
+                Suisse Romande
+            </p>
+            <div class="separator"></div>
+            <p style="font-size: 1.1em; line-height: 1.9; margin: 50px 0; font-style: italic;">
+                "L'élégance n'est pas se faire remarquer, mais être impossible à oublier."
+            </p>
+            <p style="font-size: 0.95em; line-height: 1.8; color: #999;">
+                Nous créons des expériences digitales mémorables pour les entreprises
+                qui refusent la médiocrité. Design raffiné, technologie de pointe,
+                et une approche tarifaire qui rend le luxe accessible.
+            </p>
+        </div>
+    </div>
+
+    <!-- Version 10: Vibrant Swiss -->
+    <div class="version vibrant-swiss" id="version10">
+        <div class="container">
+            <h1 class="logo">ALPSTONE</h1>
+            <p style="font-size: 1.8em; margin-bottom: 30px; font-weight: 300; letter-spacing: 2px;">
+                Créativité · Innovation · Passion
+            </p>
+            <p style="font-size: 1.2em; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+                Nous apportons de la couleur et de l'énergie au web suisse !
+                Des sites audacieux qui se démarquent, tout en conservant
+                la qualité et la précision suisse.
+            </p>
+            <div class="shapes">
+                <div class="shape">DESIGN</div>
+                <div class="shape" style="padding: 20px;">TECH</div>
+                <div class="shape">WEB</div>
+            </div>
+            <p style="font-size: 1.3em; margin-top: 60px; font-weight: 600;">
+                🎨 Osez être différent · 🚀 Lancez-vous · 💎 Brillez en ligne
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function changeVersion() {
+            const select = document.getElementById('versionSelect');
+            const versions = document.querySelectorAll('.version');
+
+            versions.forEach(v => v.classList.remove('active'));
+
+            const selectedVersion = document.getElementById('version' + select.value);
+            selectedVersion.classList.add('active');
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Navigation par clavier (flèches)
+        document.addEventListener('keydown', function(e) {
+            const select = document.getElementById('versionSelect');
+            const currentValue = parseInt(select.value);
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                if (currentValue < 10) {
+                    select.value = currentValue + 1;
+                    changeVersion();
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                if (currentValue > 1) {
+                    select.value = currentValue - 1;
+                    changeVersion();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
