@@ -76,84 +76,26 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // ==========================================
-// SCROLL ANIMATIONS - FADE IN (FIXED)
+// SIMPLE FADE IN ON SCROLL
 // ==========================================
 
 const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
+    threshold: 0.1,
+    rootMargin: '0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-visible');
+            entry.target.classList.add('visible');
         }
     });
 }, observerOptions);
 
-// Observe all service cards, portfolio items, etc.
-const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .stat-item');
+// Observe service cards and portfolio items
+const animatedElements = document.querySelectorAll('.service-card, .portfolio-item');
 animatedElements.forEach(el => {
-    el.classList.add('fade-in');
     observer.observe(el);
-});
-
-// ==========================================
-// PARALLAX SCROLL EFFECTS (SUBTLE)
-// ==========================================
-
-let ticking = false;
-
-function updateParallax() {
-    const scrolled = window.pageYOffset;
-
-    // Parallax for section headers - very subtle
-    const sectionHeaders = document.querySelectorAll('.section-header');
-    sectionHeaders.forEach(header => {
-        const rect = header.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isVisible) {
-            const offset = (scrolled - header.offsetTop + window.innerHeight) * 0.015;
-            header.style.transform = `translateY(${offset}px)`;
-        }
-    });
-
-    // Parallax for about image
-    const aboutImage = document.querySelector('.about-image-wrapper');
-    if (aboutImage) {
-        const rect = aboutImage.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isVisible) {
-            const offset = (scrolled - aboutImage.offsetTop + window.innerHeight) * 0.02;
-            aboutImage.style.transform = `translateY(${offset}px)`;
-        }
-    }
-
-    ticking = false;
-}
-
-function requestParallaxUpdate() {
-    if (!ticking) {
-        requestAnimationFrame(updateParallax);
-        ticking = true;
-    }
-}
-
-// Only enable parallax on desktop/tablet
-if (window.innerWidth > 768) {
-    window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
-}
-
-// Disable parallax on resize if mobile
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768) {
-        window.removeEventListener('scroll', requestParallaxUpdate);
-    } else {
-        window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
-    }
 });
 
 // ==========================================
@@ -180,32 +122,6 @@ window.addEventListener('scroll', () => {
 });
 
 // ==========================================
-// LOADING ANIMATION
-// ==========================================
-
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.3s ease';
-
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 50);
-});
-
-// ==========================================
-// PORTFOLIO ITEM INTERACTIONS
-// ==========================================
-
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-portfolioItems.forEach(item => {
-    item.addEventListener('click', () => {
-        // You can add modal or detailed view functionality here
-        console.log('Portfolio item clicked');
-    });
-});
-
-// ==========================================
 // SCROLL TO TOP ON PAGE LOAD
 // ==========================================
 
@@ -214,22 +130,3 @@ if (history.scrollRestoration) {
 }
 
 window.scrollTo(0, 0);
-
-// ==========================================
-// HERO CONTENT SUBTLE ANIMATION
-// ==========================================
-
-const heroContent = document.querySelector('.hero-content');
-if (heroContent) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        // Very subtle fade and move on scroll
-        const opacity = 1 - (scrolled * 0.0015);
-        const translateY = scrolled * 0.2;
-
-        if (opacity > 0.3) {
-            heroContent.style.opacity = opacity;
-            heroContent.style.transform = `translateY(${translateY}px)`;
-        }
-    }, { passive: true });
-}
