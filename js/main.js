@@ -76,7 +76,7 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // ==========================================
-// SCROLL ANIMATIONS - FADE IN
+// SCROLL ANIMATIONS - FADE IN (FIXED)
 // ==========================================
 
 const observerOptions = {
@@ -87,8 +87,7 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('fade-in-visible');
         }
     });
 }, observerOptions);
@@ -96,34 +95,18 @@ const observer = new IntersectionObserver((entries) => {
 // Observe all service cards, portfolio items, etc.
 const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .stat-item');
 animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.classList.add('fade-in');
     observer.observe(el);
 });
 
 // ==========================================
-// PARALLAX SCROLL EFFECTS
+// PARALLAX SCROLL EFFECTS (SUBTLE)
 // ==========================================
 
 let ticking = false;
 
 function updateParallax() {
     const scrolled = window.pageYOffset;
-
-    // Parallax for service cards - subtle movement
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-        if (isVisible) {
-            // Alternate direction for visual interest
-            const direction = index % 2 === 0 ? 1 : -1;
-            const offset = (scrolled - card.offsetTop + window.innerHeight) * 0.03 * direction;
-            card.style.transform = `translateY(${offset}px)`;
-        }
-    });
 
     // Parallax for section headers - very subtle
     const sectionHeaders = document.querySelectorAll('.section-header');
@@ -132,26 +115,22 @@ function updateParallax() {
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
         if (isVisible) {
-            const offset = (scrolled - header.offsetTop + window.innerHeight) * 0.02;
+            const offset = (scrolled - header.offsetTop + window.innerHeight) * 0.015;
             header.style.transform = `translateY(${offset}px)`;
         }
     });
 
-    // Parallax for portfolio items
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach((item, index) => {
-        const rect = item.getBoundingClientRect();
+    // Parallax for about image
+    const aboutImage = document.querySelector('.about-image-wrapper');
+    if (aboutImage) {
+        const rect = aboutImage.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
         if (isVisible) {
-            const direction = index % 3 === 0 ? 1 : (index % 3 === 1 ? -1 : 0.5);
-            const offset = (scrolled - item.offsetTop + window.innerHeight) * 0.025 * direction;
-            const portfolioImage = item.querySelector('.portfolio-image');
-            if (portfolioImage) {
-                portfolioImage.style.transform = `translateY(${offset}px)`;
-            }
+            const offset = (scrolled - aboutImage.offsetTop + window.innerHeight) * 0.02;
+            aboutImage.style.transform = `translateY(${offset}px)`;
         }
-    });
+    }
 
     ticking = false;
 }
@@ -206,7 +185,7 @@ window.addEventListener('scroll', () => {
 
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.4s ease';
+    document.body.style.transition = 'opacity 0.3s ease';
 
     setTimeout(() => {
         document.body.style.opacity = '1';
@@ -237,18 +216,18 @@ if (history.scrollRestoration) {
 window.scrollTo(0, 0);
 
 // ==========================================
-// HERO CONTENT ANIMATION
+// HERO CONTENT SUBTLE ANIMATION
 // ==========================================
 
 const heroContent = document.querySelector('.hero-content');
 if (heroContent) {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        // Subtle fade and move on scroll
-        const opacity = 1 - (scrolled * 0.002);
-        const translateY = scrolled * 0.3;
+        // Very subtle fade and move on scroll
+        const opacity = 1 - (scrolled * 0.0015);
+        const translateY = scrolled * 0.2;
 
-        if (opacity > 0) {
+        if (opacity > 0.3) {
             heroContent.style.opacity = opacity;
             heroContent.style.transform = `translateY(${translateY}px)`;
         }
