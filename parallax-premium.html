@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpstone Studio - Premium Mountain Parallax</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir-profond: #111111;
+            --accent-mineral: #8A3F99;
+            --gris-pierre: #4a4a4a;
+            --gris-clair: #e8e8e8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: var(--gris-clair);
+            overflow-x: hidden;
+        }
+
+        /* Parallax Container */
+        .parallax-section {
+            height: 200vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sky Gradient */
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                #0a0a1f 0%,
+                #1a1a3a 20%,
+                #2a2550 40%,
+                #3a3565 60%,
+                #4a4578 70%,
+                #6a5a8a 85%,
+                #8a6f9f 100%
+            );
+            z-index: 1;
+        }
+
+        /* Stars */
+        .stars-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Shooting Star */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            animation: shoot 3s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(300px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        /* Moon */
+        .moon {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0);
+            box-shadow:
+                0 0 60px rgba(255, 255, 255, 0.4),
+                inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            z-index: 4;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+        }
+
+        .cloud-1 {
+            width: 200px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation: float-cloud-1 60s linear infinite;
+        }
+
+        .cloud-1::before {
+            width: 100px;
+            height: 60px;
+            top: -30px;
+            left: 30px;
+        }
+
+        .cloud-1::after {
+            width: 80px;
+            height: 50px;
+            top: -20px;
+            right: 30px;
+        }
+
+        .cloud-2 {
+            width: 150px;
+            height: 50px;
+            top: 30%;
+            right: 20%;
+            animation: float-cloud-2 80s linear infinite;
+        }
+
+        .cloud-2::before {
+            width: 80px;
+            height: 50px;
+            top: -25px;
+            left: 20px;
+        }
+
+        @keyframes float-cloud-1 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100vw); }
+        }
+
+        @keyframes float-cloud-2 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100vw); }
+        }
+
+        /* Mountain Layers - 7 layers for extreme depth */
+        .mountain-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+        }
+
+        /* Layer 1 - Furthest back */
+        .mountain-1 {
+            z-index: 5;
+        }
+
+        .mountain-1 svg {
+            filter: blur(3px);
+            opacity: 0.3;
+        }
+
+        /* Layer 2 */
+        .mountain-2 {
+            z-index: 6;
+        }
+
+        .mountain-2 svg {
+            filter: blur(2px);
+            opacity: 0.4;
+        }
+
+        /* Layer 3 */
+        .mountain-3 {
+            z-index: 7;
+        }
+
+        .mountain-3 svg {
+            filter: blur(1.5px);
+            opacity: 0.5;
+        }
+
+        /* Layer 4 */
+        .mountain-4 {
+            z-index: 8;
+        }
+
+        .mountain-4 svg {
+            filter: blur(1px);
+            opacity: 0.6;
+        }
+
+        /* Layer 5 */
+        .mountain-5 {
+            z-index: 9;
+        }
+
+        .mountain-5 svg {
+            opacity: 0.75;
+        }
+
+        /* Layer 6 */
+        .mountain-6 {
+            z-index: 10;
+        }
+
+        .mountain-6 svg {
+            opacity: 0.85;
+        }
+
+        /* Layer 7 - Front */
+        .mountain-7 {
+            z-index: 11;
+        }
+
+        .mountain-7 svg {
+            opacity: 0.95;
+        }
+
+        /* Fog layers */
+        .fog {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            z-index: 12;
+            pointer-events: none;
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(138, 63, 153, 0.3) 0%,
+                rgba(138, 63, 153, 0.15) 50%,
+                transparent 100%
+            );
+            animation: fog-move 30s linear infinite;
+        }
+
+        .fog-layer:nth-child(2) {
+            animation: fog-move 40s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        @keyframes fog-move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Snow particles */
+        .snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 13;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Content */
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            text-align: center;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+            perspective: 1000px;
+        }
+
+        .logo-3d {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            25% { transform: translateY(-20px) rotateX(10deg) rotateY(10deg); }
+            50% { transform: translateY(0) rotateX(0deg) rotateY(20deg); }
+            75% { transform: translateY(-20px) rotateX(-10deg) rotateY(10deg); }
+        }
+
+        .logo-shape {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent-mineral), #6a4a7a);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            box-shadow:
+                0 0 60px rgba(138, 63, 153, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .main-title {
+            font-size: 7rem;
+            font-weight: 100;
+            letter-spacing: 30px;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow:
+                0 0 20px rgba(138, 63, 153, 0.8),
+                0 0 40px rgba(138, 63, 153, 0.6),
+                0 0 60px rgba(138, 63, 153, 0.4);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow:
+                    0 0 20px rgba(138, 63, 153, 0.8),
+                    0 0 40px rgba(138, 63, 153, 0.6),
+                    0 0 60px rgba(138, 63, 153, 0.4);
+            }
+            50% {
+                text-shadow:
+                    0 0 30px rgba(138, 63, 153, 1),
+                    0 0 60px rgba(138, 63, 153, 0.8),
+                    0 0 90px rgba(138, 63, 153, 0.6);
+            }
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 10px;
+            color: var(--accent-mineral);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 20px 50px;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cta-primary {
+            background: var(--accent-mineral);
+            color: white;
+            border: 2px solid var(--accent-mineral);
+            box-shadow: 0 0 30px rgba(138, 63, 153, 0.5);
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-primary:hover {
+            box-shadow: 0 0 50px rgba(138, 63, 153, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .cta-secondary:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scroll-text {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+        }
+
+        .scroll-mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(138, 63, 153, 0.8);
+            border-radius: 25px;
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--accent-mineral);
+            border-radius: 50%;
+            animation: scroll-wheel 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes scroll-wheel {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        /* Content Section */
+        .content-section {
+            position: relative;
+            background: linear-gradient(to bottom, #0a0a0a 0%, var(--noir-profond) 100%);
+            padding: 150px 20px;
+            z-index: 30;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 200;
+            letter-spacing: 15px;
+            text-align: center;
+            margin-bottom: 80px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: var(--accent-mineral);
+            margin: 40px auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(138, 63, 153, 0.1), rgba(26, 26, 26, 0.8));
+            padding: 60px 40px;
+            border: 1px solid rgba(138, 63, 153, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 63, 153, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent-mineral);
+            box-shadow: 0 30px 80px rgba(138, 63, 153, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
+                letter-spacing: 15px;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 5px;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                letter-spacing: 8px;
+            }
+
+            .logo-3d,
+            .logo-shape {
+                width: 100px;
+                height: 100px;
+            }
+
+            .moon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Parallax Section -->
+    <section class="parallax-section">
+        <div class="parallax-wrapper">
+            <!-- Sky -->
+            <div class="sky"></div>
+
+            <!-- Stars -->
+            <div class="stars-layer" id="stars"></div>
+
+            <!-- Shooting Stars -->
+            <div class="shooting-star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+            <div class="shooting-star" style="top: 15%; left: 70%; animation-delay: 4s;"></div>
+            <div class="shooting-star" style="top: 25%; left: 40%; animation-delay: 8s;"></div>
+
+            <!-- Moon -->
+            <div class="moon"></div>
+
+            <!-- Clouds -->
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+
+            <!-- Mountain Layers (7 layers for extreme depth) -->
+            <div class="mountain-layer mountain-1" data-speed="0.1">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 80%;">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3a3565;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2a2550;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 200,300 400,400 600,200 800,350 1000,250 1200,400 1200,800" fill="url(#grad1)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-2" data-speed="0.15">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 75%;">
+                    <defs>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4a4578;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3a3565;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 150,250 350,350 550,150 750,300 950,200 1150,350 1200,800" fill="url(#grad2)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-3" data-speed="0.25">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 70%;">
+                    <defs>
+                        <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#5a5588;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4a4578;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 100,200 300,300 500,100 700,250 900,150 1100,300 1200,800" fill="url(#grad3)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-4" data-speed="0.4">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 65%;">
+                    <defs>
+                        <linearGradient id="grad4" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6a5a8a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#5a5588;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 180,280 380,380 580,180 780,330 980,230 1180,380 1200,800" fill="url(#grad4)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-5" data-speed="0.6">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 60%;">
+                    <defs>
+                        <linearGradient id="grad5" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7a6a9a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6a5a8a;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 120,320 320,400 520,220 720,370 920,270 1120,420 1200,800" fill="url(#grad5)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-6" data-speed="0.8">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 55%;">
+                    <defs>
+                        <linearGradient id="grad6" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8a7aaa;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7a6a9a;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 80,360 280,440 480,260 680,410 880,310 1080,460 1200,800" fill="url(#grad6)"/>
+                </svg>
+            </div>
+
+            <div class="mountain-layer mountain-7" data-speed="1">
+                <svg viewBox="0 0 1200 800" preserveAspectRatio="none" style="position: absolute; bottom: 0; width: 100%; height: 50%;">
+                    <defs>
+                        <linearGradient id="grad7" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#9a8aba;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8a7aaa;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="snow" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#e0e0ff;stop-opacity:0.3" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="0,800 60,400 260,480 460,300 660,450 860,350 1060,500 1200,800" fill="url(#grad7)"/>
+                    <!-- Snow caps -->
+                    <polygon points="260,480 280,460 300,480" fill="url(#snow)"/>
+                    <polygon points="460,300 480,280 500,300" fill="url(#snow)"/>
+                    <polygon points="660,450 680,430 700,450" fill="url(#snow)"/>
+                    <polygon points="860,350 880,330 900,350" fill="url(#snow)"/>
+                </svg>
+            </div>
+
+            <!-- Fog -->
+            <div class="fog">
+                <div class="fog-layer"></div>
+                <div class="fog-layer"></div>
+            </div>
+
+            <!-- Snow -->
+            <div class="snow" id="snow"></div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <div class="logo-container">
+                    <div class="logo-3d">
+                        <div class="logo-shape"></div>
+                    </div>
+                </div>
+
+                <h1 class="main-title">ALPSTONE</h1>
+                <p class="subtitle">STUDIO</p>
+                <p class="tagline">
+                    Au sommet de l'excellence digitale en Suisse romande.
+                    Créateurs d'expériences web aussi majestueuses que les Alpes.
+                </p>
+
+                <div class="cta-container">
+                    <a href="#content" class="cta-button cta-primary">Découvrir nos créations</a>
+                    <a href="#contact" class="cta-button cta-secondary">Nous contacter</a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll</span>
+                <div class="scroll-mouse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section" id="content">
+        <div class="content-wrapper">
+            <h2 class="section-title">Excellence</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🏔️</span>
+                    <h3 class="feature-title">Vision Alpine</h3>
+                    <p class="feature-description">
+                        Inspirés par la grandeur des Alpes suisses, nous créons des sites web
+                        qui marquent les esprits et résistent à l'épreuve du temps.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">💎</span>
+                    <h3 class="feature-title">Qualité Premium</h3>
+                    <p class="feature-description">
+                        Chaque projet bénéficie de la précision et du savoir-faire suisse.
+                        Design raffiné et code impeccable.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="feature-title">Performance</h3>
+                    <p class="feature-description">
+                        Technologies de pointe pour des sites ultra-rapides.
+                        Optimisation SEO et accessibilité intégrées.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h3 class="feature-title">Design Unique</h3>
+                    <p class="feature-description">
+                        Chaque création est sur mesure, pensée pour refléter
+                        l'identité et les valeurs de votre entreprise.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3 class="feature-title">Innovation</h3>
+                    <p class="feature-description">
+                        Nous utilisons les dernières technologies et tendances
+                        pour garantir un site moderne et évolutif.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h3 class="feature-title">Accompagnement</h3>
+                    <p class="feature-description">
+                        Support dédié et maintenance continue. Nous sommes
+                        votre partenaire digital sur le long terme.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate stars
+        function generateStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 70}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                star.style.animationDuration = `${Math.random() * 3 + 3}s`;
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Generate snow
+        function generateSnow() {
+            const snowContainer = document.getElementById('snow');
+            const numberOfFlakes = 50;
+
+            for (let i = 0; i < numberOfFlakes; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+
+                const size = Math.random() * 4 + 2;
+                flake.style.width = `${size}px`;
+                flake.style.height = `${size}px`;
+                flake.style.left = `${Math.random() * 100}%`;
+                flake.style.animationDelay = `${Math.random() * 10}s`;
+                flake.style.animationDuration = `${Math.random() * 10 + 10}s`;
+
+                snowContainer.appendChild(flake);
+            }
+        }
+
+        generateStars();
+        generateSnow();
+
+        // Advanced Parallax Effect
+        let ticking = false;
+
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.mountain-layer');
+            const sky = document.querySelector('.sky');
+            const moon = document.querySelector('.moon');
+            const stars = document.querySelector('.stars-layer');
+
+            // Sky color transition
+            const skyOpacity = Math.min(scrolled / 500, 1);
+            sky.style.opacity = 1 - skyOpacity * 0.3;
+
+            // Moon movement
+            moon.style.transform = `translateY(${scrolled * 0.5}px) scale(${1 + scrolled * 0.0003})`;
+
+            // Stars parallax
+            stars.style.transform = `translateY(${scrolled * 0.05}px)`;
+
+            // Mountain layers with different speeds
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.dataset.speed);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            });
+
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in effects
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+
+        // Initial parallax
+        updateParallax();
+    </script>
+</body>
+</html>
