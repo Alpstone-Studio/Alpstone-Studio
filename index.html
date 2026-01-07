@@ -1,942 +1,283 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpstone Studio - Développement Web Premium | Suisse Romande</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --noir-profond: #111111;
-            --blanc-doux: #F3FF33;
-            --accent-mineral: #8A3F99;
-            --gris-pierre: #4a4a4a;
-            --gris-clair: #e8e8e8;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--noir-profond);
-            color: var(--gris-clair);
-            overflow-x: hidden;
-        }
-
-        /* Hero Parallax Section */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Mountain Layers - Parallax */
-        .mountain-layer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .mountain-back {
-            z-index: 1;
-            opacity: 0.3;
-        }
-
-        .mountain-mid {
-            z-index: 2;
-            opacity: 0.5;
-        }
-
-        .mountain-front {
-            z-index: 3;
-            opacity: 0.8;
-        }
-
-        /* SVG Mountains avec gradient */
-        .mountain-svg {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Stars background */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Logo 3D Cube */
-        .logo-3d {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 40px;
-            transform-style: preserve-3d;
-            animation: rotate3d 20s infinite linear;
-        }
-
-        @keyframes rotate3d {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
-        }
-
-        .cube-face {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, var(--accent-mineral) 0%, var(--gris-pierre) 100%);
-            border: 2px solid var(--gris-clair);
-            opacity: 0.9;
-        }
-
-        .cube-face.front  { transform: translateZ(60px); }
-        .cube-face.back   { transform: rotateY(180deg) translateZ(60px); }
-        .cube-face.right  { transform: rotateY(90deg) translateZ(60px); }
-        .cube-face.left   { transform: rotateY(-90deg) translateZ(60px); }
-        .cube-face.top    { transform: rotateX(90deg) translateZ(60px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(60px); }
-
-        /* Hero Content */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 40px;
-            max-width: 900px;
-        }
-
-        .hero-logo {
-            font-size: 5rem;
-            font-weight: 200;
-            letter-spacing: 15px;
-            color: var(--gris-clair);
-            margin-bottom: 10px;
-            text-shadow: 0 0 40px rgba(138, 63, 153, 0.6);
-            animation: fadeInDown 1.5s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            color: var(--accent-mineral);
-            margin-bottom: 40px;
-            animation: fadeInUp 1.5s ease-out 0.3s backwards;
-        }
-
-        .hero-tagline {
-            font-size: 1.2rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: var(--gris-clair);
-            max-width: 600px;
-            margin: 0 auto 50px;
-            opacity: 0.9;
-            animation: fadeIn 2s ease-out 0.6s backwards;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            background: transparent;
-            border: 2px solid var(--accent-mineral);
-            color: var(--gris-clair);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 2s ease-out 0.9s backwards;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-mineral);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .cta-button:hover::before {
-            left: 0;
-        }
-
-        .cta-button:hover {
-            color: white;
-            border-color: var(--accent-mineral);
-            box-shadow: 0 0 30px rgba(138, 63, 153, 0.5);
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-indicator span {
-            display: block;
-            width: 30px;
-            height: 50px;
-            border: 2px solid var(--accent-mineral);
-            border-radius: 25px;
-            position: relative;
-        }
-
-        .scroll-indicator span::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--accent-mineral);
-            border-radius: 50%;
-            animation: scrollDown 2s infinite;
-        }
-
-        @keyframes scrollDown {
-            0% { top: 8px; opacity: 1; }
-            100% { top: 30px; opacity: 0; }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        /* Services Section */
-        .services {
-            position: relative;
-            padding: 150px 20px;
-            background: linear-gradient(180deg, var(--noir-profond) 0%, #1a1a1a 100%);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 200;
-            letter-spacing: 10px;
-            margin-bottom: 80px;
-            color: var(--gris-clair);
-            text-transform: uppercase;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: var(--accent-mineral);
-            margin: 30px auto 0;
-        }
-
-        .services-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            padding: 0 20px;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, rgba(138, 63, 153, 0.1) 0%, rgba(74, 74, 74, 0.1) 100%);
-            padding: 50px 40px;
-            border: 1px solid rgba(138, 63, 153, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(138, 63, 153, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            border-color: var(--accent-mineral);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(138, 63, 153, 0.3);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            display: block;
-            color: var(--accent-mineral);
-        }
-
-        .service-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            color: var(--gris-clair);
-        }
-
-        .service-description {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: rgba(232, 232, 232, 0.8);
-            font-weight: 300;
-        }
-
-        /* About Section */
-        .about {
-            padding: 150px 20px;
-            background: #1a1a1a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 20% 50%, rgba(138, 63, 153, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(138, 63, 153, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-text {
-            font-size: 1.3rem;
-            line-height: 2;
-            font-weight: 300;
-            color: var(--gris-clair);
-            margin-bottom: 30px;
-        }
-
-        .about-highlight {
-            color: var(--accent-mineral);
-            font-weight: 400;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 100px 20px;
-            background: var(--noir-profond);
-        }
-
-        .stats-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 60px;
-            text-align: center;
-        }
-
-        .stat-item {
-            position: relative;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--accent-mineral);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            letter-spacing: 2px;
-            color: var(--gris-clair);
-            text-transform: uppercase;
-            font-weight: 300;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 150px 20px;
-            background: linear-gradient(180deg, var(--noir-profond) 0%, #0a0a0a 100%);
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            margin-bottom: 40px;
-            color: var(--gris-clair);
-        }
-
-        .contact-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 50px;
-            color: rgba(232, 232, 232, 0.8);
-        }
-
-        .contact-button {
-            display: inline-block;
-            padding: 20px 60px;
-            background: var(--accent-mineral);
-            color: white;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: all 0.4s ease;
-            border: 2px solid var(--accent-mineral);
-        }
-
-        .contact-button:hover {
-            background: transparent;
-            color: var(--accent-mineral);
-            box-shadow: 0 0 40px rgba(138, 63, 153, 0.5);
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 20px;
-            background: #0a0a0a;
-            text-align: center;
-            border-top: 1px solid rgba(138, 63, 153, 0.2);
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            color: var(--gris-clair);
-            margin-bottom: 20px;
-        }
-
-        .footer-text {
-            font-size: 0.9rem;
-            color: rgba(232, 232, 232, 0.5);
-            letter-spacing: 1px;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-logo {
-                font-size: 3rem;
-                letter-spacing: 8px;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-                letter-spacing: 2px;
-            }
-
-            .hero-tagline {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                letter-spacing: 5px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-number {
-                font-size: 3rem;
-            }
-
-            .logo-3d {
-                width: 80px;
-                height: 80px;
-            }
-
-            .cube-face {
-                width: 80px;
-                height: 80px;
-            }
-
-            .cube-face.front,
-            .cube-face.back,
-            .cube-face.right,
-            .cube-face.left,
-            .cube-face.top,
-            .cube-face.bottom {
-                transform: translateZ(40px);
-            }
-
-            .cube-face.back { transform: rotateY(180deg) translateZ(40px); }
-            .cube-face.right { transform: rotateY(90deg) translateZ(40px); }
-            .cube-face.left { transform: rotateY(-90deg) translateZ(40px); }
-            .cube-face.top { transform: rotateX(90deg) translateZ(40px); }
-            .cube-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
-        }
-
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 25px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            transition: all 0.4s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 50px;
-            border-bottom: 1px solid rgba(138, 63, 153, 0.3);
-        }
-
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 5px;
-            color: var(--gris-clair);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--gris-clair);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-mineral);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-mineral);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-    </style>
+    <meta name="description" content="Alpstone Studio - Professional Web Development Agency crafting exceptional digital experiences">
+    <meta name="keywords" content="web development, web design, digital agency, custom websites">
+    <title>Alpstone Studio | Web Development Agency</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#" class="nav-logo">ALPSTONE</a>
-        <ul class="nav-links">
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#home" class="logo">
+                    <img src="Logos/Alpstone-studio-vertical/Transparent-vertical.png" alt="Alpstone Studio Logo" class="logo-img">
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
     </nav>
 
-    <!-- Hero Section with Parallax -->
-    <section class="hero">
-        <!-- Stars Background -->
-        <div class="stars" id="stars"></div>
-
-        <!-- Mountain Layers -->
-        <div class="mountain-layer mountain-back" data-speed="0.2">
-            <svg class="mountain-svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                <polygon points="0,600 300,150 600,250 900,100 1200,200 1200,600" fill="rgba(74, 74, 74, 0.3)"/>
-            </svg>
-        </div>
-
-        <div class="mountain-layer mountain-mid" data-speed="0.5">
-            <svg class="mountain-svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                <polygon points="0,600 200,200 500,300 800,150 1100,250 1200,300 1200,600" fill="rgba(138, 63, 153, 0.2)"/>
-            </svg>
-        </div>
-
-        <div class="mountain-layer mountain-front" data-speed="0.8">
-            <svg class="mountain-svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                <polygon points="0,600 100,350 400,450 700,250 1000,400 1200,350 1200,600" fill="rgba(74, 74, 74, 0.4)"/>
-            </svg>
-        </div>
-
-        <!-- Hero Content -->
-        <div class="hero-content">
-            <div class="logo-3d">
-                <div class="cube-face front"></div>
-                <div class="cube-face back"></div>
-                <div class="cube-face right"></div>
-                <div class="cube-face left"></div>
-                <div class="cube-face top"></div>
-                <div class="cube-face bottom"></div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Crafting Digital Excellence
+                </h1>
+                <p class="hero-subtitle">
+                    We build stunning, high-performance websites that elevate your brand and drive results
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                    <a href="#portfolio" class="btn btn-secondary">View Our Work</a>
+                </div>
             </div>
-
-            <h1 class="hero-logo">ALPSTONE</h1>
-            <p class="hero-subtitle">STUDIO</p>
-            <p class="hero-tagline">
-                Développement web d'exception en Suisse romande.
-                Nous créons des expériences digitales aussi solides et majestueuses que les Alpes.
-            </p>
-            <a href="#contact" class="cta-button">Découvrir</a>
         </div>
-
-        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
-            <span></span>
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="services" id="services">
-        <h2 class="section-title">Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <span class="service-icon">🎨</span>
-                <h3 class="service-title">Design Premium</h3>
-                <p class="service-description">
-                    Interfaces élégantes et intuitives qui captivent vos clients.
-                    Chaque pixel est pensé pour refléter l'excellence de votre marque.
-                </p>
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-description">Comprehensive web solutions tailored to your needs</p>
             </div>
-
-            <div class="service-card">
-                <span class="service-icon">⚡</span>
-                <h3 class="service-title">Développement</h3>
-                <p class="service-description">
-                    Code propre, performant et évolutif. Technologies modernes
-                    pour des sites web rapides et fiables.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">📱</span>
-                <h3 class="service-title">Responsive</h3>
-                <p class="service-description">
-                    Expérience optimale sur tous les appareils.
-                    Votre site s'adapte parfaitement du mobile au desktop.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">🚀</span>
-                <h3 class="service-title">Performance</h3>
-                <p class="service-description">
-                    Optimisation poussée pour des temps de chargement ultra-rapides.
-                    SEO et accessibilité intégrés.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">🔒</span>
-                <h3 class="service-title">Sécurité</h3>
-                <p class="service-description">
-                    Protection maximale de vos données et de celles de vos clients.
-                    Conformité RGPD et meilleures pratiques.
-                </p>
-            </div>
-
-            <div class="service-card">
-                <span class="service-icon">💎</span>
-                <h3 class="service-title">Support</h3>
-                <p class="service-description">
-                    Accompagnement continu et maintenance proactive.
-                    Nous restons à vos côtés après le lancement.
-                </p>
+            <div class="services-grid">
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="service-title">Web Development</h3>
+                    <p class="service-description">
+                        Custom websites built with modern technologies, optimized for performance and scalability
+                    </p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-title">UI/UX Design</h3>
+                    <p class="service-description">
+                        Beautiful, intuitive interfaces that provide exceptional user experiences
+                    </p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="service-title">Responsive Design</h3>
+                    <p class="service-description">
+                        Flawless experiences across all devices, from desktop to mobile
+                    </p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="service-title">E-Commerce</h3>
+                    <p class="service-description">
+                        Powerful online stores that convert visitors into customers
+                    </p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="service-title">SEO Optimization</h3>
+                    <p class="service-description">
+                        Improve your visibility and rank higher in search engine results
+                    </p>
+                </div>
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="service-title">Maintenance & Support</h3>
+                    <p class="service-description">
+                        Ongoing support to keep your website secure, updated, and running smoothly
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section class="about" id="about">
-        <h2 class="section-title">Notre Vision</h2>
-        <div class="about-content">
-            <p class="about-text">
-                Basé au cœur de la <span class="about-highlight">Suisse romande</span>,
-                Alpstone Studio incarne la fusion entre <span class="about-highlight">excellence helvétique</span>
-                et innovation digitale.
-            </p>
-            <p class="about-text">
-                Comme les <span class="about-highlight">Alpes</span> qui nous entourent,
-                nos créations sont <span class="about-highlight">solides, majestueuses et intemporelles</span>.
-                Nous croyons que le luxe et la qualité doivent être accessibles à toutes les entreprises.
-            </p>
-            <p class="about-text">
-                Notre approche allie <span class="about-highlight">design premium</span>,
-                <span class="about-highlight">technologie de pointe</span> et
-                <span class="about-highlight">tarifs transparents</span>
-                pour donner vie à votre vision digitale.
-            </p>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text fade-in-up">
+                    <h2 class="section-title">About Alpstone Studio</h2>
+                    <p class="about-description">
+                        We are a passionate team of web developers and designers dedicated to creating exceptional digital experiences. With expertise in modern technologies and a keen eye for design, we transform your vision into reality.
+                    </p>
+                    <p class="about-description">
+                        Our approach combines creativity with technical excellence, ensuring every project we deliver not only looks stunning but performs flawlessly. We believe in building long-term partnerships with our clients, providing ongoing support and guidance as your business grows.
+                    </p>
+                </div>
+                <div class="about-image fade-in-up">
+                    <div class="about-image-wrapper">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Satisfaction</span>
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Our Work</h2>
+                <p class="section-description">Explore our recent projects</p>
             </div>
-            <div class="stat-item">
-                <span class="stat-number">50+</span>
-                <span class="stat-label">Projets</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Support</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">Swiss</span>
-                <span class="stat-label">Quality</span>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in-up">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">E-Commerce Platform</h3>
+                            <p class="portfolio-category">Web Development</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in-up">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">Corporate Website</h3>
+                            <p class="portfolio-category">UI/UX Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in-up">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">Mobile App Landing</h3>
+                            <p class="portfolio-category">Responsive Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in-up">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">Portfolio Website</h3>
+                            <p class="portfolio-category">Full Stack</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="contact-content">
-            <h2 class="contact-title">Prêt à démarrer ?</h2>
-            <p class="contact-text">
-                Transformons ensemble votre vision en réalité digitale.
-                Contactez-nous pour discuter de votre projet.
-            </p>
-            <a href="mailto:contact@alpstone.studio" class="contact-button">Nous Contacter</a>
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">Let's bring your project to life</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@alpstone.ch</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Switzerland</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-logo">ALPSTONE STUDIO</div>
-        <p class="footer-text">© 2024 Alpstone Studio. Développement web premium en Suisse romande.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="Logos/Alpstone-studio-vertical/White-vertical.png" alt="Alpstone Studio" class="footer-logo">
+                    <p class="footer-description">
+                        Crafting exceptional digital experiences
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">UI/UX Design</a></li>
+                        <li><a href="#services">E-Commerce</a></li>
+                        <li><a href="#services">SEO</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alpstone Studio. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <script>
-        // Parallax Effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.mountain-layer');
-
-            parallaxElements.forEach(element => {
-                const speed = element.dataset.speed;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-
-            // Stars parallax
-            const stars = document.getElementById('stars');
-            stars.style.transform = `translateY(${scrolled * 0.1}px)`;
-        });
-
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Generate stars
-        function generateStars() {
-            const starsContainer = document.getElementById('stars');
-            const numberOfStars = 100;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-
-                starsContainer.appendChild(star);
-            }
-        }
-
-        generateStars();
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Counter animation for stats
-        function animateCounter(element, target) {
-            let current = 0;
-            const increment = target / 100;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 20);
-        }
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const number = entry.target.querySelector('.stat-number');
-                    const text = number.textContent;
-                    if (text.includes('+')) {
-                        const value = parseInt(text);
-                        number.textContent = '0+';
-                        animateCounter(number, value);
-                    }
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.stat-item').forEach(item => {
-            statsObserver.observe(item);
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
