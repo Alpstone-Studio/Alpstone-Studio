@@ -130,3 +130,20 @@ if (history.scrollRestoration) {
 }
 
 window.scrollTo(0, 0);
+
+// Ensure hero background video does not loop and stays on last frame when finished
+document.addEventListener('DOMContentLoaded', () => {
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+        try {
+            heroVideo.loop = false;
+        } catch (e) {}
+
+        heroVideo.addEventListener('ended', () => {
+            heroVideo.pause();
+            try {
+                heroVideo.currentTime = heroVideo.duration;
+            } catch (err) {}
+        });
+    }
+});
