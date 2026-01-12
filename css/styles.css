@@ -1,13 +1,13 @@
 :root {
-    --bg-main: #f6f8fc;
-    --bg-soft: rgba(255, 255, 255, 0.7);
-    --bg-glass: rgba(255, 255, 255, 0.55);
-    --border-soft: rgba(15, 23, 42, 0.08);
-    --text-main: #111827;
-    --text-muted: #5b6475;
+    --bg-main: #f8f9fc;
+    --bg-soft: rgba(255, 255, 255, 0.85);
+    --bg-glass: rgba(255, 255, 255, 0.6);
+    --border-soft: rgba(10, 15, 30, 0.08);
+    --text-main: #0c111b;
+    --text-muted: #4b5563;
     --accent: #2f6bff;
-    --accent-soft: #cfe0ff;
-    --shadow-neu: 14px 14px 30px rgba(15, 23, 42, 0.08), -14px -14px 30px rgba(255, 255, 255, 0.9);
+    --accent-soft: rgba(47, 107, 255, 0.12);
+    --shadow-neu: 16px 16px 30px rgba(15, 23, 42, 0.08), -16px -16px 30px rgba(255, 255, 255, 0.9);
     --shadow-soft: 0 18px 50px rgba(15, 23, 42, 0.12);
     --radius: 26px;
     --font: "Inter", "Segoe UI", sans-serif;
@@ -53,15 +53,15 @@ img {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(246, 248, 252, 0.4), rgba(246, 248, 252, 0.85));
+    background: linear-gradient(180deg, rgba(248, 249, 252, 0.55), rgba(248, 249, 252, 0.9));
 }
 
 .sky-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.25;
-    filter: blur(6px) saturate(0.7);
+    opacity: 0.22;
+    filter: blur(8px) saturate(0.7);
 }
 
 .sky-glow,
@@ -74,7 +74,7 @@ img {
     top: 0;
     z-index: 10;
     backdrop-filter: blur(18px);
-    background: rgba(246, 248, 252, 0.75);
+    background: rgba(248, 249, 252, 0.82);
     border-bottom: 1px solid var(--border-soft);
 }
 
@@ -217,7 +217,7 @@ img {
 }
 
 .btn-glass {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
     color: var(--text-main);
     border-color: var(--border-soft);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
@@ -356,7 +356,7 @@ img {
 .timeline-step {
     padding: 18px;
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.75);
     border: 1px solid var(--border-soft);
 }
 
@@ -391,7 +391,7 @@ img {
     border-radius: 50%;
     background: radial-gradient(circle at top, rgba(47, 107, 255, 0.4), transparent 70%);
     filter: blur(2px);
-    box-shadow: 0 0 40px rgba(47, 107, 255, 0.3);
+    box-shadow: 0 0 40px rgba(47, 107, 255, 0.25);
 }
 
 .showcase-orb.small {
@@ -440,7 +440,7 @@ img {
 .footer {
     padding: 40px 0 60px;
     border-top: 1px solid var(--border-soft);
-    background: rgba(246, 248, 252, 0.9);
+    background: rgba(248, 249, 252, 0.95);
 }
 
 .footer-content {
@@ -468,7 +468,7 @@ img {
         right: 5%;
         flex-direction: column;
         padding: 16px;
-        background: rgba(246, 248, 252, 0.95);
+        background: rgba(248, 249, 252, 0.98);
         border-radius: 16px;
         display: none;
         box-shadow: var(--shadow-soft);
