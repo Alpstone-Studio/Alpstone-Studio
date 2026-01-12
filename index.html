@@ -3,280 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Alpstone Studio - Professional Web Development Agency crafting exceptional digital experiences">
-    <meta name="keywords" content="web development, web design, digital agency, custom websites">
-    <title>Alpstone Studio | Web Development Agency</title>
+    <meta name="description" content="Alpstone Studio - Floating-island inspired web development agency landing page">
+    <meta name="keywords" content="web development, web design, digital agency, floating island">
+    <title>Alpstone Studio | Floating Island Agency</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="#home" class="logo">
-                    <img src="Logos/Alpstone-studio-vertical/Transparent-vertical.png" alt="Alpstone Studio Logo" class="logo-img">
-                </a>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="hamburger" id="hamburger">
-                    <span></span>
+    <div class="sky">
+        <video class="sky-video" autoplay muted loop playsinline aria-hidden="true">
+            <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
+        </video>
+        <div class="sky-glow"></div>
+        <div class="sky-mist"></div>
+    </div>
+
+    <header class="site-header" id="home">
+        <div class="container nav-bar">
+            <a class="logo" href="#home">
+                <img src="Logos/Alpstone-studio-vertical/Transparent-vertical.png" alt="Alpstone Studio" />
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#services">Services</a>
+                <a href="#islands">Approach</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a class="btn btn-ghost" href="#contact">Book a Call</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                     <span></span>
                     <span></span>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <video class="hero-video" autoplay muted preload="auto" playsinline aria-hidden="true">
-            <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
-        </video>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Crafting Digital Excellence
-                </h1>
-                <p class="hero-subtitle">
-                    We build stunning, high-performance websites that elevate your brand and drive results
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                    <a href="#portfolio" class="btn btn-secondary">View Our Work</a>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="island hero-island float-medium">
+                    <p class="eyebrow">Alpstone Studio</p>
+                    <h1>Build a brand that feels like a floating island.</h1>
+                    <p class="lead">
+                        We craft cinematic, high-conversion websites that feel weightless, immersive, and unmistakably yours.
+                        Every detail is layered with blur, light, and motion for a premium digital presence.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#contact">Start a Project</a>
+                        <a class="btn btn-glass" href="#showcase">See the Work</a>
+                    </div>
+                    <div class="hero-badges">
+                        <span class="badge">Brand Strategy</span>
+                        <span class="badge">Web Design</span>
+                        <span class="badge">Webflow & Custom</span>
+                    </div>
+                </div>
+                <div class="hero-floating">
+                    <div class="island video-card float-slow">
+                        <div class="video-label">
+                            <span>Featured Motion</span>
+                            <i class="fa-solid fa-wave-square"></i>
+                        </div>
+                        <video autoplay muted loop playsinline>
+                            <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="island stat-card float-fast">
+                        <p class="stat-number">42%</p>
+                        <p class="stat-label">Avg. uplift in engagement</p>
+                    </div>
+                    <div class="island stat-card float-medium">
+                        <p class="stat-number">4-6 wks</p>
+                        <p class="stat-label">Launch window</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Our Services</h2>
-                <p class="section-description">Comprehensive web solutions tailored to your needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="service-title">Web Development</h3>
-                    <p class="service-description">
-                        Custom websites built with modern technologies, optimized for performance and scalability
-                    </p>
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Islands of expertise</h2>
+                    <p>Each capability floats independently, yet connects into one seamless journey.</p>
                 </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3 class="service-title">UI/UX Design</h3>
-                    <p class="service-description">
-                        Beautiful, intuitive interfaces that provide exceptional user experiences
-                    </p>
-                </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="service-title">Responsive Design</h3>
-                    <p class="service-description">
-                        Flawless experiences across all devices, from desktop to mobile
-                    </p>
-                </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3 class="service-title">E-Commerce</h3>
-                    <p class="service-description">
-                        Powerful online stores that convert visitors into customers
-                    </p>
-                </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="service-title">SEO Optimization</h3>
-                    <p class="service-description">
-                        Improve your visibility and rank higher in search engine results
-                    </p>
-                </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3 class="service-title">Maintenance & Support</h3>
-                    <p class="service-description">
-                        Ongoing support to keep your website secure, updated, and running smoothly
-                    </p>
+                <div class="grid">
+                    <article class="island card float-fast">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <h3>Identity Systems</h3>
+                        <p>Visual identities crafted for clarity, recognizability, and modern elegance.</p>
+                    </article>
+                    <article class="island card float-medium">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <h3>Web Experiences</h3>
+                        <p>Immersive sites with depth, motion, and conversion-driven structures.</p>
+                    </article>
+                    <article class="island card float-slow">
+                        <i class="fa-solid fa-video"></i>
+                        <h3>Motion & Video</h3>
+                        <p>Ambient motion design to keep your story moving in every scroll.</p>
+                    </article>
+                    <article class="island card float-fast">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Growth Launches</h3>
+                        <p>Marketing-ready assets, analytics, and optimization from day one.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text fade-in-up">
-                    <h2 class="section-title">About Alpstone Studio</h2>
-                    <p class="about-description">
-                        We are a passionate team of web developers and designers dedicated to creating exceptional digital experiences. With expertise in modern technologies and a keen eye for design, we transform your vision into reality.
+        <section class="section" id="islands">
+            <div class="container split">
+                <div class="island content-card float-slow">
+                    <h2>Our floating-island approach</h2>
+                    <p>
+                        We start with your brand narrative, design a visual landscape around it, and then anchor
+                        everything with performance-focused development. The result feels light, cinematic, and
+                        effortless while still being engineered for growth.
                     </p>
-                    <p class="about-description">
-                        Our approach combines creativity with technical excellence, ensuring every project we deliver not only looks stunning but performs flawlessly. We believe in building long-term partnerships with our clients, providing ongoing support and guidance as your business grows.
-                    </p>
+                    <ul class="list">
+                        <li>Discovery workshops & vision mapping</li>
+                        <li>Immersive UX flows with blurred depth</li>
+                        <li>Launch-ready, responsive builds</li>
+                    </ul>
+                    <a class="btn btn-primary" href="#contact">Map your island</a>
                 </div>
-                <div class="about-image fade-in-up">
-                    <div class="about-image-wrapper">
-                        <i class="fas fa-code"></i>
+                <div class="island timeline float-medium">
+                    <div class="timeline-step">
+                        <span>01</span>
+                        <h3>Signal</h3>
+                        <p>Define the story, tone, and impact you want to make.</p>
+                    </div>
+                    <div class="timeline-step">
+                        <span>02</span>
+                        <h3>Atmosphere</h3>
+                        <p>Build blurred layers and floating elements that feel alive.</p>
+                    </div>
+                    <div class="timeline-step">
+                        <span>03</span>
+                        <h3>Lift-off</h3>
+                        <p>Deliver a polished experience that performs on every device.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Our Work</h2>
-                <p class="section-description">Explore our recent projects</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">E-Commerce Platform</h3>
-                            <p class="portfolio-category">Web Development</p>
+        <section class="section" id="showcase">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Signature showcase</h2>
+                    <p>A glimpse of the ambience you can bring to your brand.</p>
+                </div>
+                <div class="island showcase float-medium">
+                    <div>
+                        <h3>Floating campaigns</h3>
+                        <p>
+                            From atmospheric visuals to crisp conversion flows, we craft experiences that feel
+                            premium and stay memorable.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="btn btn-glass" href="#contact">Request a demo</a>
+                            <a class="btn btn-ghost" href="#contact">Download deck</a>
                         </div>
                     </div>
-                </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Corporate Website</h3>
-                            <p class="portfolio-category">UI/UX Design</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Mobile App Landing</h3>
-                            <p class="portfolio-category">Responsive Design</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Portfolio Website</h3>
-                            <p class="portfolio-category">Full Stack</p>
-                        </div>
+                    <div class="showcase-visual">
+                        <div class="showcase-orb"></div>
+                        <div class="showcase-orb small"></div>
+                        <p class="showcase-label">Ambient glow + layered blur</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-description">Let's bring your project to life</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p>info@alpstone.ch</p>
-                        </div>
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="island contact-card float-slow">
+                    <h2>Ready to launch?</h2>
+                    <p>Tell us where you want to float next and we will design the route.</p>
+                    <div class="contact-actions">
+                        <a class="btn btn-primary" href="mailto:info@alpstone.ch">Email Alpstone</a>
+                        <a class="btn btn-glass" href="tel:+4100000000">Schedule a Call</a>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Location</h4>
-                            <p>Switzerland</p>
-                        </div>
+                    <div class="contact-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> Switzerland</span>
+                        <span><i class="fa-solid fa-envelope"></i> info@alpstone.ch</span>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <img src="Logos/Alpstone-studio-vertical/White-vertical.png" alt="Alpstone Studio" class="footer-logo">
-                    <p class="footer-description">
-                        Crafting exceptional digital experiences
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="#services">Web Development</a></li>
-                        <li><a href="#services">UI/UX Design</a></li>
-                        <li><a href="#services">E-Commerce</a></li>
-                        <li><a href="#services">SEO</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Alpstone Studio. All rights reserved.</p>
+        <div class="container footer-content">
+            <img src="Logos/Alpstone-studio-vertical/White-vertical.png" alt="Alpstone Studio" />
+            <p>Crafting weightless digital experiences since 2016.</p>
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </footer>
