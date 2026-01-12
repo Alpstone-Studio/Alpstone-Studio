@@ -45,7 +45,7 @@ img {
 .hero {
     position: relative;
     min-height: 100vh;
-    padding: 120px 0;
+    padding: 140px 0 120px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -149,6 +149,7 @@ img {
     z-index: 2;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .island {
@@ -165,8 +166,9 @@ img {
     box-shadow: var(--shadow-soft);
     border: 1px solid rgba(255, 255, 255, 0.8);
     max-width: 560px;
-    text-align: left;
+    text-align: center;
     position: relative;
+    padding: 36px;
 }
 
 .hero-plaque::before {
@@ -180,7 +182,7 @@ img {
 }
 
 .hero-plaque h1 {
-    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
     line-height: 1.1;
     margin-bottom: 18px;
 }

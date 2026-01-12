@@ -67,9 +67,18 @@ const onScroll = () => {
 };
 
 if (heroVideo) {
+    heroVideo.muted = true;
+    heroVideo.setAttribute('playsinline', '');
     heroVideo.pause();
+    heroVideo.currentTime = 0;
     heroVideo.addEventListener('loadedmetadata', () => {
         videoDuration = heroVideo.duration || 0;
+        updateHeroScrollEffects();
+    });
+    heroVideo.addEventListener('loadeddata', () => {
+        if (!videoDuration) {
+            videoDuration = heroVideo.duration || 0;
+        }
         updateHeroScrollEffects();
     });
 }
