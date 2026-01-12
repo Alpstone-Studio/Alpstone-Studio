@@ -162,13 +162,14 @@ img {
 }
 
 .hero-plaque {
-    background: var(--bg-soft);
+    background: rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     max-width: 560px;
     text-align: center;
     position: relative;
-    padding: 36px;
+    padding: 40px 36px;
+    backdrop-filter: blur(24px);
 }
 
 .hero-plaque::before {
@@ -176,8 +177,8 @@ img {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 0 30px rgba(47, 107, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 35px rgba(47, 107, 255, 0.25);
     pointer-events: none;
 }
 
@@ -199,6 +200,39 @@ img {
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 28px;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+}
+
+.dark-magic {
+    color: #0b0f1f;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.dark-magic::after {
+    content: "";
+    position: absolute;
+    inset: -4px -8px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.25), transparent 70%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: -1;
+}
+
+.dark-magic:hover {
+    color: #06070c;
+}
+
+.dark-magic:hover::after {
+    opacity: 1;
+    transform: scale(1.05);
 }
 
 .hero-actions {
