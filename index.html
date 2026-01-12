@@ -10,14 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="sky">
-        <video class="sky-video" autoplay muted loop playsinline aria-hidden="true">
-            <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
-        </video>
-        <div class="sky-glow"></div>
-        <div class="sky-mist"></div>
-    </div>
-
     <header class="site-header" id="home">
         <div class="container nav-bar">
             <a class="logo" href="#home">
@@ -40,14 +32,18 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="island hero-island">
+        <section class="hero" id="hero">
+            <video class="hero-video" muted playsinline preload="metadata" aria-hidden="true">
+                <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="island hero-plaque" id="heroPlaque">
                     <p class="eyebrow">Alpstone Studio</p>
                     <h1>Modern web experiences for ambitious brands.</h1>
                     <p class="lead">
-                        We are a Swiss digital agency building elegant, high-performing websites that feel calm, premium,
-                        and unmistakably Alpstone. From strategy to launch, we design for clarity, trust, and growth.
+                        We are a Swiss digital agency guiding visionary teams from brand clarity to launch. Alpstone
+                        builds high-performing digital platforms that earn trust, communicate value, and grow with you.
                     </p>
                     <div class="hero-actions">
                         <a class="btn btn-primary" href="#contact">Start a Project</a>
@@ -59,54 +55,35 @@
                         <span class="badge">Custom Development</span>
                     </div>
                 </div>
-                <div class="hero-floating">
-                    <div class="island video-card">
-                        <div class="video-label">
-                            <span>Studio Reel</span>
-                            <i class="fa-solid fa-wave-square"></i>
-                        </div>
-                        <video autoplay muted loop playsinline>
-                            <source src="https://www.monrucher.ch/TVU/mtnBG.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="island stat-card">
-                        <p class="stat-number">42%</p>
-                        <p class="stat-label">Avg. uplift in engagement</p>
-                    </div>
-                    <div class="island stat-card">
-                        <p class="stat-number">4-6 wks</p>
-                        <p class="stat-label">Launch window</p>
-                    </div>
-                </div>
             </div>
         </section>
 
         <section class="section" id="services">
             <div class="container">
                 <div class="section-heading">
-                    <h2>What Alpstone delivers</h2>
-                    <p>Full-service support for modern brands, from strategy and design to build and launch.</p>
+                    <h2>What we do</h2>
+                    <p>Alpstone partners with growth-minded teams to shape brands, build websites, and launch with confidence.</p>
                 </div>
                 <div class="grid">
                     <article class="island card">
                         <i class="fa-solid fa-pen-nib"></i>
                         <h3>Brand & Strategy</h3>
-                        <p>Positioning, visual direction, and messaging that make your brand unmistakable.</p>
+                        <p>Positioning, naming, and narrative that clarify who you are and why you matter.</p>
                     </article>
                     <article class="island card">
                         <i class="fa-solid fa-layer-group"></i>
-                        <h3>Web Design</h3>
-                        <p>Clean, elegant interfaces with intuitive flows and modern motion.</p>
+                        <h3>Experience Design</h3>
+                        <p>Interface systems that feel effortless, premium, and aligned with your brand voice.</p>
                     </article>
                     <article class="island card">
                         <i class="fa-solid fa-video"></i>
-                        <h3>Development</h3>
-                        <p>Custom builds, Webflow, and performance-focused engineering.</p>
+                        <h3>Web Development</h3>
+                        <p>Custom builds and Webflow delivery engineered for speed, SEO, and scalability.</p>
                     </article>
                     <article class="island card">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                         <h3>Launch & Growth</h3>
-                        <p>Analytics, SEO, and ongoing optimization for sustainable growth.</p>
+                        <p>Analytics, optimization, and ongoing improvements that compound over time.</p>
                     </article>
                 </div>
             </div>
@@ -115,33 +92,33 @@
         <section class="section" id="islands">
             <div class="container split">
                 <div class="island content-card">
-                    <h2>Our Alpstone process</h2>
+                    <h2>Our philosophy</h2>
                     <p>
-                        We start with discovery, shape a refined visual system, and build an experience that is
-                        clean, performant, and ready to scale. Every project is led by strategy and executed with care.
+                        Every engagement begins with listening. We align brand, product, and audience to craft digital
+                        experiences that feel effortless, credible, and built for longevity.
                     </p>
                     <ul class="list">
-                        <li>Discovery workshops & roadmap planning</li>
-                        <li>UX/UI design with glass + neumorphic layers</li>
-                        <li>Launch-ready, responsive builds</li>
+                        <li>Strategy-led discovery and positioning</li>
+                        <li>Design systems that balance clarity and emotion</li>
+                        <li>Engineering built for speed and reliability</li>
                     </ul>
-                    <a class="btn btn-primary" href="#contact">Map your island</a>
+                    <a class="btn btn-primary" href="#contact">Plan your launch</a>
                 </div>
                 <div class="island timeline">
                     <div class="timeline-step">
                         <span>01</span>
                         <h3>Discovery</h3>
-                        <p>Define the story, tone, and goals that drive the project.</p>
+                        <p>Understand the brand, audience, and market opportunity.</p>
                     </div>
                     <div class="timeline-step">
                         <span>02</span>
                         <h3>Design</h3>
-                        <p>Build a visual system with elegant depth and clarity.</p>
+                        <p>Shape the experience, messaging, and visual identity.</p>
                     </div>
                     <div class="timeline-step">
                         <span>03</span>
                         <h3>Launch</h3>
-                        <p>Deliver a polished experience that performs on every device.</p>
+                        <p>Deliver a high-performing site with ongoing support.</p>
                     </div>
                 </div>
             </div>
@@ -150,15 +127,15 @@
         <section class="section" id="portfolio">
             <div class="container">
                 <div class="section-heading">
-                    <h2>Selected work</h2>
-                    <p>A snapshot of how Alpstone builds premium digital brands.</p>
+                    <h2>Who we work with</h2>
+                    <p>We partner with founders, product teams, and creative leaders who value clarity and craft.</p>
                 </div>
                 <div class="island showcase">
                     <div>
-                        <h3>Alpstone portfolio</h3>
+                        <h3>Industries we serve</h3>
                         <p>
-                            From corporate websites to product launches, we build experiences that feel premium,
-                            convert clearly, and scale with your business.
+                            Technology, hospitality, professional services, and ambitious startups across Switzerland
+                            and Europe. Our work is tailored, not templated.
                         </p>
                         <div class="hero-actions">
                             <a class="btn btn-glass" href="#contact">Request case study</a>
@@ -168,7 +145,7 @@
                     <div class="showcase-visual">
                         <div class="showcase-orb"></div>
                         <div class="showcase-orb small"></div>
-                        <p class="showcase-label">Modern blend of clarity + depth</p>
+                        <p class="showcase-label">Clarity, craft, and measurable outcomes</p>
                     </div>
                 </div>
             </div>
