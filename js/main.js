@@ -259,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = cardData[currentIndex];
         cardInfo.innerHTML = `
             <h3 class="portfolio-info-title">${data.title}</h3>
-            <p class="portfolio-info-category">${data.category}</p>
             <p class="portfolio-info-description">${data.description}</p>
         `;
     }
@@ -341,32 +340,5 @@ document.addEventListener('DOMContentLoaded', () => {
 // SUBTLE SNAP SCROLL TO PORTFOLIO CENTER
 // ==========================================
 
-// Create intersection observer for portfolio section
-const portfolioSection = document.getElementById('portfolio');
-if (portfolioSection) {
-    let hasSnapped = false;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // Only snap once when 80%+ of section is visible
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.8 && !hasSnapped) {
-                hasSnapped = true;
-                // Subtle snap to center
-                portfolioSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-
-                // Reset after a delay to allow re-triggering if user scrolls away and back
-                setTimeout(() => {
-                    hasSnapped = false;
-                }, 2000);
-            }
-        });
-    }, {
-        threshold: [0.8, 0.85, 0.9, 0.95, 1.0],
-        rootMargin: '0px'
-    });
-
-    observer.observe(portfolioSection);
-}
+// The portfolio section now uses CSS scroll-snap-align: center
+// No JavaScript needed for snap scroll - it's handled by CSS

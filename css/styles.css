@@ -34,6 +34,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
 }
 
 body {
@@ -356,7 +357,7 @@ body {
 
 .section-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     position: relative;
 }
 
@@ -652,18 +653,27 @@ body {
    ========================================== */
 
 .portfolio {
-    padding: var(--section-padding);
+    padding: 60px 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+}
+
+.portfolio .container {
+    width: 100%;
 }
 
 .portfolio-stack-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    margin-top: 40px;
+    gap: 20px;
+    margin-top: 30px;
 }
 
 /* Portfolio View Toggle */
@@ -754,17 +764,12 @@ body {
 .portfolio-grid-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: var(--text-dark);
 }
 
 .portfolio-grid-category {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    display: none;
 }
 
 .portfolio-grid-description {
@@ -788,7 +793,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 80px;
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
 .portfolio-stack {
@@ -868,12 +873,12 @@ body {
 .portfolio-card-info {
     text-align: center;
     max-width: 600px;
-    padding: 20px;
+    padding: 15px;
     transition: opacity 0.3s ease;
 }
 
 .portfolio-info-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 12px;
     color: var(--text-dark);
@@ -881,17 +886,12 @@ body {
 }
 
 .portfolio-info-category {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    display: none;
 }
 
 .portfolio-info-description {
     color: var(--text-light);
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
 }
 
