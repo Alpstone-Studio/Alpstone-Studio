@@ -147,3 +147,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ==========================================
+// PARALLAX SCROLLING FOR HERO GLASS CONTAINER
+// ==========================================
+
+window.addEventListener('scroll', () => {
+    const heroGlassContainer = document.getElementById('heroGlassContainer');
+    const heroSection = document.querySelector('.hero');
+
+    if (heroGlassContainer && heroSection) {
+        const scrollY = window.pageYOffset || window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+
+        // Parallax effect: container moves slower (0.5x speed)
+        const parallaxSpeed = 0.5;
+        const translateY = scrollY * parallaxSpeed;
+
+        // Calculate opacity based on scroll position
+        // Fade out as it reaches the bottom of the hero section
+        const fadeStart = heroHeight * 0.6;
+        const fadeEnd = heroHeight;
+        let opacity = 1;
+
+        if (scrollY > fadeStart) {
+            opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+            opacity = Math.max(0, Math.min(1, opacity));
+        }
+
+        // Apply transform and opacity
+        heroGlassContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px))`;
+        heroGlassContainer.style.opacity = opacity;
+
+        // Hide completely when scrolled past hero section
+        if (scrollY > heroHeight) {
+            heroGlassContainer.style.display = 'none';
+        } else {
+            heroGlassContainer.style.display = 'block';
+        }
+    }
+});
+
+// ==========================================
+// PARALLAX SCROLLING FOR FLOATING ELEMENTS
+// ==========================================
+
+window.addEventListener('scroll', () => {
+    const parallaxElements = document.querySelectorAll('.parallax-float');
+
+    parallaxElements.forEach(element => {
+        const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
+        const rect = element.getBoundingClientRect();
+        const scrollY = window.pageYOffset || window.scrollY;
+
+        // Only apply parallax if element is in viewport
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const yPos = -(scrollY * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        }
+    });
+});

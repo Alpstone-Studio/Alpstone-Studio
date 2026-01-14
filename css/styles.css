@@ -156,7 +156,7 @@ body {
 }
 
 /* ==========================================
-   HERO SECTION - MODERN & DYNAMIC
+   HERO SECTION - GLASSMORPHIC WITH PARALLAX
    ========================================== */
 
 .hero {
@@ -168,52 +168,6 @@ body {
     background: var(--bg-dark);
     padding-top: 90px;
     overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(67, 141, 215, 0.15) 0%, transparent 70%);
-    filter: blur(80px);
-    animation: pulse 8s ease-in-out infinite;
-    z-index: -1;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: 10%;
-    left: -5%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(32, 55, 93, 0.12) 0%, transparent 70%);
-    filter: blur(60px);
-    animation: pulse 6s ease-in-out infinite reverse;
-    z-index: -1;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--text-white);
-    padding: 80px 40px;
-    max-width: 900px;
 }
 
 /* Background video styling */
@@ -229,7 +183,7 @@ body {
     filter: brightness(0.98);
 }
 
-/* Soft vignette overlay to make edges slightly transparent/darker */
+/* Soft vignette overlay */
 .hero .hero-overlay {
     position: absolute;
     inset: 0;
@@ -239,32 +193,60 @@ body {
     mix-blend-mode: multiply;
 }
 
-.hero-title {
-    font-size: 4rem;
+/* Glassmorphic container with parallax */
+.hero-glass-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 60px 80px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    max-width: 90%;
+    text-align: center;
+}
+
+.hero-glass-container:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                0 0 80px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%) scale(1.02);
+}
+
+.hero-glass-title {
+    font-size: 4.5rem;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     line-height: 1.1;
     color: var(--text-white);
     letter-spacing: -0.02em;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+                 0 2px 10px rgba(67, 141, 215, 0.3);
 }
 
-.hero-subtitle {
-    font-size: 1.4rem;
-    margin-bottom: 48px;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    color: rgba(255, 255, 255, 0.85);
+.hero-glass-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 400;
     line-height: 1.6;
+    font-style: italic;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+/* Hidden original content */
+.hero-content {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
 }
 
 .scroll-indicator {
@@ -275,6 +257,7 @@ body {
     color: rgba(255, 255, 255, 0.6);
     font-size: 1.8rem;
     animation: bounce 2s infinite;
+    z-index: 11;
 }
 
 @keyframes bounce {
@@ -427,13 +410,82 @@ body {
 .portfolio-item:nth-child(4) { transition-delay: 0.4s; }
 
 /* ==========================================
+   FLOATING PARALLAX ELEMENTS
+   ========================================== */
+
+.parallax-float {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.float-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(67, 141, 215, 0.15) 0%, transparent 70%);
+    filter: blur(60px);
+    top: 10%;
+    right: 5%;
+    animation: float-slow 20s ease-in-out infinite;
+}
+
+.float-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    filter: blur(80px);
+    bottom: 15%;
+    left: 8%;
+    animation: float-medium 15s ease-in-out infinite reverse;
+}
+
+.float-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(32, 55, 93, 0.12) 0%, transparent 70%);
+    filter: blur(50px);
+    top: 50%;
+    left: 10%;
+    animation: float-fast 12s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(30px, 40px) scale(1.1);
+    }
+}
+
+@keyframes float-medium {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-40px, -30px) scale(1.15);
+    }
+}
+
+@keyframes float-fast {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(50px, -50px) scale(1.2);
+    }
+}
+
+/* ==========================================
    SERVICES - GLASSMORPHISM CARDS
    ========================================== */
 
 .services {
     padding: var(--section-padding);
-    background: var(--bg-light);
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
     position: relative;
+    overflow: hidden;
 }
 
 .services-grid {
@@ -443,15 +495,17 @@ body {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 48px 32px;
-    border-radius: 24px;
+    border-radius: 30px;
     text-align: center;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.2),
+                -12px -12px 24px rgba(255, 255, 255, 0.8),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -463,7 +517,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top right, rgba(67, 141, 215, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at top right, rgba(67, 141, 215, 0.08) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -473,8 +527,11 @@ body {
 }
 
 .service-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 12px 48px rgba(67, 141, 215, 0.15);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 18px 18px 36px rgba(174, 174, 192, 0.25),
+                -18px -18px 36px rgba(255, 255, 255, 0.9),
+                0 8px 32px rgba(67, 141, 215, 0.2),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.4);
     border-color: rgba(67, 141, 215, 0.3);
 }
 
@@ -512,7 +569,9 @@ body {
 
 .about {
     padding: var(--section-padding);
-    background: var(--bg-white);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .about-content {
@@ -579,7 +638,9 @@ body {
 
 .portfolio {
     padding: var(--section-padding);
-    background: var(--bg-light);
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .portfolio-grid {
@@ -591,9 +652,17 @@ body {
 .portfolio-item {
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: 10px 10px 20px rgba(174, 174, 192, 0.2),
+                -10px -10px 20px rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover {
+    box-shadow: 15px 15px 30px rgba(174, 174, 192, 0.25),
+                -15px -15px 30px rgba(255, 255, 255, 0.9),
+                0 8px 32px rgba(67, 141, 215, 0.15);
 }
 
 .portfolio-image {
@@ -652,7 +721,9 @@ body {
 
 .contact {
     padding: var(--section-padding);
-    background: var(--bg-white);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .contact-content {
@@ -712,20 +783,25 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 18px 24px;
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
     font-family: var(--font-primary);
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.15),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.7);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(67, 141, 215, 0.1);
-    background: rgba(67, 141, 215, 0.02);
+    box-shadow: 0 0 0 4px rgba(67, 141, 215, 0.1),
+                inset 2px 2px 5px rgba(67, 141, 215, 0.1),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .form-group textarea {
