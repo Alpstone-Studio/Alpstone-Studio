@@ -168,40 +168,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// SIMPLE HARDWARE-ACCELERATED PARALLAX
+// DEAD SIMPLE PARALLAX - NO RAF, NO INTERPOLATION
 // ==========================================
 
-let lastKnownScrollY = 0;
-let currentScrollY = 0;
-let rafId = null;
-
-function smoothParallax() {
-    // Smooth interpolation
-    currentScrollY += (lastKnownScrollY - currentScrollY) * 0.1;
-
+window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset || window.scrollY;
     const heroGlassContainer = document.getElementById('heroGlassContainer');
     const heroSection = document.querySelector('.hero');
 
+    // Hero glass container parallax
     if (heroGlassContainer && heroSection) {
         const heroHeight = heroSection.offsetHeight;
         const parallaxSpeed = 0.5;
-        const translateY = currentScrollY * parallaxSpeed;
+        const translateY = scrollY * parallaxSpeed;
 
         // Calculate opacity
         const fadeStart = heroHeight * 0.6;
         const fadeEnd = heroHeight;
         let opacity = 1;
 
-        if (currentScrollY > fadeStart) {
-            opacity = 1 - (currentScrollY - fadeStart) / (fadeEnd - fadeStart);
+        if (scrollY > fadeStart) {
+            opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
             opacity = Math.max(0, Math.min(1, opacity));
         }
 
-        // Use translate3d for hardware acceleration
-        heroGlassContainer.style.transform = `translate3d(-50%, calc(-50% + ${translateY}px), 0)`;
+        // Direct transform - no smoothing
+        heroGlassContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px))`;
         heroGlassContainer.style.opacity = opacity;
 
-        if (currentScrollY > heroHeight) {
+        if (scrollY > heroHeight) {
             heroGlassContainer.style.visibility = 'hidden';
         } else {
             heroGlassContainer.style.visibility = 'visible';
@@ -212,24 +207,9 @@ function smoothParallax() {
     const parallaxElements = document.querySelectorAll('.parallax-float');
     parallaxElements.forEach(element => {
         const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
-        const yPos = -(currentScrollY * speed);
-        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        const yPos = -(scrollY * speed);
+        element.style.transform = `translateY(${yPos}px)`;
     });
-
-    // Continue animation loop
-    if (Math.abs(lastKnownScrollY - currentScrollY) > 0.5) {
-        rafId = requestAnimationFrame(smoothParallax);
-    } else {
-        rafId = null;
-    }
-}
-
-window.addEventListener('scroll', () => {
-    lastKnownScrollY = window.pageYOffset || window.scrollY;
-
-    if (!rafId) {
-        rafId = requestAnimationFrame(smoothParallax);
-    }
 }, { passive: true });
 
 // ==========================================
@@ -240,13 +220,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const portfolioCards = document.querySelectorAll('.portfolio-card');
     const prevBtn = document.getElementById('portfolioPrev');
     const nextBtn = document.getElementById('portfolioNext');
+    const cardInfo = document.getElementById('portfolioCardInfo');
     let currentIndex = 0;
+
+    // Card data
+    const cardData = [
+        {
+            title: 'E-Commerce Platform',
+            category: 'Web Development',
+            description: 'Modern online shopping experience with seamless checkout'
+        },
+        {
+            title: 'Corporate Website',
+            category: 'UI/UX Design',
+            description: 'Professional presence with elegant design'
+        },
+        {
+            title: 'Mobile App Landing',
+            category: 'Responsive Design',
+            description: 'Engaging landing page optimized for all devices'
+        },
+        {
+            title: 'Portfolio Website',
+            category: 'Full Stack',
+            description: 'Custom portfolio showcasing creative work'
+        }
+    ];
+
+    function updateCardInfo() {
+        const data = cardData[currentIndex];
+        cardInfo.innerHTML = `
+            <h3 class="portfolio-info-title">${data.title}</h3>
+            <p class="portfolio-info-category">${data.category}</p>
+            <p class="portfolio-info-description">${data.description}</p>
+        `;
+    }
 
     function updateCardPositions() {
         portfolioCards.forEach((card, index) => {
             const relativePosition = index - currentIndex;
             card.setAttribute('data-position', relativePosition);
         });
+        updateCardInfo();
     }
 
     function nextCard() {

@@ -169,53 +169,55 @@
             </div>
 
             <!-- Card Stack Container -->
-            <div class="portfolio-stack-container">
-                <button class="portfolio-nav portfolio-nav-prev" id="portfolioPrev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
+            <div class="portfolio-stack-wrapper">
+                <div class="portfolio-stack-container">
+                    <button class="portfolio-nav portfolio-nav-prev" id="portfolioPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
 
-                <div class="portfolio-stack" id="portfolioStack">
-                    <div class="portfolio-card" data-index="0">
-                        <div class="portfolio-card-inner">
-                            <div class="portfolio-card-content">
-                                <h3 class="portfolio-card-title">E-Commerce Platform</h3>
-                                <p class="portfolio-card-category">Web Development</p>
-                                <p class="portfolio-card-description">Modern online shopping experience with seamless checkout</p>
+                    <div class="portfolio-stack" id="portfolioStack">
+                        <div class="portfolio-card" data-index="0">
+                            <div class="portfolio-card-image">
+                                <!-- Placeholder for screenshot - will be styled to look like a web page -->
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-shopping-cart" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-index="1">
+                            <div class="portfolio-card-image">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-building" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-index="2">
+                            <div class="portfolio-card-image">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-mobile-alt" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-card" data-index="3">
+                            <div class="portfolio-card-image">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-camera" style="font-size: 4rem; color: var(--primary-color);"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="portfolio-card" data-index="1">
-                        <div class="portfolio-card-inner">
-                            <div class="portfolio-card-content">
-                                <h3 class="portfolio-card-title">Corporate Website</h3>
-                                <p class="portfolio-card-category">UI/UX Design</p>
-                                <p class="portfolio-card-description">Professional presence with elegant design</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-card" data-index="2">
-                        <div class="portfolio-card-inner">
-                            <div class="portfolio-card-content">
-                                <h3 class="portfolio-card-title">Mobile App Landing</h3>
-                                <p class="portfolio-card-category">Responsive Design</p>
-                                <p class="portfolio-card-description">Engaging landing page optimized for all devices</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-card" data-index="3">
-                        <div class="portfolio-card-inner">
-                            <div class="portfolio-card-content">
-                                <h3 class="portfolio-card-title">Portfolio Website</h3>
-                                <p class="portfolio-card-category">Full Stack</p>
-                                <p class="portfolio-card-description">Custom portfolio showcasing creative work</p>
-                            </div>
-                        </div>
-                    </div>
+
+                    <button class="portfolio-nav portfolio-nav-next" id="portfolioNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
 
-                <button class="portfolio-nav portfolio-nav-next" id="portfolioNext">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <!-- Card Info Below Stack -->
+                <div class="portfolio-card-info" id="portfolioCardInfo">
+                    <h3 class="portfolio-info-title">E-Commerce Platform</h3>
+                    <p class="portfolio-info-category">Web Development</p>
+                    <p class="portfolio-info-description">Modern online shopping experience with seamless checkout</p>
+                </div>
             </div>
         </div>
     </section>
