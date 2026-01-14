@@ -338,25 +338,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// SNAP SCROLL TO PORTFOLIO CENTER
+// SUBTLE SNAP SCROLL TO PORTFOLIO CENTER
 // ==========================================
 
 // Create intersection observer for portfolio section
 const portfolioSection = document.getElementById('portfolio');
 if (portfolioSection) {
+    let hasSnapped = false;
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.1 && entry.intersectionRatio < 0.9) {
-                // User is entering the section, snap to center it
+            // Only snap once when 80%+ of section is visible
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.8 && !hasSnapped) {
+                hasSnapped = true;
+                // Subtle snap to center
                 portfolioSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'center'
                 });
+
+                // Reset after a delay to allow re-triggering if user scrolls away and back
+                setTimeout(() => {
+                    hasSnapped = false;
+                }, 2000);
             }
         });
     }, {
-        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
-        rootMargin: '-10% 0px -10% 0px'
+        threshold: [0.8, 0.85, 0.9, 0.95, 1.0],
+        rootMargin: '0px'
     });
 
     observer.observe(portfolioSection);
