@@ -22,7 +22,11 @@ navLinks.forEach(link => {
 });
 
 // Navbar scroll effect - show on scroll and enhance when scrolled further
+let hasScrolled = false;
+
 window.addEventListener('scroll', () => {
+    hasScrolled = true;
+
     // Show navbar as soon as user scrolls
     if (window.scrollY > 0) {
         navbar.classList.add('visible');
@@ -37,6 +41,13 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
 });
+
+// Show navbar after 10 seconds if user hasn't scrolled
+setTimeout(() => {
+    if (!hasScrolled) {
+        navbar.classList.add('visible');
+    }
+}, 10000);
 
 // ==========================================
 // SMOOTH SCROLLING
@@ -157,71 +168,119 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// OPTIMIZED PARALLAX SCROLLING WITH RAF
+// SIMPLE HARDWARE-ACCELERATED PARALLAX
 // ==========================================
 
-let ticking = false;
-let lastScrollY = 0;
+let lastKnownScrollY = 0;
+let currentScrollY = 0;
+let rafId = null;
 
-function updateParallax() {
-    const scrollY = lastScrollY;
+function smoothParallax() {
+    // Smooth interpolation
+    currentScrollY += (lastKnownScrollY - currentScrollY) * 0.1;
+
     const heroGlassContainer = document.getElementById('heroGlassContainer');
     const heroSection = document.querySelector('.hero');
 
-    // Update hero glass container parallax
     if (heroGlassContainer && heroSection) {
         const heroHeight = heroSection.offsetHeight;
-
-        // Parallax effect: container moves slower (0.5x speed)
         const parallaxSpeed = 0.5;
-        const translateY = scrollY * parallaxSpeed;
+        const translateY = currentScrollY * parallaxSpeed;
 
-        // Calculate opacity based on scroll position
+        // Calculate opacity
         const fadeStart = heroHeight * 0.6;
         const fadeEnd = heroHeight;
         let opacity = 1;
 
-        if (scrollY > fadeStart) {
-            opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+        if (currentScrollY > fadeStart) {
+            opacity = 1 - (currentScrollY - fadeStart) / (fadeEnd - fadeStart);
             opacity = Math.max(0, Math.min(1, opacity));
         }
 
-        // Apply transform and opacity
-        heroGlassContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px))`;
+        // Use translate3d for hardware acceleration
+        heroGlassContainer.style.transform = `translate3d(-50%, calc(-50% + ${translateY}px), 0)`;
         heroGlassContainer.style.opacity = opacity;
 
-        // Hide completely when scrolled past hero section
-        if (scrollY > heroHeight) {
-            heroGlassContainer.style.display = 'none';
+        if (currentScrollY > heroHeight) {
+            heroGlassContainer.style.visibility = 'hidden';
         } else {
-            heroGlassContainer.style.display = 'block';
+            heroGlassContainer.style.visibility = 'visible';
         }
     }
 
-    // Update floating elements parallax
+    // Update floating elements
     const parallaxElements = document.querySelectorAll('.parallax-float');
     parallaxElements.forEach(element => {
         const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
-        const rect = element.getBoundingClientRect();
-
-        // Only apply parallax if element is in viewport
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            const yPos = -(scrollY * speed);
-            element.style.transform = `translateY(${yPos}px)`;
-        }
+        const yPos = -(currentScrollY * speed);
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
     });
 
-    ticking = false;
-}
-
-function requestTick() {
-    if (!ticking) {
-        requestAnimationFrame(updateParallax);
-        ticking = true;
+    // Continue animation loop
+    if (Math.abs(lastKnownScrollY - currentScrollY) > 0.5) {
+        rafId = requestAnimationFrame(smoothParallax);
+    } else {
+        rafId = null;
     }
 }
 
 window.addEventListener('scroll', () => {
-    lastScrollY = window.pageYOffset || window.scrollY;
-    requestTick();
+    lastKnownScrollY = window.pageYOffset || window.scrollY;
+
+    if (!rafId) {
+        rafId = requestAnimationFrame(smoothParallax);
+    }
 }, { passive: true });
+
+// ==========================================
+// PORTFOLIO CARD STACK NAVIGATION
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    const prevBtn = document.getElementById('portfolioPrev');
+    const nextBtn = document.getElementById('portfolioNext');
+    let currentIndex = 0;
+
+    function updateCardPositions() {
+        portfolioCards.forEach((card, index) => {
+            const relativePosition = index - currentIndex;
+            card.setAttribute('data-position', relativePosition);
+        });
+    }
+
+    function nextCard() {
+        currentIndex = (currentIndex + 1) % portfolioCards.length;
+        updateCardPositions();
+    }
+
+    function prevCard() {
+        currentIndex = (currentIndex - 1 + portfolioCards.length) % portfolioCards.length;
+        updateCardPositions();
+    }
+
+    // Initialize positions
+    updateCardPositions();
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextCard);
+    prevBtn.addEventListener('click', prevCard);
+
+    // Click on top card to go to next
+    portfolioCards.forEach(card => {
+        card.addEventListener('click', () => {
+            if (card.getAttribute('data-position') === '0') {
+                nextCard();
+            }
+        });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevCard();
+        } else if (e.key === 'ArrowRight') {
+            nextCard();
+        }
+    });
+});

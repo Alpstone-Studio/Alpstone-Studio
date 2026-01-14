@@ -43,7 +43,7 @@
         <!-- Glassmorphic floating title container -->
         <div class="hero-glass-container" id="heroGlassContainer">
             <h1 class="hero-glass-title">Alpstone Studio</h1>
-            <p class="hero-glass-subtitle">So easy that it's almost black magic</p>
+            <p class="hero-glass-subtitle">So easy, it's almost black magic</p>
         </div>
 
         <div class="container">
@@ -167,39 +167,55 @@
                 <h2 class="section-title">Our Work</h2>
                 <p class="section-description">Explore our recent projects</p>
             </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">E-Commerce Platform</h3>
-                            <p class="portfolio-category">Web Development</p>
+
+            <!-- Card Stack Container -->
+            <div class="portfolio-stack-container">
+                <button class="portfolio-nav portfolio-nav-prev" id="portfolioPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="portfolio-stack" id="portfolioStack">
+                    <div class="portfolio-card" data-index="0">
+                        <div class="portfolio-card-inner">
+                            <div class="portfolio-card-content">
+                                <h3 class="portfolio-card-title">E-Commerce Platform</h3>
+                                <p class="portfolio-card-category">Web Development</p>
+                                <p class="portfolio-card-description">Modern online shopping experience with seamless checkout</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card" data-index="1">
+                        <div class="portfolio-card-inner">
+                            <div class="portfolio-card-content">
+                                <h3 class="portfolio-card-title">Corporate Website</h3>
+                                <p class="portfolio-card-category">UI/UX Design</p>
+                                <p class="portfolio-card-description">Professional presence with elegant design</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card" data-index="2">
+                        <div class="portfolio-card-inner">
+                            <div class="portfolio-card-content">
+                                <h3 class="portfolio-card-title">Mobile App Landing</h3>
+                                <p class="portfolio-card-category">Responsive Design</p>
+                                <p class="portfolio-card-description">Engaging landing page optimized for all devices</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card" data-index="3">
+                        <div class="portfolio-card-inner">
+                            <div class="portfolio-card-content">
+                                <h3 class="portfolio-card-title">Portfolio Website</h3>
+                                <p class="portfolio-card-category">Full Stack</p>
+                                <p class="portfolio-card-description">Custom portfolio showcasing creative work</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Corporate Website</h3>
-                            <p class="portfolio-category">UI/UX Design</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Mobile App Landing</h3>
-                            <p class="portfolio-category">Responsive Design</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item fade-in-up">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3 class="portfolio-title">Portfolio Website</h3>
-                            <p class="portfolio-category">Full Stack</p>
-                        </div>
-                    </div>
-                </div>
+
+                <button class="portfolio-nav portfolio-nav-next" id="portfolioNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
