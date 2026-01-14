@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// PORTFOLIO VIEW TOGGLE
+// PORTFOLIO VIEW TOGGLE WITH SMOOTH ANIMATIONS
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -326,25 +326,39 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Toggle views with animation
             if (view === 'grid') {
+                // Switch to grid view
                 indicator.classList.add('grid-active');
-                stackWrapper.classList.add('grid-active');
                 portfolioSection.classList.add('grid-view-active');
 
-                // Delay grid view appearance for smooth transition
-                setTimeout(() => {
-                    gridView.classList.add('active');
-                }, 100);
-            } else {
-                indicator.classList.remove('grid-active');
-                gridView.classList.remove('active');
-                portfolioSection.classList.remove('grid-view-active');
+                // Fade out stack view
+                stackWrapper.classList.add('hiding');
 
-                // Delay stack view appearance for smooth transition
                 setTimeout(() => {
+                    // Hide stack, show grid
+                    stackWrapper.classList.add('grid-active');
+                    gridView.classList.add('active');
+
+                    // Fade in grid view
+                    setTimeout(() => {
+                        gridView.classList.add('visible');
+                    }, 50);
+                }, 300);
+
+            } else {
+                // Switch to card view
+                indicator.classList.remove('grid-active');
+
+                // Fade out grid view
+                gridView.classList.remove('visible');
+
+                setTimeout(() => {
+                    // Hide grid, show stack
+                    gridView.classList.remove('active');
                     stackWrapper.classList.remove('grid-active');
-                }, 100);
+                    stackWrapper.classList.remove('hiding');
+                    portfolioSection.classList.remove('grid-view-active');
+                }, 300);
             }
         });
     });

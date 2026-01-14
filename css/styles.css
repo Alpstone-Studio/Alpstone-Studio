@@ -673,15 +673,17 @@ body {
 
 .portfolio .container {
     width: 100%;
-    max-height: calc(100vh - 130px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-/* Remove height constraint in grid view */
-.portfolio.grid-view-active .container {
-    max-height: none;
+/* Portfolio content area with smooth height transitions */
+.portfolio-content-area {
+    width: 100%;
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .portfolio-stack-wrapper {
@@ -690,13 +692,21 @@ body {
     align-items: center;
     gap: 12px;
     margin-top: 15px;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* Portfolio View Toggle - Icon Only with Sliding Indicator */
+.portfolio-stack-wrapper.hiding {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Portfolio View Toggle - Right Side */
 .portfolio-view-toggle {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 30px;
+    right: 20px;
     display: flex;
     gap: 0;
     background: rgba(255, 255, 255, 0.7);
@@ -704,7 +714,7 @@ body {
     border-radius: 20px;
     box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.2),
                 -8px -8px 16px rgba(255, 255, 255, 0.8);
-    position: relative;
+    z-index: 10;
 }
 
 .view-toggle-indicator {
@@ -756,32 +766,17 @@ body {
     gap: 32px;
     width: 100%;
     max-width: 1200px;
+    margin-top: 15px;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 
 .portfolio-grid-view.active {
     display: grid;
-    animation: fadeInUp 0.4s ease forwards;
 }
 
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Hide and animate stack view */
-.portfolio-stack-wrapper {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.portfolio-stack-wrapper.grid-active {
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
+.portfolio-grid-view.visible {
+    opacity: 1;
 }
 
 .portfolio-grid-item {
@@ -834,11 +829,7 @@ body {
 }
 
 /* Hide stack view when grid is active */
-.portfolio-stack-wrapper.grid-active .portfolio-stack-container {
-    display: none;
-}
-
-.portfolio-stack-wrapper.grid-active .portfolio-card-info {
+.portfolio-stack-wrapper.grid-active {
     display: none;
 }
 
