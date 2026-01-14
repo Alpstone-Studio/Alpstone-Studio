@@ -313,8 +313,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+    const indicator = document.querySelector('.view-toggle-indicator');
     const stackWrapper = document.querySelector('.portfolio-stack-wrapper');
     const gridView = document.getElementById('portfolioGridView');
+    const portfolioSection = document.querySelector('.portfolio');
 
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -324,13 +326,25 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Toggle views
+            // Toggle views with animation
             if (view === 'grid') {
+                indicator.classList.add('grid-active');
                 stackWrapper.classList.add('grid-active');
-                gridView.classList.add('active');
+                portfolioSection.classList.add('grid-view-active');
+
+                // Delay grid view appearance for smooth transition
+                setTimeout(() => {
+                    gridView.classList.add('active');
+                }, 100);
             } else {
-                stackWrapper.classList.remove('grid-active');
+                indicator.classList.remove('grid-active');
                 gridView.classList.remove('active');
+                portfolioSection.classList.remove('grid-view-active');
+
+                // Delay stack view appearance for smooth transition
+                setTimeout(() => {
+                    stackWrapper.classList.remove('grid-active');
+                }, 100);
             }
         });
     });
