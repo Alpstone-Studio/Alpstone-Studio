@@ -21,14 +21,33 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar scroll effect
+// Navbar scroll effect - show on scroll and enhance when scrolled further
+let hasScrolled = false;
+
 window.addEventListener('scroll', () => {
+    hasScrolled = true;
+
+    // Show navbar as soon as user scrolls
+    if (window.scrollY > 0) {
+        navbar.classList.add('visible');
+    } else {
+        navbar.classList.remove('visible');
+    }
+
+    // Add scrolled effect for enhanced blur
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
 });
+
+// Show navbar after 10 seconds if user hasn't scrolled
+setTimeout(() => {
+    if (!hasScrolled) {
+        navbar.classList.add('visible');
+    }
+}, 10000);
 
 // ==========================================
 // SMOOTH SCROLLING
@@ -147,3 +166,179 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ==========================================
+// OPTIMIZED PARALLAX WITH CSS CUSTOM PROPERTIES
+// ==========================================
+
+const heroGlassContainer = document.getElementById('heroGlassContainer');
+const heroSection = document.querySelector('.hero');
+
+// Set CSS custom property for parallax
+function updateParallax() {
+    const scrollY = window.pageYOffset || window.scrollY;
+
+    // Hero glass container parallax
+    if (heroGlassContainer && heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        const parallaxSpeed = 0.5;
+        const translateY = scrollY * parallaxSpeed;
+
+        // Calculate opacity
+        const fadeStart = heroHeight * 0.6;
+        const fadeEnd = heroHeight;
+        let opacity = 1;
+
+        if (scrollY > fadeStart) {
+            opacity = 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart);
+            opacity = Math.max(0, Math.min(1, opacity));
+        }
+
+        // Use translate3d for GPU acceleration
+        heroGlassContainer.style.transform = `translate3d(-50%, calc(-50% + ${translateY}px), 0)`;
+        heroGlassContainer.style.opacity = opacity;
+
+        if (scrollY > heroHeight) {
+            heroGlassContainer.style.visibility = 'hidden';
+        } else {
+            heroGlassContainer.style.visibility = 'visible';
+        }
+    }
+
+    // Update floating elements
+    const parallaxElements = document.querySelectorAll('.parallax-float');
+    parallaxElements.forEach(element => {
+        const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
+        const yPos = -(scrollY * speed);
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+    });
+}
+
+// Use passive listener for better scroll performance
+window.addEventListener('scroll', updateParallax, { passive: true });
+
+// Initial call
+updateParallax();
+
+// ==========================================
+// PORTFOLIO CARD STACK NAVIGATION
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    const prevBtn = document.getElementById('portfolioPrev');
+    const nextBtn = document.getElementById('portfolioNext');
+    const cardInfo = document.getElementById('portfolioCardInfo');
+    let currentIndex = 0;
+
+    // Card data
+    const cardData = [
+        {
+            title: 'E-Commerce Platform',
+            category: 'Web Development',
+            description: 'Modern online shopping experience with seamless checkout'
+        },
+        {
+            title: 'Corporate Website',
+            category: 'UI/UX Design',
+            description: 'Professional presence with elegant design'
+        },
+        {
+            title: 'Mobile App Landing',
+            category: 'Responsive Design',
+            description: 'Engaging landing page optimized for all devices'
+        },
+        {
+            title: 'Portfolio Website',
+            category: 'Full Stack',
+            description: 'Custom portfolio showcasing creative work'
+        }
+    ];
+
+    function updateCardInfo() {
+        const data = cardData[currentIndex];
+        cardInfo.innerHTML = `
+            <h3 class="portfolio-info-title">${data.title}</h3>
+            <p class="portfolio-info-description">${data.description}</p>
+        `;
+    }
+
+    function updateCardPositions() {
+        portfolioCards.forEach((card, index) => {
+            const relativePosition = index - currentIndex;
+            card.setAttribute('data-position', relativePosition);
+        });
+        updateCardInfo();
+    }
+
+    function nextCard() {
+        currentIndex = (currentIndex + 1) % portfolioCards.length;
+        updateCardPositions();
+    }
+
+    function prevCard() {
+        currentIndex = (currentIndex - 1 + portfolioCards.length) % portfolioCards.length;
+        updateCardPositions();
+    }
+
+    // Initialize positions
+    updateCardPositions();
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextCard);
+    prevBtn.addEventListener('click', prevCard);
+
+    // Click on top card to go to next
+    portfolioCards.forEach(card => {
+        card.addEventListener('click', () => {
+            if (card.getAttribute('data-position') === '0') {
+                nextCard();
+            }
+        });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevCard();
+        } else if (e.key === 'ArrowRight') {
+            nextCard();
+        }
+    });
+});
+
+// ==========================================
+// PORTFOLIO VIEW TOGGLE
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+    const stackWrapper = document.querySelector('.portfolio-stack-wrapper');
+    const gridView = document.getElementById('portfolioGridView');
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const view = btn.getAttribute('data-view');
+
+            // Update active button
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Toggle views
+            if (view === 'grid') {
+                stackWrapper.classList.add('grid-active');
+                gridView.classList.add('active');
+            } else {
+                stackWrapper.classList.remove('grid-active');
+                gridView.classList.remove('active');
+            }
+        });
+    });
+});
+
+// ==========================================
+// SUBTLE SNAP SCROLL TO PORTFOLIO CENTER
+// ==========================================
+
+// The portfolio section now uses CSS scroll-snap-align: center
+// No JavaScript needed for snap scroll - it's handled by CSS
