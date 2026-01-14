@@ -21,8 +21,16 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar scroll effect
+// Navbar scroll effect - show on scroll and enhance when scrolled further
 window.addEventListener('scroll', () => {
+    // Show navbar as soon as user scrolls
+    if (window.scrollY > 0) {
+        navbar.classList.add('visible');
+    } else {
+        navbar.classList.remove('visible');
+    }
+
+    // Add scrolled effect for enhanced blur
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
@@ -149,15 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// PARALLAX SCROLLING FOR HERO GLASS CONTAINER
+// OPTIMIZED PARALLAX SCROLLING WITH RAF
 // ==========================================
 
-window.addEventListener('scroll', () => {
+let ticking = false;
+let lastScrollY = 0;
+
+function updateParallax() {
+    const scrollY = lastScrollY;
     const heroGlassContainer = document.getElementById('heroGlassContainer');
     const heroSection = document.querySelector('.hero');
 
+    // Update hero glass container parallax
     if (heroGlassContainer && heroSection) {
-        const scrollY = window.pageYOffset || window.scrollY;
         const heroHeight = heroSection.offsetHeight;
 
         // Parallax effect: container moves slower (0.5x speed)
@@ -165,7 +177,6 @@ window.addEventListener('scroll', () => {
         const translateY = scrollY * parallaxSpeed;
 
         // Calculate opacity based on scroll position
-        // Fade out as it reaches the bottom of the hero section
         const fadeStart = heroHeight * 0.6;
         const fadeEnd = heroHeight;
         let opacity = 1;
@@ -186,19 +197,12 @@ window.addEventListener('scroll', () => {
             heroGlassContainer.style.display = 'block';
         }
     }
-});
 
-// ==========================================
-// PARALLAX SCROLLING FOR FLOATING ELEMENTS
-// ==========================================
-
-window.addEventListener('scroll', () => {
+    // Update floating elements parallax
     const parallaxElements = document.querySelectorAll('.parallax-float');
-
     parallaxElements.forEach(element => {
         const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
         const rect = element.getBoundingClientRect();
-        const scrollY = window.pageYOffset || window.scrollY;
 
         // Only apply parallax if element is in viewport
         if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -206,4 +210,18 @@ window.addEventListener('scroll', () => {
             element.style.transform = `translateY(${yPos}px)`;
         }
     });
-});
+
+    ticking = false;
+}
+
+function requestTick() {
+    if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+    }
+}
+
+window.addEventListener('scroll', () => {
+    lastScrollY = window.pageYOffset || window.scrollY;
+    requestTick();
+}, { passive: true });

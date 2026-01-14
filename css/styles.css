@@ -65,6 +65,13 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.navbar.visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .navbar.scrolled {
