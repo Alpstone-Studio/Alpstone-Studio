@@ -168,13 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// DEAD SIMPLE PARALLAX - NO RAF, NO INTERPOLATION
+// OPTIMIZED PARALLAX WITH CSS CUSTOM PROPERTIES
 // ==========================================
 
-window.addEventListener('scroll', () => {
+const heroGlassContainer = document.getElementById('heroGlassContainer');
+const heroSection = document.querySelector('.hero');
+
+// Set CSS custom property for parallax
+function updateParallax() {
     const scrollY = window.pageYOffset || window.scrollY;
-    const heroGlassContainer = document.getElementById('heroGlassContainer');
-    const heroSection = document.querySelector('.hero');
 
     // Hero glass container parallax
     if (heroGlassContainer && heroSection) {
@@ -192,8 +194,8 @@ window.addEventListener('scroll', () => {
             opacity = Math.max(0, Math.min(1, opacity));
         }
 
-        // Direct transform - no smoothing
-        heroGlassContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px))`;
+        // Use translate3d for GPU acceleration
+        heroGlassContainer.style.transform = `translate3d(-50%, calc(-50% + ${translateY}px), 0)`;
         heroGlassContainer.style.opacity = opacity;
 
         if (scrollY > heroHeight) {
@@ -208,9 +210,15 @@ window.addEventListener('scroll', () => {
     parallaxElements.forEach(element => {
         const speed = parseFloat(element.getAttribute('data-speed')) || 0.5;
         const yPos = -(scrollY * speed);
-        element.style.transform = `translateY(${yPos}px)`;
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
     });
-}, { passive: true });
+}
+
+// Use passive listener for better scroll performance
+window.addEventListener('scroll', updateParallax, { passive: true });
+
+// Initial call
+updateParallax();
 
 // ==========================================
 // PORTFOLIO CARD STACK NAVIGATION
@@ -299,3 +307,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// ==========================================
+// PORTFOLIO VIEW TOGGLE
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+    const stackWrapper = document.querySelector('.portfolio-stack-wrapper');
+    const gridView = document.getElementById('portfolioGridView');
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const view = btn.getAttribute('data-view');
+
+            // Update active button
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Toggle views
+            if (view === 'grid') {
+                stackWrapper.classList.add('grid-active');
+                gridView.classList.add('active');
+            } else {
+                stackWrapper.classList.remove('grid-active');
+                gridView.classList.remove('active');
+            }
+        });
+    });
+});
+
+// ==========================================
+// SNAP SCROLL TO PORTFOLIO CENTER
+// ==========================================
+
+// Create intersection observer for portfolio section
+const portfolioSection = document.getElementById('portfolio');
+if (portfolioSection) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1 && entry.intersectionRatio < 0.9) {
+                // User is entering the section, snap to center it
+                portfolioSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
+    }, {
+        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        rootMargin: '-10% 0px -10% 0px'
+    });
+
+    observer.observe(portfolioSection);
+}
