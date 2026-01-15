@@ -1120,18 +1120,19 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 140%;
-    height: 140%;
+    width: 150%;
+    height: 150%;
     background: radial-gradient(
         circle,
-        rgba(67, 141, 215, 0.25) 0%,
-        rgba(67, 141, 215, 0.1) 30%,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.3) 25%,
+        rgba(67, 141, 215, 0.2) 50%,
         transparent 70%
     );
     border-radius: 50%;
     z-index: -1;
-    opacity: 0.8;
-    filter: blur(20px);
+    opacity: 1;
+    filter: blur(25px);
     transition: all 0.4s ease;
 }
 
@@ -1143,9 +1144,15 @@ body {
 }
 
 .footer-logo-glass:hover::before {
-    opacity: 1;
-    width: 160%;
-    height: 160%;
+    width: 170%;
+    height: 170%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0.4) 25%,
+        rgba(67, 141, 215, 0.3) 50%,
+        transparent 70%
+    );
 }
 
 .footer-logo {
