@@ -374,3 +374,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // The portfolio section now uses CSS scroll-snap-align: center
 // No JavaScript needed for snap scroll - it's handled by CSS
+
+
+// ==========================================
+// About image wrapper movement
+// ==========================================
+
+const aboutWrapper = document.querySelector('.about-image-wrapper');
+const aboutImg = aboutWrapper.querySelector('img');
+
+let targetX = 0, targetY = 0;
+let currentX = 0, currentY = 0;
+
+function updateOffsets() {
+    // limites pour que l'image ne dépasse jamais
+    maxOffsetX = (aboutImg.clientWidth - aboutWrapper.clientWidth) / 2;
+    maxOffsetY = (aboutImg.clientHeight - aboutWrapper.clientHeight) / 2;
+}
+
+aboutWrapper.addEventListener('mousemove', e => {
+    const rect = aboutWrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const percX = (x / rect.width - 0.5) * 2; // -1 à 1
+    const percY = (y / rect.height - 0.5) * 2;
+
+    // mouvement inverse
+    targetX = -percX * maxOffsetX;
+    targetY = -percY * maxOffsetY;
+});
+
+aboutWrapper.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
+});
+
+function animate() {
+    currentX += (targetX - currentX) * 0.1;
+    currentY += (targetY - currentY) * 0.1;
+
+    aboutImg.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px))`;
+    requestAnimationFrame(animate);
+}
+
+// attendre que l'image soit chargée pour calculer les offsets
+aboutImg.onload = () => {
+    updateOffsets();
+    animate();
+};
+if (aboutImg.complete) aboutImg.onload();
+window.addEventListener('resize', updateOffsets);

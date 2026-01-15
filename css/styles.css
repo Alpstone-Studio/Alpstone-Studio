@@ -629,6 +629,20 @@ body {
     box-shadow: 0 20px 60px rgba(32, 55, 93, 0.15);
 }
 
+/* Image initiale centrée avec léger zoom */
+.about-image-wrapper img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 24px;
+    will-change: transform;
+}
+
+/* Overlay animé en arrière-plan */
 .about-image-wrapper::before {
     content: '';
     position: absolute;
@@ -640,6 +654,7 @@ body {
     animation: rotate 20s linear infinite;
 }
 
+/* Keyframes pour l'animation radiale */
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -687,6 +702,11 @@ body {
     width: 100%;
     transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    padding: 15px 0;
 }
 
 .portfolio-stack-wrapper {
