@@ -357,7 +357,7 @@ body {
 
 .section-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -365,6 +365,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .section-title {
@@ -668,7 +669,7 @@ body {
    ========================================== */
 
 .portfolio {
-    padding: 100px 0 60px 0;
+    padding: 90px 0 40px 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
     position: relative;
     overflow: hidden;
@@ -676,59 +677,106 @@ body {
     display: flex;
     align-items: center;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
+    transition: min-height 0.5s ease, padding 0.5s ease;
+}
+
+/* Remove snap scroll and height constraints in grid view */
+.portfolio.grid-view-active {
+    min-height: auto;
+    scroll-snap-align: none;
+    padding: 60px 0;
+    align-items: flex-start;
 }
 
 .portfolio .container {
     width: 100%;
-    max-height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Portfolio content area with smooth height transitions */
+.portfolio-content-area {
+    width: 100%;
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 80px;
+    padding: 15px 0;
 }
 
 .portfolio-stack-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* Portfolio View Toggle */
+.portfolio-stack-wrapper.hiding {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Portfolio View Toggle - Right Side */
 .portfolio-view-toggle {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 30px;
+    right: 20px;
     display: flex;
-    gap: 12px;
+    gap: 0;
     background: rgba(255, 255, 255, 0.7);
-    padding: 8px;
+    padding: 6px;
     border-radius: 20px;
     box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.2),
                 -8px -8px 16px rgba(255, 255, 255, 0.8);
+    z-index: 10;
+}
+
+.view-toggle-indicator {
+    position: absolute;
+    width: 44px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 14px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(67, 141, 215, 0.3);
+    left: 6px;
+    top: 6px;
+}
+
+.view-toggle-indicator.grid-active {
+    transform: translateX(44px);
 }
 
 .view-toggle-btn {
-    padding: 10px 24px;
+    padding: 0;
     border: none;
     border-radius: 14px;
     background: transparent;
     color: var(--text-light);
-    font-family: var(--font-primary);
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    width: 44px;
+    height: 40px;
+    position: relative;
+    z-index: 1;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .view-toggle-btn.active {
-    background: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 12px rgba(67, 141, 215, 0.3);
 }
 
 .view-toggle-btn:hover:not(.active) {
@@ -742,10 +790,17 @@ body {
     gap: 32px;
     width: 100%;
     max-width: 1200px;
+    margin-top: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .portfolio-grid-view.active {
     display: grid;
+}
+
+.portfolio-grid-view.visible {
+    opacity: 1;
 }
 
 .portfolio-grid-item {
@@ -798,11 +853,7 @@ body {
 }
 
 /* Hide stack view when grid is active */
-.portfolio-stack-wrapper.grid-active .portfolio-stack-container {
-    display: none;
-}
-
-.portfolio-stack-wrapper.grid-active .portfolio-card-info {
+.portfolio-stack-wrapper.grid-active {
     display: none;
 }
 
@@ -812,7 +863,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 80px;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .portfolio-stack {
@@ -892,14 +943,14 @@ body {
 .portfolio-card-info {
     text-align: center;
     max-width: 600px;
-    padding: 10px;
+    padding: 8px;
     transition: opacity 0.3s ease;
 }
 
 .portfolio-info-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--text-dark);
     letter-spacing: -0.01em;
 }
@@ -910,7 +961,7 @@ body {
 
 .portfolio-info-description {
     color: var(--text-light);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.5;
 }
 
@@ -1071,11 +1122,68 @@ body {
     margin-bottom: 48px;
 }
 
+.footer-logo-glass {
+    position: relative;
+    display: inline-block;
+    padding: 24px 32px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    transition: all 0.4s ease;
+}
+
+.footer-logo-glass::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(67, 141, 215, 0.1) 40%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(20px);
+    transition: all 0.4s ease;
+}
+
+.footer-logo-glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(67, 141, 215, 0.3);
+    box-shadow: 0 8px 32px rgba(67, 141, 215, 0.2);
+    transform: translateY(-4px);
+}
+
+.footer-logo-glass:hover::before {
+    width: 150%;
+    height: 150%;
+    opacity: 0.8;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(67, 141, 215, 0.15) 40%,
+        transparent 70%
+    );
+}
+
 .footer-logo {
     height: 80px;
     width: auto;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 4px 12px rgba(67, 141, 215, 0.2));
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(67, 141, 215, 0.15));
+    transition: filter 0.4s ease;
+}
+
+.footer-logo-glass:hover .footer-logo {
+    filter: drop-shadow(0 4px 12px rgba(67, 141, 215, 0.25));
 }
 
 .footer-description {
