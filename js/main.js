@@ -353,11 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 gridView.classList.remove('visible');
 
                 setTimeout(() => {
-                    // Hide grid, show stack
+                    // Hide grid, show stack (but keep it hidden initially)
                     gridView.classList.remove('active');
-                    stackWrapper.classList.remove('grid-active');
-                    stackWrapper.classList.remove('hiding');
                     portfolioSection.classList.remove('grid-view-active');
+                    stackWrapper.classList.remove('grid-active');
+
+                    // Fade in stack view
+                    setTimeout(() => {
+                        stackWrapper.classList.remove('hiding');
+                    }, 50);
                 }, 300);
             }
         });
