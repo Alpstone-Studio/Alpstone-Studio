@@ -1120,19 +1120,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150%;
-    height: 150%;
+    width: 130%;
+    height: 130%;
     background: radial-gradient(
         circle,
-        rgba(255, 255, 255, 0.5) 0%,
-        rgba(255, 255, 255, 0.3) 25%,
-        rgba(67, 141, 215, 0.2) 50%,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(67, 141, 215, 0.1) 40%,
         transparent 70%
     );
     border-radius: 50%;
     z-index: -1;
-    opacity: 1;
-    filter: blur(25px);
+    opacity: 0.6;
+    filter: blur(20px);
     transition: all 0.4s ease;
 }
 
@@ -1144,13 +1143,13 @@ body {
 }
 
 .footer-logo-glass:hover::before {
-    width: 170%;
-    height: 170%;
+    width: 150%;
+    height: 150%;
+    opacity: 0.8;
     background: radial-gradient(
         circle,
-        rgba(255, 255, 255, 0.7) 0%,
-        rgba(255, 255, 255, 0.4) 25%,
-        rgba(67, 141, 215, 0.3) 50%,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(67, 141, 215, 0.15) 40%,
         transparent 70%
     );
 }
@@ -1159,12 +1158,12 @@ body {
     height: 80px;
     width: auto;
     display: block;
-    filter: drop-shadow(0 4px 12px rgba(67, 141, 215, 0.3));
+    filter: drop-shadow(0 2px 8px rgba(67, 141, 215, 0.15));
     transition: filter 0.4s ease;
 }
 
 .footer-logo-glass:hover .footer-logo {
-    filter: drop-shadow(0 6px 16px rgba(67, 141, 215, 0.5));
+    filter: drop-shadow(0 4px 12px rgba(67, 141, 215, 0.25));
 }
 
 .footer-description {
