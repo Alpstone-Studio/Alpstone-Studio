@@ -1423,38 +1423,61 @@
             <div class="content-sidebar">
                 <div class="preview-card">
                     <h3 class="preview-title">Aperçu en temps réel</h3>
-                    <div class="preview-content" id="preview">
+                    <div class="preview-content" id="preview" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;">
                         <!-- Navigation -->
                         <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; padding: 8px;" id="preview-nav">
                             <div style="font-weight: 700; font-size: 0.9rem;" id="preview-logo">Logo</div>
                             <div style="display: flex; gap: 8px; font-size: 0.7rem;">
-                                <div id="preview-link1" style="opacity: 0.7;">Home</div>
-                                <div id="preview-link2" style="opacity: 0.7;">About</div>
+                                <div id="preview-link1" style="opacity: 0.7; cursor: pointer;">Home</div>
+                                <div id="preview-link2" style="opacity: 0.7; cursor: pointer;">About</div>
+                                <div id="preview-link3" style="opacity: 0.7; cursor: pointer;">Services</div>
                             </div>
                         </div>
 
                         <!-- Hero Section -->
                         <div style="margin-bottom: 12px; padding: 16px; text-align: center;" id="preview-hero">
                             <div style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;" id="preview-title">Your Title</div>
-                            <div style="font-size: 0.65rem; opacity: 0.8; margin-bottom: 10px;" id="preview-subtitle">Subtitle text</div>
-                            <div style="width: 60px; height: 20px; margin: 0 auto;" id="preview-cta"></div>
+                            <div style="font-size: 0.65rem; opacity: 0.8; margin-bottom: 10px;" id="preview-subtitle">Subtitle text here</div>
+                            <div style="width: 60px; height: 20px; margin: 0 auto; cursor: pointer;" id="preview-cta"></div>
                         </div>
 
                         <!-- Cards Grid -->
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
-                            <div style="padding: 10px;" id="preview-card1">
+                            <div style="padding: 10px; cursor: pointer;" id="preview-card1">
                                 <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon1"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title1">Feature 1</div>
+                                <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 4px;" id="preview-card-title1">Feature 1</div>
+                                <div style="font-size: 0.55rem; opacity: 0.7;" id="preview-card-desc1">Description</div>
                             </div>
-                            <div style="padding: 10px;" id="preview-card2">
+                            <div style="padding: 10px; cursor: pointer;" id="preview-card2">
                                 <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon2"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title2">Feature 2</div>
+                                <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 4px;" id="preview-card-title2">Feature 2</div>
+                                <div style="font-size: 0.55rem; opacity: 0.7;" id="preview-card-desc2">Description</div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Content Section -->
+                        <div style="padding: 12px; margin-bottom: 12px;" id="preview-section">
+                            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;" id="preview-section-title">Section Title</div>
+                            <div style="font-size: 0.6rem; line-height: 1.4; opacity: 0.8;" id="preview-section-text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+                            </div>
+                        </div>
+
+                        <!-- More Cards for Scrolling -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                            <div style="padding: 10px;" id="preview-card3">
+                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon3"></div>
+                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title3">Feature 3</div>
+                            </div>
+                            <div style="padding: 10px;" id="preview-card4">
+                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon4"></div>
+                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title4">Feature 4</div>
                             </div>
                         </div>
 
                         <!-- Footer -->
-                        <div style="padding: 8px; text-align: center; font-size: 0.6rem; opacity: 0.6;" id="preview-footer">
-                            © 2024 Your Brand
+                        <div style="padding: 8px; text-align: center; font-size: 0.6rem; opacity: 0.6; margin-top: 16px;" id="preview-footer">
+                            © 2024 Your Brand • Made with ❤️
                         </div>
                     </div>
                 </div>
@@ -1668,30 +1691,44 @@
                 `;
             } else if (primaryBgContrast >= 3) {
                 feedbackPrimary.className = 'color-feedback warning';
-                const suggestion = getSuggestion(primary, background, 4.5);
+                const suggestionPrimary = getSuggestion(primary, background, 4.5);
+                const suggestionBg = getSuggestion(background, primary, 4.5);
                 feedbackPrimary.innerHTML = `
                     <i class="fas fa-exclamation-triangle"></i>
                     <strong>Acceptable mais peut mieux faire</strong><br>
                     Le contraste actuel de ${primaryBgContrast.toFixed(1)}:1 est correct pour les gros textes,
                     mais peut poser des problèmes de lisibilité sur les petits textes.<br>
-                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
-                            onclick="applySuggestion('primary', '${suggestion}')">
-                        <i class="fas fa-magic"></i> Essayer ${suggestion}
-                    </button>
+                    <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('primary', '${suggestionPrimary}')">
+                            <i class="fas fa-palette"></i> Modifier couleur principale
+                        </button>
+                        <button class="modal-btn modal-btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('background', '${suggestionBg}')">
+                            <i class="fas fa-fill"></i> Modifier fond
+                        </button>
+                    </div>
                 `;
             } else {
                 feedbackPrimary.className = 'color-feedback error';
-                const suggestion = getSuggestion(primary, background, 4.5);
+                const suggestionPrimary = getSuggestion(primary, background, 4.5);
+                const suggestionBg = getSuggestion(background, primary, 4.5);
                 feedbackPrimary.innerHTML = `
                     <i class="fas fa-times-circle"></i>
                     <strong>Attention : contraste trop faible</strong><br>
                     Avec un ratio de seulement ${primaryBgContrast.toFixed(1)}:1, votre texte sera difficile à lire.
                     Les visiteurs malvoyants ne pourront pas utiliser votre site correctement.<br>
-                    <strong>Solution :</strong> ${getLuminance(background) > 0.5 ? 'Utilisez une couleur plus foncée' : 'Utilisez une couleur plus claire'}<br>
-                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
-                            onclick="applySuggestion('primary', '${suggestion}')">
-                        <i class="fas fa-magic"></i> Essayer ${suggestion}
-                    </button>
+                    <strong>Choisissez une solution :</strong><br>
+                    <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('primary', '${suggestionPrimary}')">
+                            <i class="fas fa-palette"></i> Corriger couleur (${suggestionPrimary})
+                        </button>
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('background', '${suggestionBg}')">
+                            <i class="fas fa-fill"></i> Corriger fond (${suggestionBg})
+                        </button>
+                    </div>
                 `;
             }
 
@@ -1705,27 +1742,41 @@
                 `;
             } else if (accentBgContrast >= 3) {
                 feedbackAccent.className = 'color-feedback warning';
-                const suggestion = getSuggestion(accent, background, 4.5);
+                const suggestionAccent = getSuggestion(accent, background, 4.5);
+                const suggestionBg = getSuggestion(background, accent, 4.5);
                 feedbackAccent.innerHTML = `
                     <i class="fas fa-exclamation-triangle"></i>
                     <strong>Contraste moyen</strong> (${accentBgContrast.toFixed(1)}:1) -
                     Convenable pour les éléments décoratifs, mais évitez de l'utiliser pour du texte important.<br>
-                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
-                            onclick="applySuggestion('accent', '${suggestion}')">
-                        <i class="fas fa-magic"></i> Améliorer automatiquement
-                    </button>
+                    <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('accent', '${suggestionAccent}')">
+                            <i class="fas fa-palette"></i> Modifier couleur accent
+                        </button>
+                        <button class="modal-btn modal-btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('background', '${suggestionBg}')">
+                            <i class="fas fa-fill"></i> Modifier fond
+                        </button>
+                    </div>
                 `;
             } else {
                 feedbackAccent.className = 'color-feedback error';
-                const suggestion = getSuggestion(accent, background, 4.5);
+                const suggestionAccent = getSuggestion(accent, background, 4.5);
+                const suggestionBg = getSuggestion(background, accent, 4.5);
                 feedbackAccent.innerHTML = `
                     <i class="fas fa-times-circle"></i>
                     <strong>Contraste insuffisant</strong> (${accentBgContrast.toFixed(1)}:1)<br>
                     Cette couleur sera invisible sur votre fond. ${getLuminance(background) > 0.5 ? 'Choisissez une teinte plus foncée' : 'Choisissez une teinte plus claire'}.<br>
-                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
-                            onclick="applySuggestion('accent', '${suggestion}')">
-                        <i class="fas fa-magic"></i> Corriger automatiquement
-                    </button>
+                    <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('accent', '${suggestionAccent}')">
+                            <i class="fas fa-palette"></i> Corriger accent (${suggestionAccent})
+                        </button>
+                        <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
+                                onclick="applySuggestion('background', '${suggestionBg}')">
+                            <i class="fas fa-fill"></i> Corriger fond (${suggestionBg})
+                        </button>
+                    </div>
                 `;
             }
         }
@@ -1774,12 +1825,26 @@
             const { primary, background, accent } = designState.colors;
             const { radius, density, animations } = designState.settings;
             const style = designState.style;
+            const typo = designState.typography;
 
             // Calculate values based on settings
             const borderRadius = radius === 1 ? '4px' : radius === 2 ? '8px' : '16px';
             const padding = density === 1 ? '8px' : density === 2 ? '12px' : '16px';
             const gap = density === 1 ? '6px' : density === 2 ? '8px' : '12px';
             const transition = animations === 0 ? 'none' : animations === 1 ? 'all 0.2s ease' : 'all 0.3s ease';
+
+            // Get typography fonts
+            const fonts = {
+                'inter-roboto': { heading: 'Inter, sans-serif', body: 'Roboto, sans-serif' },
+                'playfair-source': { heading: 'Playfair Display, serif', body: 'Source Sans Pro, sans-serif' },
+                'montserrat-open': { heading: 'Montserrat, sans-serif', body: 'Open Sans, sans-serif' },
+                'poppins-nunito': { heading: 'Poppins, sans-serif', body: 'Nunito, sans-serif' },
+                'raleway-lato': { heading: 'Raleway, sans-serif', body: 'Lato, sans-serif' }
+            };
+
+            const selectedFont = fonts[typo] || fonts['inter-roboto'];
+            const headingFont = selectedFont.heading;
+            const bodyFont = selectedFont.body;
 
             // Main container
             const previewEl = document.getElementById('preview');
@@ -1798,13 +1863,16 @@
 
             const logo = document.getElementById('preview-logo');
             logo.style.color = primary;
+            logo.style.fontFamily = headingFont;
 
             const link1 = document.getElementById('preview-link1');
             const link2 = document.getElementById('preview-link2');
-            link1.style.color = primary;
-            link2.style.color = primary;
-            link1.style.transition = transition;
-            link2.style.transition = transition;
+            const link3 = document.getElementById('preview-link3');
+            [link1, link2, link3].forEach(link => {
+                link.style.color = primary;
+                link.style.transition = transition;
+                link.style.fontFamily = bodyFont;
+            });
 
             // Hero section
             const hero = document.getElementById('preview-hero');
@@ -1838,10 +1906,12 @@
             const title = document.getElementById('preview-title');
             title.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? accent : 'white';
             title.style.transition = transition;
+            title.style.fontFamily = headingFont;
 
             const subtitle = document.getElementById('preview-subtitle');
             subtitle.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${accent}CC` : 'rgba(255,255,255,0.9)';
             subtitle.style.transition = transition;
+            subtitle.style.fontFamily = bodyFont;
 
             const cta = document.getElementById('preview-cta');
             cta.style.backgroundColor = accent;
@@ -1860,8 +1930,10 @@
             // Cards
             const card1 = document.getElementById('preview-card1');
             const card2 = document.getElementById('preview-card2');
+            const card3 = document.getElementById('preview-card3');
+            const card4 = document.getElementById('preview-card4');
 
-            [card1, card2].forEach(card => {
+            [card1, card2, card3, card4].forEach(card => {
                 if (style === 'GLS') {
                     card.style.backgroundColor = `${background}CC`;
                     card.style.backdropFilter = 'blur(10px)';
@@ -1892,8 +1964,10 @@
             // Icons
             const icon1 = document.getElementById('preview-icon1');
             const icon2 = document.getElementById('preview-icon2');
+            const icon3 = document.getElementById('preview-icon3');
+            const icon4 = document.getElementById('preview-icon4');
 
-            [icon1, icon2].forEach(icon => {
+            [icon1, icon2, icon3, icon4].forEach(icon => {
                 icon.style.backgroundColor = primary;
                 icon.style.borderRadius = borderRadius;
                 icon.style.transition = transition;
@@ -1908,20 +1982,77 @@
             // Card titles
             const cardTitle1 = document.getElementById('preview-card-title1');
             const cardTitle2 = document.getElementById('preview-card-title2');
+            const cardTitle3 = document.getElementById('preview-card-title3');
+            const cardTitle4 = document.getElementById('preview-card-title4');
 
-            [cardTitle1, cardTitle2].forEach(title => {
-                if (style === 'LUX' || style === 'BRT' || style === 'RTF') {
-                    title.style.color = primary;
-                } else {
-                    title.style.color = primary;
-                }
+            [cardTitle1, cardTitle2, cardTitle3, cardTitle4].forEach(title => {
+                title.style.color = primary;
                 title.style.transition = transition;
+                title.style.fontFamily = headingFont;
             });
+
+            // Card descriptions
+            const cardDesc1 = document.getElementById('preview-card-desc1');
+            const cardDesc2 = document.getElementById('preview-card-desc2');
+
+            if (cardDesc1 && cardDesc2) {
+                [cardDesc1, cardDesc2].forEach(desc => {
+                    desc.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${primary}80` : accent;
+                    desc.style.transition = transition;
+                    desc.style.fontFamily = bodyFont;
+                });
+            }
+
+            // Additional Section
+            const section = document.getElementById('preview-section');
+            section.style.borderRadius = borderRadius;
+            section.style.transition = transition;
+
+            const sectionTitle = document.getElementById('preview-section-title');
+            sectionTitle.style.color = primary;
+            sectionTitle.style.fontFamily = headingFont;
+            sectionTitle.style.transition = transition;
+
+            const sectionText = document.getElementById('preview-section-text');
+            sectionText.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${primary}CC` : accent;
+            sectionText.style.fontFamily = bodyFont;
+            sectionText.style.transition = transition;
 
             // Footer
             const footer = document.getElementById('preview-footer');
             footer.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? primary : accent;
             footer.style.transition = transition;
+            footer.style.fontFamily = bodyFont;
+
+            // Add hover animations if enabled
+            if (animations > 0) {
+                [card1, card2, card3, card4].forEach((card, index) => {
+                    card.onmouseover = () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.boxShadow = style === 'GLS'
+                            ? `0 8px 24px rgba(0,0,0,0.15)`
+                            : style === 'RTF'
+                            ? `0 0 20px ${primary}60`
+                            : `0 4px 16px rgba(0,0,0,0.12)`;
+                    };
+                    card.onmouseout = () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = style === 'GLS'
+                            ? `0 4px 16px rgba(0,0,0,0.1)`
+                            : style === 'RTF'
+                            ? `0 0 15px ${primary}30`
+                            : `0 2px 8px rgba(0,0,0,0.08)`;
+                    };
+                });
+
+                // CTA hover effect
+                cta.onmouseover = () => {
+                    cta.style.transform = 'scale(1.05)';
+                };
+                cta.onmouseout = () => {
+                    cta.style.transform = 'scale(1)';
+                };
+            }
         }
 
         // Navigation
