@@ -225,37 +225,37 @@
 
         .style-preview {
             width: 100%;
-            height: 140px;
+            height: 80px;
             border-radius: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .style-name {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-dark);
         }
 
         .style-category {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             color: var(--primary-color);
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .style-description {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: var(--text-light);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* Color Picker Section */
@@ -343,8 +343,8 @@
         /* Typography Options */
         .typo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
             margin-top: 24px;
         }
 
@@ -352,7 +352,7 @@
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px 16px;
             border: 2px solid rgba(255, 255, 255, 0.8);
             cursor: pointer;
             text-align: center;
@@ -372,20 +372,20 @@
         }
 
         .typo-sample {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .typo-name {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 4px;
             color: var(--text-dark);
         }
 
         .typo-desc {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-light);
         }
 
@@ -618,6 +618,383 @@
             }
         }
 
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .welcome-screen.hidden {
+            display: none;
+        }
+
+        .welcome-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .welcome-actions {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-btn {
+            padding: 24px 48px;
+            border-radius: 16px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 240px;
+            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.2),
+                        -12px -12px 24px rgba(255, 255, 255, 0.8);
+        }
+
+        .welcome-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .welcome-btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .welcome-btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(67, 141, 215, 0.4);
+        }
+
+        .welcome-btn-secondary {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            color: var(--text-dark);
+            border: 2px solid var(--primary-color);
+        }
+
+        .welcome-btn-secondary:hover {
+            transform: translateY(-4px);
+            background: rgba(67, 141, 215, 0.1);
+        }
+
+        .welcome-btn-subtitle {
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Custom Modal */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .custom-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            padding: 48px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .modal-icon.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .modal-icon.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+        }
+
+        .modal-icon.warning {
+            background: rgba(255, 152, 0, 0.1);
+            color: #FF9800;
+        }
+
+        .modal-icon.info {
+            background: rgba(67, 141, 215, 0.1);
+            color: var(--primary-color);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .modal-body {
+            margin-bottom: 32px;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(67, 141, 215, 0.2);
+            border-radius: 12px;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(67, 141, 215, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 16px rgba(67, 141, 215, 0.3);
+        }
+
+        .modal-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-dark);
+        }
+
+        .modal-btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Example Fullscreen Modal */
+        .example-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .example-modal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .example-close {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 3001;
+        }
+
+        .example-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .example-content {
+            padding: 80px 40px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .example-header {
+            text-align: center;
+            margin-bottom: 48px;
+            color: white;
+        }
+
+        .example-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .example-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .example-desc {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .example-preview {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+            margin-bottom: 32px;
+        }
+
+        .example-site {
+            min-height: 600px;
+            padding: 0;
+        }
+
+        /* Smaller cards for full picture mode */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .style-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.15),
+                        -8px -8px 16px rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+
+        .style-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.25),
+                        -12px -12px 24px rgba(255, 255, 255, 0.9),
+                        0 8px 32px rgba(67, 141, 215, 0.2);
+        }
+
+        .style-preview-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(67, 141, 215, 0.9);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .style-card:hover .style-preview-btn {
+            opacity: 1;
+        }
+
+        .style-preview-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .onboarding-content {
@@ -641,7 +1018,15 @@
 
             .style-grid,
             .typo-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .welcome-actions {
+                flex-direction: column;
+            }
+
+            .example-name {
+                font-size: 2rem;
             }
         }
 
@@ -666,11 +1051,82 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .modal-content {
+                padding: 32px 24px;
+            }
+
+            .example-content {
+                padding: 60px 20px 20px;
+            }
+
+            .style-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="onboarding-container">
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
+            <h1 class="onboarding-title">Design Onboarding</h1>
+            <p class="onboarding-subtitle">Créez l'identité visuelle complète de votre site web en quelques étapes simples</p>
+
+            <div class="welcome-actions">
+                <button class="welcome-btn welcome-btn-primary" onclick="startOnboarding()">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Créer mon design</span>
+                    <span class="welcome-btn-subtitle">Commencer l'onboarding</span>
+                </button>
+                <button class="welcome-btn welcome-btn-secondary" onclick="showTokenInput()">
+                    <i class="fas fa-key"></i>
+                    <span>J'ai déjà un token</span>
+                    <span class="welcome-btn-subtitle">Charger une configuration</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div class="custom-modal" id="customModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3 class="modal-title" id="modalTitle">Titre</h3>
+            </div>
+            <div class="modal-body" id="modalBody">Message</div>
+            <div id="modalInputContainer"></div>
+            <div class="modal-actions" id="modalActions">
+                <button class="modal-btn modal-btn-primary" id="modalConfirm">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Example Fullscreen Modal -->
+    <div class="example-modal" id="exampleModal">
+        <button class="example-close" onclick="closeExample()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="example-content">
+            <div class="example-header">
+                <div class="example-label" id="exampleCategory">CATÉGORIE</div>
+                <h2 class="example-name" id="exampleName">Nom du style</h2>
+                <p class="example-desc" id="exampleDesc">Description du style</p>
+            </div>
+            <div class="example-preview">
+                <div class="example-site" id="exampleSite">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="onboarding-container" id="onboardingContainer" style="display: none;">
         <!-- Header -->
         <div class="onboarding-header">
             <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
@@ -712,67 +1168,88 @@
                     <p class="step-description">Sélectionnez le style qui correspond le mieux à votre vision</p>
 
                     <div class="style-grid">
-                        <div class="style-card" data-style="MIN">
+                        <div class="style-card" data-style="MIN" data-category="Classique">
+                            <button class="style-preview-btn" onclick="showExample('MIN', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-mobile-alt" style="color: #000;"></i>
                             </div>
                             <div class="style-category">Classique</div>
                             <div class="style-name">Minimal Pro</div>
-                            <div class="style-description">Design épuré et moderne inspiré par Apple. Espaces blancs généreux, typographie claire.</div>
+                            <div class="style-description">Épuré et moderne</div>
                         </div>
 
-                        <div class="style-card" data-style="GLS">
+                        <div class="style-card" data-style="GLS" data-category="Moderne">
+                            <button class="style-preview-btn" onclick="showExample('GLS', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-gem" style="color: #438DD7;"></i>
                             </div>
                             <div class="style-category">Moderne</div>
                             <div class="style-name">Modern Glass</div>
-                            <div class="style-description">Effets de verre dépoli et transparences. Style premium et innovant.</div>
+                            <div class="style-description">Transparences premium</div>
                         </div>
 
-                        <div class="style-card" data-style="SFT">
+                        <div class="style-card" data-style="SFT" data-category="Classique">
+                            <button class="style-preview-btn" onclick="showExample('SFT', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-circle" style="color: #4285F4;"></i>
                             </div>
                             <div class="style-category">Classique</div>
                             <div class="style-name">Soft UI</div>
-                            <div class="style-description">Interface douce inspirée par Google. Formes arrondies et couleurs pastel.</div>
+                            <div class="style-description">Doux et arrondi</div>
                         </div>
 
-                        <div class="style-card" data-style="EDT">
+                        <div class="style-card" data-style="EDT" data-category="Audacieux">
+                            <button class="style-preview-btn" onclick="showExample('EDT', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-palette" style="color: #E91E63;"></i>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Editorial</div>
-                            <div class="style-description">Style coloré et expressif. Typographie forte, contrastes marqués.</div>
+                            <div class="style-description">Coloré et expressif</div>
                         </div>
 
-                        <div class="style-card" data-style="LUX">
+                        <div class="style-card" data-style="LUX" data-category="Premium">
+                            <button class="style-preview-btn" onclick="showExample('LUX', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-crown" style="color: #D4AF37;"></i>
                             </div>
                             <div class="style-category">Premium</div>
                             <div class="style-name">Luxury Dark</div>
-                            <div class="style-description">Élégance sombre inspirée des marques de luxe. Or et noir.</div>
+                            <div class="style-description">Élégance sombre</div>
                         </div>
 
-                        <div class="style-card" data-style="BRT">
+                        <div class="style-card" data-style="BRT" data-category="Audacieux">
+                            <button class="style-preview-btn" onclick="showExample('BRT', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-cube" style="color: #FF5722;"></i>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Brutal Modern</div>
-                            <div class="style-description">Design industriel audacieux. Formes brutes, contrastes forts.</div>
+                            <div class="style-description">Industriel audacieux</div>
                         </div>
 
-                        <div class="style-card" data-style="RTF">
+                        <div class="style-card" data-style="RTF" data-category="Audacieux">
+                            <button class="style-preview-btn" onclick="showExample('RTF', event)">
+                                <i class="fas fa-expand"></i>
+                            </button>
                             <div class="style-preview">
                                 <i class="fas fa-rocket" style="color: #9C27B0;"></i>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Retro Future</div>
-                            <div class="style-description">Esthétique arcade et rétro-futuriste. Néons et géométrie.</div>
+                            <div class="style-description">Néons et géométrie</div>
                         </div>
                     </div>
                 </div>
@@ -1101,11 +1578,11 @@
             });
         }
 
-        // Validate Colors
+        // Validate Colors with enhanced feedback
         function validateColors() {
             const { primary, background, accent } = designState.colors;
 
-            // Calculate contrast ratio (simplified)
+            // Calculate contrast ratio
             const getContrast = (color1, color2) => {
                 const getLuminance = (hex) => {
                     const rgb = parseInt(hex.slice(1), 16);
@@ -1126,34 +1603,123 @@
                 return (lighter + 0.05) / (darker + 0.05);
             };
 
+            // Get suggested color adjustments
+            const getSuggestion = (baseColor, targetColor, targetContrast) => {
+                const baseLum = getLuminance(baseColor);
+                const targetLum = getLuminance(targetColor);
+
+                // Determine if we need to darken or lighten
+                const needsDarker = baseLum > 0.5;
+
+                // Generate suggestion
+                const rgb = parseInt(baseColor.slice(1), 16);
+                let r = (rgb >> 16) & 0xff;
+                let g = (rgb >> 8) & 0xff;
+                let b = (rgb >> 0) & 0xff;
+
+                const adjustment = needsDarker ? -30 : 30;
+                r = Math.max(0, Math.min(255, r + adjustment));
+                g = Math.max(0, Math.min(255, g + adjustment));
+                b = Math.max(0, Math.min(255, b + adjustment));
+
+                return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            };
+
+            const getLuminance = (hex) => {
+                const rgb = parseInt(hex.slice(1), 16);
+                const r = (rgb >> 16) & 0xff;
+                const g = (rgb >> 8) & 0xff;
+                const b = (rgb >> 0) & 0xff;
+                const [rs, gs, bs] = [r, g, b].map(c => {
+                    c = c / 255;
+                    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+            };
+
             const primaryBgContrast = getContrast(primary, background);
             const accentBgContrast = getContrast(accent, background);
 
-            // Feedback for primary
+            // Enhanced feedback for primary
             const feedbackPrimary = document.getElementById('feedback-primary');
             if (primaryBgContrast >= 4.5) {
                 feedbackPrimary.className = 'color-feedback valid';
-                feedbackPrimary.innerHTML = '<i class="fas fa-check-circle"></i> Excellent contraste (ratio: ' + primaryBgContrast.toFixed(1) + ':1)';
+                feedbackPrimary.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Parfait !</strong> Votre couleur principale est parfaitement lisible sur le fond.
+                    Le contraste de ${primaryBgContrast.toFixed(1)}:1 garantit une excellente accessibilité.
+                `;
             } else if (primaryBgContrast >= 3) {
                 feedbackPrimary.className = 'color-feedback warning';
-                feedbackPrimary.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Contraste acceptable (ratio: ' + primaryBgContrast.toFixed(1) + ':1)';
+                const suggestion = getSuggestion(primary, background, 4.5);
+                feedbackPrimary.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Acceptable mais peut mieux faire</strong><br>
+                    Le contraste actuel de ${primaryBgContrast.toFixed(1)}:1 est correct pour les gros textes,
+                    mais peut poser des problèmes de lisibilité sur les petits textes.<br>
+                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
+                            onclick="applySuggestion('primary', '${suggestion}')">
+                        <i class="fas fa-magic"></i> Essayer ${suggestion}
+                    </button>
+                `;
             } else {
                 feedbackPrimary.className = 'color-feedback error';
-                feedbackPrimary.innerHTML = '<i class="fas fa-times-circle"></i> Contraste insuffisant (ratio: ' + primaryBgContrast.toFixed(1) + ':1) - Recommandé: 4.5:1';
+                const suggestion = getSuggestion(primary, background, 4.5);
+                feedbackPrimary.innerHTML = `
+                    <i class="fas fa-times-circle"></i>
+                    <strong>Attention : contraste trop faible</strong><br>
+                    Avec un ratio de seulement ${primaryBgContrast.toFixed(1)}:1, votre texte sera difficile à lire.
+                    Les visiteurs malvoyants ne pourront pas utiliser votre site correctement.<br>
+                    <strong>Solution :</strong> ${getLuminance(background) > 0.5 ? 'Utilisez une couleur plus foncée' : 'Utilisez une couleur plus claire'}<br>
+                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
+                            onclick="applySuggestion('primary', '${suggestion}')">
+                        <i class="fas fa-magic"></i> Essayer ${suggestion}
+                    </button>
+                `;
             }
 
-            // Feedback for accent
+            // Enhanced feedback for accent
             const feedbackAccent = document.getElementById('feedback-accent');
             if (accentBgContrast >= 4.5) {
                 feedbackAccent.className = 'color-feedback valid';
-                feedbackAccent.innerHTML = '<i class="fas fa-check-circle"></i> Excellent contraste';
+                feedbackAccent.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Excellent !</strong> Votre couleur d'accent a un contraste parfait (${accentBgContrast.toFixed(1)}:1).
+                `;
             } else if (accentBgContrast >= 3) {
                 feedbackAccent.className = 'color-feedback warning';
-                feedbackAccent.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Contraste acceptable';
+                const suggestion = getSuggestion(accent, background, 4.5);
+                feedbackAccent.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Contraste moyen</strong> (${accentBgContrast.toFixed(1)}:1) -
+                    Convenable pour les éléments décoratifs, mais évitez de l'utiliser pour du texte important.<br>
+                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
+                            onclick="applySuggestion('accent', '${suggestion}')">
+                        <i class="fas fa-magic"></i> Améliorer automatiquement
+                    </button>
+                `;
             } else {
                 feedbackAccent.className = 'color-feedback error';
-                feedbackAccent.innerHTML = '<i class="fas fa-times-circle"></i> Contraste insuffisant';
+                const suggestion = getSuggestion(accent, background, 4.5);
+                feedbackAccent.innerHTML = `
+                    <i class="fas fa-times-circle"></i>
+                    <strong>Contraste insuffisant</strong> (${accentBgContrast.toFixed(1)}:1)<br>
+                    Cette couleur sera invisible sur votre fond. ${getLuminance(background) > 0.5 ? 'Choisissez une teinte plus foncée' : 'Choisissez une teinte plus claire'}.<br>
+                    <button class="modal-btn modal-btn-primary" style="margin-top: 8px; padding: 8px 16px;"
+                            onclick="applySuggestion('accent', '${suggestion}')">
+                        <i class="fas fa-magic"></i> Corriger automatiquement
+                    </button>
+                `;
             }
+        }
+
+        // Apply color suggestion
+        function applySuggestion(colorType, suggestedColor) {
+            designState.colors[colorType] = suggestedColor;
+            document.getElementById(`color-${colorType}`).value = suggestedColor;
+            document.getElementById(`color-${colorType}-text`).value = suggestedColor;
+            validateColors();
+            updatePreview();
         }
 
         // Typography Options
@@ -1401,35 +1967,475 @@
             updatePreview();
         }
 
+        // Welcome Screen Functions
+        function startOnboarding() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('onboardingContainer').style.display = 'flex';
+        }
+
+        function showTokenInput() {
+            showPrompt(
+                'Entrez votre token',
+                'Collez votre token design pour charger votre configuration existante :',
+                'info',
+                (token) => {
+                    if (token && parseToken(token)) {
+                        updateUI();
+                        currentStep = 1;
+                        updateStepDisplay();
+                        document.getElementById('welcomeScreen').classList.add('hidden');
+                        document.getElementById('onboardingContainer').style.display = 'flex';
+                        showAlert('Token chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
+                    } else if (token) {
+                        showAlert('Token invalide', 'Le token que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
+                    }
+                }
+            );
+        }
+
+        // Custom Modal Functions
+        function showAlert(title, message, type = 'info', callback = null) {
+            const modal = document.getElementById('customModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalActions = document.getElementById('modalActions');
+            const modalInputContainer = document.getElementById('modalInputContainer');
+
+            // Set icon based on type
+            modalIcon.className = `modal-icon ${type}`;
+            if (type === 'success') {
+                modalIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            } else if (type === 'error') {
+                modalIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+            } else if (type === 'warning') {
+                modalIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+            } else {
+                modalIcon.innerHTML = '<i class="fas fa-info-circle"></i>';
+            }
+
+            modalTitle.textContent = title;
+            modalBody.textContent = message;
+            modalInputContainer.innerHTML = '';
+
+            modalActions.innerHTML = `
+                <button class="modal-btn modal-btn-primary" onclick="closeModal(${callback ? 'true' : 'false'})">
+                    OK
+                </button>
+            `;
+
+            modal.classList.add('active');
+
+            if (callback) {
+                modal.dataset.callback = callback.toString();
+            }
+        }
+
+        function showConfirm(title, message, type = 'info', onConfirm = null, onCancel = null) {
+            const modal = document.getElementById('customModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalActions = document.getElementById('modalActions');
+            const modalInputContainer = document.getElementById('modalInputContainer');
+
+            modalIcon.className = `modal-icon ${type}`;
+            if (type === 'success') {
+                modalIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            } else if (type === 'error') {
+                modalIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+            } else if (type === 'warning') {
+                modalIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+            } else {
+                modalIcon.innerHTML = '<i class="fas fa-info-circle"></i>';
+            }
+
+            modalTitle.textContent = title;
+            modalBody.textContent = message;
+            modalInputContainer.innerHTML = '';
+
+            modalActions.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal(false, true)">
+                    Annuler
+                </button>
+                <button class="modal-btn modal-btn-primary" onclick="closeModal(true, false)">
+                    Confirmer
+                </button>
+            `;
+
+            modal.classList.add('active');
+
+            if (onConfirm) {
+                modal.dataset.onConfirm = onConfirm.toString();
+            }
+            if (onCancel) {
+                modal.dataset.onCancel = onCancel.toString();
+            }
+        }
+
+        function showPrompt(title, message, type = 'info', callback = null) {
+            const modal = document.getElementById('customModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalActions = document.getElementById('modalActions');
+            const modalInputContainer = document.getElementById('modalInputContainer');
+
+            modalIcon.className = `modal-icon ${type}`;
+            modalIcon.innerHTML = '<i class="fas fa-keyboard"></i>';
+
+            modalTitle.textContent = title;
+            modalBody.textContent = message;
+
+            modalInputContainer.innerHTML = '<input type="text" class="modal-input" id="promptInput" placeholder="Entrez votre token...">';
+
+            modalActions.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal(false, true)">
+                    Annuler
+                </button>
+                <button class="modal-btn modal-btn-primary" onclick="submitPrompt()">
+                    Valider
+                </button>
+            `;
+
+            modal.classList.add('active');
+
+            if (callback) {
+                window.promptCallback = callback;
+            }
+
+            // Focus input
+            setTimeout(() => {
+                document.getElementById('promptInput').focus();
+            }, 100);
+        }
+
+        function submitPrompt() {
+            const input = document.getElementById('promptInput');
+            const value = input ? input.value : null;
+
+            if (window.promptCallback) {
+                window.promptCallback(value);
+                window.promptCallback = null;
+            }
+
+            closeModal(false);
+        }
+
+        function closeModal(executeCallback = false, executeCancel = false) {
+            const modal = document.getElementById('customModal');
+
+            if (executeCallback && modal.dataset.onConfirm) {
+                eval('(' + modal.dataset.onConfirm + ')()');
+                delete modal.dataset.onConfirm;
+            } else if (executeCancel && modal.dataset.onCancel) {
+                eval('(' + modal.dataset.onCancel + ')()');
+                delete modal.dataset.onCancel;
+            }
+
+            modal.classList.remove('active');
+        }
+
+        // Example Modal Functions
+        function showExample(styleCode, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const styleData = {
+                'MIN': {
+                    name: 'Minimal Pro',
+                    category: 'Classique',
+                    description: 'Design épuré et moderne inspiré par Apple. Espaces blancs généreux, typographie claire et élégante.',
+                },
+                'GLS': {
+                    name: 'Modern Glass',
+                    category: 'Moderne',
+                    description: 'Effets de verre dépoli et transparences sophistiquées. Style premium et innovant avec des effets visuels captivants.',
+                },
+                'SFT': {
+                    name: 'Soft UI',
+                    category: 'Classique',
+                    description: 'Interface douce inspirée par Google Material Design. Formes arrondies, couleurs pastel et ombres délicates.',
+                },
+                'EDT': {
+                    name: 'Editorial',
+                    category: 'Audacieux',
+                    description: 'Style coloré et expressif avec typographie forte. Contrastes marqués et mise en page magazine.',
+                },
+                'LUX': {
+                    name: 'Luxury Dark',
+                    category: 'Premium',
+                    description: 'Élégance sombre inspirée des marques de luxe. Palette or et noir, finitions raffinées.',
+                },
+                'BRT': {
+                    name: 'Brutal Modern',
+                    category: 'Audacieux',
+                    description: 'Design industriel audacieux avec formes brutes. Contrastes forts et typographie percutante.',
+                },
+                'RTF': {
+                    name: 'Retro Future',
+                    category: 'Audacieux',
+                    description: 'Esthétique arcade et rétro-futuriste. Néons vibrants, géométrie audacieuse et ambiance années 80.',
+                }
+            };
+
+            const style = styleData[styleCode];
+            if (!style) return;
+
+            document.getElementById('exampleCategory').textContent = style.category;
+            document.getElementById('exampleName').textContent = style.name;
+            document.getElementById('exampleDesc').textContent = style.description;
+
+            // Generate example site based on current design state
+            const exampleSite = document.getElementById('exampleSite');
+            exampleSite.innerHTML = generateExampleSite(styleCode);
+
+            document.getElementById('exampleModal').classList.add('active');
+        }
+
+        function closeExample() {
+            document.getElementById('exampleModal').classList.remove('active');
+        }
+
+        function generateExampleSite(styleCode) {
+            const { primary, background, accent } = designState.colors;
+            const { radius, density } = designState.settings;
+
+            const borderRadius = radius === 1 ? '4px' : radius === 2 ? '8px' : '16px';
+            const padding = density === 1 ? '12px' : density === 2 ? '20px' : '32px';
+            const gap = density === 1 ? '12px' : density === 2 ? '20px' : '32px';
+
+            // Generate different layouts based on style
+            let siteHTML = '';
+
+            if (styleCode === 'MIN') {
+                siteHTML = `
+                    <div style="background: ${background}; min-height: 600px; font-family: -apple-system, sans-serif;">
+                        <nav style="padding: ${padding}; background: ${background}; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 1.5rem; color: ${primary};">Logo</div>
+                                <div style="display: flex; gap: ${gap};">
+                                    <a href="#" style="color: #333; text-decoration: none;">Accueil</a>
+                                    <a href="#" style="color: #333; text-decoration: none;">Services</a>
+                                    <a href="#" style="color: #333; text-decoration: none;">Contact</a>
+                                </div>
+                            </div>
+                        </nav>
+                        <section style="padding: 80px ${padding}; text-align: center;">
+                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; color: #000;">Design Minimal</h1>
+                            <p style="font-size: 1.3rem; color: #666; max-width: 600px; margin: 0 auto 40px;">
+                                L'essence de la simplicité et de l'élégance.
+                            </p>
+                            <button style="background: ${primary}; color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600;">
+                                Découvrir
+                            </button>
+                        </section>
+                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Fonctionnalité 1</h3>
+                                    <p style="color: #666;">Description claire et concise.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Fonctionnalité 2</h3>
+                                    <p style="color: #666;">Interface épurée et intuitive.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Fonctionnalité 3</h3>
+                                    <p style="color: #666;">Expérience utilisateur optimale.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `;
+            } else if (styleCode === 'GLS') {
+                siteHTML = `
+                    <div style="background: linear-gradient(135deg, ${primary}20 0%, ${background} 100%); min-height: 600px; font-family: -apple-system, sans-serif;">
+                        <nav style="padding: ${padding}; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.3);">
+                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 1.5rem; color: ${primary};">Logo</div>
+                                <div style="display: flex; gap: ${gap};">
+                                    <a href="#" style="color: #333; text-decoration: none;">Accueil</a>
+                                    <a href="#" style="color: #333; text-decoration: none;">Services</a>
+                                    <a href="#" style="color: #333; text-decoration: none;">Contact</a>
+                                </div>
+                            </div>
+                        </nav>
+                        <section style="padding: 80px ${padding}; text-align: center;">
+                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; color: #000;">Modern Glass</h1>
+                            <p style="font-size: 1.3rem; color: #666; max-width: 600px; margin: 0 auto 40px;">
+                                Transparence et sophistication premium.
+                            </p>
+                            <button style="background: ${primary}; color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 8px 32px ${primary}40;">
+                                En savoir plus
+                            </button>
+                        </section>
+                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
+                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Transparence</h3>
+                                    <p style="color: #666;">Effets de verre dépoli modernes.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Premium</h3>
+                                    <p style="color: #666;">Design haut de gamme et raffiné.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Innovation</h3>
+                                    <p style="color: #666;">Technologie de pointe visuelle.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `;
+            } else if (styleCode === 'LUX') {
+                const luxBg = '#0a0a0a';
+                const luxGold = '#D4AF37';
+                siteHTML = `
+                    <div style="background: ${luxBg}; min-height: 600px; font-family: Georgia, serif; color: #fff;">
+                        <nav style="padding: ${padding}; background: rgba(0, 0, 0, 0.8); border-bottom: 1px solid ${luxGold};">
+                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 1.5rem; color: ${luxGold};">LUXURY</div>
+                                <div style="display: flex; gap: ${gap};">
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Collection</a>
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Boutique</a>
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Contact</a>
+                                </div>
+                            </div>
+                        </nav>
+                        <section style="padding: 100px ${padding}; text-align: center;">
+                            <h1 style="font-size: 4rem; font-weight: 400; margin-bottom: 20px; color: ${luxGold}; letter-spacing: 4px;">EXCELLENCE</h1>
+                            <p style="font-size: 1.2rem; color: #aaa; max-width: 600px; margin: 0 auto 40px; font-style: italic;">
+                                L'art de la perfection et du raffinement
+                            </p>
+                            <button style="background: transparent; color: ${luxGold}; padding: 16px 48px; border: 2px solid ${luxGold}; border-radius: ${borderRadius}; font-size: 1rem; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">
+                                Découvrir
+                            </button>
+                        </section>
+                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
+                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
+                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Prestige</h3>
+                                    <p style="color: #aaa; font-size: 0.95rem;">Excellence et sophistication.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
+                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Exclusif</h3>
+                                    <p style="color: #aaa; font-size: 0.95rem;">Créations uniques et rares.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
+                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Élégance</h3>
+                                    <p style="color: #aaa; font-size: 0.95rem;">Finitions haut de gamme.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `;
+            } else {
+                // Default example for other styles
+                siteHTML = `
+                    <div style="background: ${background}; min-height: 600px; font-family: -apple-system, sans-serif;">
+                        <nav style="padding: ${padding}; background: ${primary}; color: white;">
+                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-weight: 700; font-size: 1.5rem;">Logo</div>
+                                <div style="display: flex; gap: ${gap};">
+                                    <a href="#" style="color: white; text-decoration: none;">Accueil</a>
+                                    <a href="#" style="color: white; text-decoration: none;">Services</a>
+                                    <a href="#" style="color: white; text-decoration: none;">Contact</a>
+                                </div>
+                            </div>
+                        </nav>
+                        <section style="padding: 80px ${padding}; text-align: center;">
+                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; color: ${primary};">Votre Titre</h1>
+                            <p style="font-size: 1.3rem; color: #666; max-width: 600px; margin: 0 auto 40px;">
+                                Un sous-titre captivant qui décrit votre produit ou service.
+                            </p>
+                            <button style="background: ${accent}; color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600;">
+                                Commencer
+                            </button>
+                        </section>
+                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border: 2px solid ${primary}20;">
+                                    <div style="width: 60px; height: 60px; background: ${primary}; border-radius: 50%; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">1</div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Caractéristique 1</h3>
+                                    <p style="color: #666;">Description avec vos couleurs personnalisées.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border: 2px solid ${primary}20;">
+                                    <div style="width: 60px; height: 60px; background: ${primary}; border-radius: 50%; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">2</div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Caractéristique 2</h3>
+                                    <p style="color: #666;">Avec votre typographie choisie.</p>
+                                </div>
+                                <div style="padding: ${padding}; background: white; border-radius: ${borderRadius}; box-shadow: 0 4px 16px rgba(0,0,0,0.1); border: 2px solid ${primary}20;">
+                                    <div style="width: 60px; height: 60px; background: ${primary}; border-radius: 50%; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">3</div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Caractéristique 3</h3>
+                                    <p style="color: #666;">Et vos espacements préférés.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                `;
+            }
+
+            return siteHTML;
+        }
+
         // Copy Token
         function copyToken() {
             const token = document.getElementById('token-value').textContent;
             navigator.clipboard.writeText(token).then(() => {
-                alert('Token copié dans le presse-papier !');
+                showAlert('Token copié !', 'Votre token a été copié dans le presse-papier. Conservez-le précieusement.', 'success');
             });
         }
 
         // Load Token
         function loadToken() {
-            const token = prompt('Collez votre token design :');
-            if (token && parseToken(token)) {
-                updateUI();
-                currentStep = 1;
-                updateStepDisplay();
-                alert('Token chargé avec succès !');
-            } else if (token) {
-                alert('Token invalide. Veuillez vérifier le format.');
-            }
+            showPrompt(
+                'Charger un token',
+                'Collez votre token design pour charger votre configuration :',
+                'info',
+                (token) => {
+                    if (token && parseToken(token)) {
+                        updateUI();
+                        currentStep = 1;
+                        updateStepDisplay();
+                        showAlert('Token chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
+                    } else if (token) {
+                        showAlert('Token invalide', 'Le token que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
+                    }
+                }
+            );
         }
 
         // Validate Design
         function validateDesign() {
             const token = generateToken();
-            const confirmed = confirm('Votre configuration est prête !\n\nToken: ' + token + '\n\nVoulez-vous copier le token dans le presse-papier ?');
+            showConfirm(
+                'Configuration prête !',
+                'Votre design est configuré. Voulez-vous copier le token dans le presse-papier ?',
+                'success',
+                () => { copyToken(); },
+                null
+            );
+        }
 
-            if (confirmed) {
-                copyToken();
+        // Replace alert and prompt calls
+        function validateStep(step) {
+            switch(step) {
+                case 1:
+                    if (!designState.style) {
+                        showAlert('Style requis', 'Veuillez sélectionner un style visuel avant de continuer.', 'warning');
+                        return false;
+                    }
+                    break;
+                case 3:
+                    if (!designState.typography) {
+                        showAlert('Typographie requise', 'Veuillez sélectionner une typographie avant de continuer.', 'warning');
+                        return false;
+                    }
+                    break;
             }
+            return true;
         }
     </script>
 </body>
