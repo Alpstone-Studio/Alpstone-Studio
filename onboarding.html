@@ -172,18 +172,7 @@
 
         /* Animation indicator */
         .animation-indicator {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 0.65rem;
-            padding: 4px 8px;
-            background: rgba(67, 141, 215, 0.1);
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 100;
+            display: none; /* Hidden as per user request */
         }
 
         /* Step Content */
@@ -1285,7 +1274,7 @@
         <div class="welcome-content">
             <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
             <h1 class="onboarding-title">Design Onboarding</h1>
-            <p class="onboarding-subtitle">Créez l'identité visuelle complète de votre site web en quelques étapes simples</p>
+            <p class="onboarding-subtitle">Inspirez-vous et trouvez le style visuel parfait pour votre projet</p>
 
             <div class="welcome-actions">
                 <button class="welcome-btn welcome-btn-primary" onclick="startOnboarding()">
@@ -1343,7 +1332,7 @@
         <div class="onboarding-header">
             <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
             <h1 class="onboarding-title">Design Onboarding</h1>
-            <p class="onboarding-subtitle">Créez l'identité visuelle complète de votre site web en quelques étapes simples</p>
+            <p class="onboarding-subtitle">Inspirez-vous et trouvez le style visuel parfait pour votre projet</p>
         </div>
 
         <!-- Step Indicator -->
@@ -1665,9 +1654,6 @@
                 <div class="preview-card">
                     <h3 class="preview-title">Aperçu en temps réel</h3>
                     <div class="preview-content" id="preview" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;">
-                        <!-- Animation Indicator -->
-                        <div class="animation-indicator" id="animationIndicator">Animations: Fluides</div>
-
                         <!-- Navigation -->
                         <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; padding: 8px;" id="preview-nav">
                             <div style="font-weight: 700; font-size: 0.9rem;" id="preview-logo">Logo</div>
@@ -2299,13 +2285,13 @@
             const gap = density === 1 ? '6px' : density === 2 ? '8px' : '12px';
             const transition = animations === 0 ? 'none' : animations === 1 ? 'all 0.2s ease' : 'all 0.3s ease';
 
-            // Update animation indicator
-            const animIndicator = document.getElementById('animationIndicator');
-            if (animIndicator) {
-                const animLabels = ['🚫 Aucune', '⚡ Rapide (0.2s)', '✨ Fluide (0.3s)'];
-                animIndicator.textContent = `Animations: ${animLabels[animations]}`;
-                animIndicator.style.transition = transition;
-            }
+            // Update animation indicator - DISABLED as per user request
+            // const animIndicator = document.getElementById('animationIndicator');
+            // if (animIndicator) {
+            //     const animLabels = ['🚫 Aucune', '⚡ Rapide (0.2s)', '✨ Fluide (0.3s)'];
+            //     animIndicator.textContent = `Animations: ${animLabels[animations]}`;
+            //     animIndicator.style.transition = transition;
+            // }
 
             // Get typography fonts
             const fonts = {
@@ -3021,39 +3007,46 @@
                 `;
             } else if (styleCode === 'GLS') {
                 siteHTML = `
-                    <div style="background: linear-gradient(135deg, ${primary}20 0%, ${background} 100%); min-height: 600px; font-family: -apple-system, sans-serif;">
-                        <nav style="padding: ${padding}; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.3);">
+                    <div style="background: linear-gradient(135deg, ${primary}15 0%, ${primary}05 30%, #e0f7ff 70%, ${background} 100%); min-height: 600px; font-family: -apple-system, sans-serif; position: relative; overflow: hidden;">
+                        <!-- Ambient orbs for depth -->
+                        <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, ${primary}30, transparent 70%); border-radius: 50%; top: -100px; right: -100px; filter: blur(60px); pointer-events: none;"></div>
+                        <div style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, ${primary}20, transparent 70%); border-radius: 50%; bottom: 100px; left: -50px; filter: blur(50px); pointer-events: none;"></div>
+
+                        <nav style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255,255,255,0.8);">
                             <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                                <div style="font-weight: 700; font-size: 1.5rem; color: ${primary};">Logo</div>
+                                <div style="font-weight: 700; font-size: 1.5rem; background: linear-gradient(135deg, ${primary}, ${primary}cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Logo</div>
                                 <div style="display: flex; gap: ${gap};">
-                                    <a href="#" style="color: #333; text-decoration: none;">Accueil</a>
-                                    <a href="#" style="color: #333; text-decoration: none;">Services</a>
-                                    <a href="#" style="color: #333; text-decoration: none;">Contact</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Accueil</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Services</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Contact</a>
                                 </div>
                             </div>
                         </nav>
-                        <section style="padding: 80px ${padding}; text-align: center;">
-                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; color: #000;">Modern Glass</h1>
-                            <p style="font-size: 1.3rem; color: #666; max-width: 600px; margin: 0 auto 40px;">
-                                Transparence et sophistication premium.
+                        <section style="padding: 80px ${padding}; text-align: center; position: relative;">
+                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #000 0%, #333 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Modern Glass</h1>
+                            <p style="font-size: 1.3rem; color: #555; max-width: 600px; margin: 0 auto 40px; font-weight: 400;">
+                                Effets de verre liquide et dépoli sophistiqués.
                             </p>
-                            <button style="background: ${primary}; color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 8px 32px ${primary}40;">
-                                En savoir plus
+                            <button style="background: linear-gradient(135deg, ${primary} 0%, ${primary}dd 100%); color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 8px 32px ${primary}50, inset 0 1px 0 rgba(255,255,255,0.3); position: relative; overflow: hidden;">
+                                <span style="position: relative; z-index: 1;">En savoir plus</span>
                             </button>
                         </section>
-                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto; position: relative;">
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
-                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
-                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Transparence</h3>
-                                    <p style="color: #666;">Effets de verre dépoli modernes.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Liquid Glass</h3>
+                                    <p style="color: #555; line-height: 1.6;">Effets de verre liquide fluides et organiques.</p>
                                 </div>
-                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
-                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Premium</h3>
-                                    <p style="color: #666;">Design haut de gamme et raffiné.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Frosted Glass</h3>
+                                    <p style="color: #555; line-height: 1.6;">Verre dépoli élégant avec transparence subtile.</p>
                                 </div>
-                                <div style="padding: ${padding}; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
-                                    <h3 style="color: ${primary}; margin-bottom: 12px;">Innovation</h3>
-                                    <p style="color: #666;">Technologie de pointe visuelle.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
+                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Premium Depth</h3>
+                                    <p style="color: #555; line-height: 1.6;">Profondeur visuelle et effets lumineux raffinés.</p>
                                 </div>
                             </div>
                         </section>
