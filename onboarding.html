@@ -3007,46 +3007,63 @@
                 `;
             } else if (styleCode === 'GLS') {
                 siteHTML = `
-                    <div style="background: linear-gradient(135deg, ${primary}15 0%, ${primary}05 30%, #e0f7ff 70%, ${background} 100%); min-height: 600px; font-family: -apple-system, sans-serif; position: relative; overflow: hidden;">
-                        <!-- Ambient orbs for depth -->
-                        <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, ${primary}30, transparent 70%); border-radius: 50%; top: -100px; right: -100px; filter: blur(60px); pointer-events: none;"></div>
-                        <div style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, ${primary}20, transparent 70%); border-radius: 50%; bottom: 100px; left: -50px; filter: blur(50px); pointer-events: none;"></div>
+                    <div style="background: linear-gradient(135deg, ${primary}18 0%, ${primary}08 25%, #e8f4ff 50%, #f0f9ff 75%, ${background} 100%); min-height: 600px; font-family: -apple-system, sans-serif; position: relative; overflow: hidden;">
+                        <!-- Ambient gradient blobs for realistic glass depth -->
+                        <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, ${primary}35, ${primary}15 40%, transparent 70%); border-radius: 50%; top: -150px; right: -150px; filter: blur(80px); pointer-events: none;"></div>
+                        <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, ${primary}25, transparent 65%); border-radius: 50%; bottom: 80px; left: -100px; filter: blur(70px); pointer-events: none;"></div>
+                        <div style="position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 60%); border-radius: 50%; top: 50%; right: 20%; filter: blur(60px); pointer-events: none;"></div>
 
-                        <nav style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6)); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255,255,255,0.8);">
-                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                                <div style="font-weight: 700; font-size: 1.5rem; background: linear-gradient(135deg, ${primary}, ${primary}cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Logo</div>
+                        <nav style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%); backdrop-filter: blur(40px) saturate(200%); -webkit-backdrop-filter: blur(40px) saturate(200%); border-bottom: 2px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12), 0 2px 8px 0 rgba(31, 38, 135, 0.08), inset 0 1px 0 0 rgba(255,255,255,0.9), inset 0 -1px 0 0 rgba(255,255,255,0.4); position: relative;">
+                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%); pointer-events: none; opacity: 0.5;"></div>
+                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
+                                <div style="font-weight: 700; font-size: 1.5rem; background: linear-gradient(135deg, ${primary}, ${primary}dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">Logo</div>
                                 <div style="display: flex; gap: ${gap};">
-                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Accueil</a>
-                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Services</a>
-                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">Contact</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Accueil</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Services</a>
+                                    <a href="#" style="color: #1a1a1a; text-decoration: none; font-weight: 500; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Contact</a>
                                 </div>
                             </div>
                         </nav>
                         <section style="padding: 80px ${padding}; text-align: center; position: relative;">
-                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #000 0%, #333 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Modern Glass</h1>
-                            <p style="font-size: 1.3rem; color: #555; max-width: 600px; margin: 0 auto 40px; font-weight: 400;">
-                                Effets de verre liquide et dépoli sophistiqués.
+                            <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #000 0%, #333 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));">Verre Trempé</h1>
+                            <p style="font-size: 1.3rem; color: #444; max-width: 600px; margin: 0 auto 40px; font-weight: 400; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">
+                                Effets de verre trempé ultra-réalistes avec reflets et profondeur.
                             </p>
-                            <button style="background: linear-gradient(135deg, ${primary} 0%, ${primary}dd 100%); color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 8px 32px ${primary}50, inset 0 1px 0 rgba(255,255,255,0.3); position: relative; overflow: hidden;">
-                                <span style="position: relative; z-index: 1;">En savoir plus</span>
+                            <button style="background: linear-gradient(135deg, ${primary} 0%, ${primary}dd 100%); color: white; padding: 16px 48px; border: none; border-radius: ${borderRadius}; font-size: 1.1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px ${primary}40, 0 8px 32px ${primary}30, inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.2); position: relative;">
+                                <span style="position: relative; z-index: 1; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">En savoir plus</span>
                             </button>
                         </section>
                         <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto; position: relative;">
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
-                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
-                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
-                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Liquid Glass</h3>
-                                    <p style="color: #555; line-height: 1.6;">Effets de verre liquide fluides et organiques.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(160deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.6) 100%); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border-radius: ${borderRadius}; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15), 0 4px 16px rgba(31, 38, 135, 0.1), 0 16px 48px rgba(31, 38, 135, 0.08), inset 0 2px 4px rgba(255,255,255,0.9), inset 0 -2px 4px rgba(0,0,0,0.03), inset -2px 0 4px rgba(0,0,0,0.02), inset 2px 0 4px rgba(255,255,255,0.5); position: relative; overflow: visible;">
+                                    <!-- Top edge bevel highlight -->
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,1) 80%, transparent 100%); border-radius: ${borderRadius} ${borderRadius} 0 0;"></div>
+                                    <!-- Left edge shine -->
+                                    <div style="position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.6) 100%); border-radius: ${borderRadius} 0 0 ${borderRadius};"></div>
+                                    <!-- Glass refraction overlay -->
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.2) 100%); border-radius: ${borderRadius}; pointer-events: none;"></div>
+                                    <div style="position: relative; z-index: 1;">
+                                        <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Liquid Glass</h3>
+                                        <p style="color: #444; line-height: 1.6; text-shadow: 0 1px 1px rgba(255,255,255,0.6);">Verre fluide avec reflets organiques.</p>
+                                    </div>
                                 </div>
-                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
-                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
-                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Frosted Glass</h3>
-                                    <p style="color: #555; line-height: 1.6;">Verre dépoli élégant avec transparence subtile.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(160deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0.55) 100%); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border-radius: ${borderRadius}; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15), 0 4px 16px rgba(31, 38, 135, 0.1), 0 16px 48px rgba(31, 38, 135, 0.08), inset 0 2px 4px rgba(255,255,255,0.9), inset 0 -2px 4px rgba(0,0,0,0.03), inset -2px 0 4px rgba(0,0,0,0.02), inset 2px 0 4px rgba(255,255,255,0.5); position: relative; overflow: visible;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,1) 80%, transparent 100%); border-radius: ${borderRadius} ${borderRadius} 0 0;"></div>
+                                    <div style="position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.6) 100%); border-radius: ${borderRadius} 0 0 ${borderRadius};"></div>
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.2) 100%); border-radius: ${borderRadius}; pointer-events: none;"></div>
+                                    <div style="position: relative; z-index: 1;">
+                                        <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Frosted Glass</h3>
+                                        <p style="color: #444; line-height: 1.6; text-shadow: 0 1px 1px rgba(255,255,255,0.6);">Verre dépoli avec effets de profondeur.</p>
+                                    </div>
                                 </div>
-                                <div style="padding: ${padding}; background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: ${borderRadius}; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 1px 2px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden;">
-                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);"></div>
-                                    <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700;">Premium Depth</h3>
-                                    <p style="color: #555; line-height: 1.6;">Profondeur visuelle et effets lumineux raffinés.</p>
+                                <div style="padding: ${padding}; background: linear-gradient(160deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.6) 100%); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border-radius: ${borderRadius}; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15), 0 4px 16px rgba(31, 38, 135, 0.1), 0 16px 48px rgba(31, 38, 135, 0.08), inset 0 2px 4px rgba(255,255,255,0.9), inset 0 -2px 4px rgba(0,0,0,0.03), inset -2px 0 4px rgba(0,0,0,0.02), inset 2px 0 4px rgba(255,255,255,0.5); position: relative; overflow: visible;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,1) 80%, transparent 100%); border-radius: ${borderRadius} ${borderRadius} 0 0;"></div>
+                                    <div style="position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.6) 100%); border-radius: ${borderRadius} 0 0 ${borderRadius};"></div>
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.2) 100%); border-radius: ${borderRadius}; pointer-events: none;"></div>
+                                    <div style="position: relative; z-index: 1;">
+                                        <h3 style="color: ${primary}; margin-bottom: 12px; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.8);">Tempered Glass</h3>
+                                        <p style="color: #444; line-height: 1.6; text-shadow: 0 1px 1px rgba(255,255,255,0.6);">Verre trempé avec biseaux et brillance.</p>
+                                    </div>
                                 </div>
                             </div>
                         </section>
