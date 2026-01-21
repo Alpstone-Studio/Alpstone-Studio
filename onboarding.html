@@ -163,6 +163,7 @@
             min-height: 300px;
             box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.15);
             transition: all 0.4s ease;
+            scroll-behavior: smooth;
         }
 
         /* Step Content */
@@ -1534,12 +1535,29 @@
             scroll: ['Standard', 'Animé léger']
         };
 
+        // Prevent page scroll when scrolling preview
+        function initPreviewScroll() {
+            const preview = document.getElementById('preview');
+            if (preview) {
+                preview.addEventListener('wheel', (e) => {
+                    const isAtTop = preview.scrollTop === 0;
+                    const isAtBottom = preview.scrollTop + preview.clientHeight >= preview.scrollHeight;
+
+                    // Prevent page scroll if we're not at the boundary or if we're scrolling in the opposite direction
+                    if ((!isAtTop && e.deltaY < 0) || (!isAtBottom && e.deltaY > 0)) {
+                        e.stopPropagation();
+                    }
+                });
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             initStyleCards();
             initColorPickers();
             initTypoOptions();
             initSettings();
+            initPreviewScroll();
             updatePreview();
             checkURLToken();
         });
