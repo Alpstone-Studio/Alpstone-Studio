@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design Onboarding - Créez l'identité visuelle de votre site web">
-    <title>Design Onboarding | Alpstone Studio</title>
+    <meta name="description" content="Concepteur de site - Créez l'identité visuelle de votre site web">
+    <title>Concepteur de site | Alpstone Studio</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,18 +139,21 @@
         /* Step Indicator */
         .step-indicator {
             position: fixed;
-            bottom: 0;
+            bottom: 20px;
             left: 0;
             right: 0;
+            margin: 0 auto;
+            width: fit-content;
             display: flex;
             justify-content: center;
             gap: 12px;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(67, 141, 215, 0.1);
-            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(67, 141, 215, 0.15);
+            border-radius: 50px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             animation: fadeInUp 0.8s ease 0.2s both;
         }
@@ -1223,11 +1226,12 @@
             gap: 24px;
             margin-top: 48px;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            align-items: center;
         }
 
         .welcome-btn {
-            padding: 24px 48px;
+            padding: 24px 32px;
             border-radius: 16px;
             border: none;
             font-weight: 600;
@@ -1237,8 +1241,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 12px;
-            min-width: 240px;
+            width: 300px;
+            min-height: 180px;
             box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.2),
                         -12px -12px 24px rgba(255, 255, 255, 0.8);
         }
@@ -1622,19 +1628,22 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(67, 141, 215, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(67, 141, 215, 0.95);
             color: white;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
             opacity: 1;
             transition: all 0.3s ease;
             z-index: 10;
+            box-shadow: 0 2px 8px rgba(67, 141, 215, 0.3);
         }
 
         .style-card:hover .style-preview-btn {
@@ -1643,7 +1652,8 @@
 
         .style-preview-btn:hover {
             background: var(--primary-dark);
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(67, 141, 215, 0.4);
         }
 
         /* Responsive */
@@ -1651,7 +1661,8 @@
 
             .step-indicator {
                 flex-wrap: wrap;
-                gap: 12px;
+                gap: 8px;
+                padding: 10px 16px;
             }
 
             .step-label {
@@ -1661,10 +1672,6 @@
             .style-grid,
             .typo-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-
-            .welcome-actions {
-                flex-direction: column;
             }
 
             .example-name {
@@ -1683,6 +1690,15 @@
 
             .nav-buttons {
                 flex-direction: column;
+            }
+
+            .welcome-actions {
+                flex-direction: column;
+            }
+
+            .welcome-btn {
+                width: 100%;
+                max-width: 300px;
             }
 
             .btn-nav {
@@ -1739,18 +1755,18 @@
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-content">
             <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
-            <h1 class="onboarding-title">Design Onboarding</h1>
+            <h1 class="onboarding-title">Concepteur de site</h1>
             <p class="onboarding-subtitle">Inspirez-vous et trouvez le style visuel parfait pour votre projet</p>
 
             <div class="welcome-actions">
                 <button class="welcome-btn welcome-btn-primary" onclick="startOnboarding()">
                     <i class="fas fa-paint-brush"></i>
                     <span>Créer mon design</span>
-                    <span class="welcome-btn-subtitle">Commencer l'onboarding</span>
+                    <span class="welcome-btn-subtitle">Commencer la création</span>
                 </button>
                 <button class="welcome-btn welcome-btn-secondary" onclick="showTokenInput()">
                     <i class="fas fa-key"></i>
-                    <span>J'ai déjà un token</span>
+                    <span>J'ai déjà un code de design</span>
                     <span class="welcome-btn-subtitle">Charger une configuration</span>
                 </button>
             </div>
@@ -1814,7 +1830,7 @@
         <div class="onboarding-header">
             <div>
                 <img src="Logos/Alpstone-studio-vertical/Transparent-background-vertical.png" alt="Alpstone Studio" class="onboarding-logo">
-                <h1 class="onboarding-title">Design Onboarding</h1>
+                <h1 class="onboarding-title">Concepteur de site</h1>
                 <p class="onboarding-subtitle" id="onboardingSubtitle">Inspirez-vous et trouvez le style visuel parfait pour votre projet</p>
             </div>
         </div>
@@ -1831,7 +1847,7 @@
                     <div class="style-grid">
                         <div class="style-card" data-style="MIN" data-category="Classique">
                             <button class="style-preview-btn" onclick="showExample('MIN', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-min">
                                 <div class="preview-header"></div>
@@ -1845,7 +1861,7 @@
 
                         <div class="style-card" data-style="GLS" data-category="Moderne">
                             <button class="style-preview-btn" onclick="showExample('GLS', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-gls">
                                 <div class="preview-glass-card"></div>
@@ -1858,7 +1874,7 @@
 
                         <div class="style-card" data-style="SFT" data-category="Classique">
                             <button class="style-preview-btn" onclick="showExample('SFT', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-sft">
                                 <div class="preview-soft-card"></div>
@@ -1871,7 +1887,7 @@
 
                         <div class="style-card" data-style="EDT" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('EDT', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-edt">
                                 <div class="preview-edt-header"></div>
@@ -1884,7 +1900,7 @@
 
                         <div class="style-card" data-style="LUX" data-category="Premium">
                             <button class="style-preview-btn" onclick="showExample('LUX', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-lux">
                                 <div class="preview-lux-card"></div>
@@ -1897,7 +1913,7 @@
 
                         <div class="style-card" data-style="BRT" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('BRT', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-brt">
                                 <div class="preview-brt-box"></div>
@@ -1910,7 +1926,7 @@
 
                         <div class="style-card" data-style="RTF" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('RTF', event)">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye"></i> Exemple
                             </button>
                             <div class="style-preview style-preview-rtf">
                                 <div class="preview-rtf-grid"></div>
@@ -2128,7 +2144,7 @@
                     </div>
 
                     <div class="token-display">
-                        <div class="token-label">Votre Token Design</div>
+                        <div class="token-label">Votre Code de Design</div>
                         <div class="token-value" id="token-value">DG1|S:GLS|C:438DD7-FFFFFF-20375D|T:M1|A:2|R:3|D:2|TR:2|SC:1</div>
                         <div class="token-actions">
                             <button class="token-btn" onclick="copyToken()">
@@ -2142,10 +2158,10 @@
 
                     <div style="background: rgba(67, 141, 215, 0.1); padding: 20px; border-radius: 16px; border-left: 4px solid var(--primary-color);">
                         <h4 style="font-weight: 600; margin-bottom: 8px; color: var(--primary-dark);">
-                            <i class="fas fa-info-circle"></i> À propos du token
+                            <i class="fas fa-info-circle"></i> À propos du code de design
                         </h4>
                         <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.6;">
-                            Ce token contient l'intégralité de vos choix design. Conservez-le précieusement pour réutiliser ou modifier votre configuration à tout moment. Aucune donnée n'est stockée sur nos serveurs.
+                            Ce code contient l'intégralité de vos choix design. Conservez-le précieusement pour réutiliser ou modifier votre configuration à tout moment. Aucune donnée n'est stockée sur nos serveurs.
                         </p>
                     </div>
                 </div>
@@ -4030,8 +4046,8 @@
 
         function showTokenInput() {
             showPrompt(
-                'Entrez votre token',
-                'Collez votre token design pour charger votre configuration existante :',
+                'Entrez votre code de design',
+                'Collez votre code de design pour charger votre configuration existante :',
                 'info',
                 (token) => {
                     if (token && parseToken(token)) {
@@ -4040,9 +4056,9 @@
                         updateStepDisplay();
                         document.getElementById('welcomeScreen').classList.add('hidden');
                         document.getElementById('onboardingContainer').style.display = 'flex';
-                        showAlert('Token chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
+                        showAlert('Code chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
                     } else if (token) {
-                        showAlert('Token invalide', 'Le token que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
+                        showAlert('Code invalide', 'Le code que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
                     }
                 }
             );
@@ -4142,7 +4158,7 @@
             modalTitle.textContent = title;
             modalBody.textContent = message;
 
-            modalInputContainer.innerHTML = '<input type="text" class="modal-input" id="promptInput" placeholder="Entrez votre token...">';
+            modalInputContainer.innerHTML = '<input type="text" class="modal-input" id="promptInput" placeholder="Entrez votre code de design...">';
 
             modalActions.innerHTML = `
                 <button class="modal-btn modal-btn-secondary" onclick="closeModal(false, true)">
@@ -5033,24 +5049,24 @@
         function copyToken() {
             const token = document.getElementById('token-value').textContent;
             navigator.clipboard.writeText(token).then(() => {
-                showAlert('Token copié !', 'Votre token a été copié dans le presse-papier. Conservez-le précieusement.', 'success');
+                showAlert('Code copié !', 'Votre code de design a été copié dans le presse-papier. Conservez-le précieusement.', 'success');
             });
         }
 
         // Load Token
         function loadToken() {
             showPrompt(
-                'Charger un token',
-                'Collez votre token design pour charger votre configuration :',
+                'Charger un code de design',
+                'Collez votre code de design pour charger votre configuration :',
                 'info',
                 (token) => {
                     if (token && parseToken(token)) {
                         updateUI();
                         currentStep = 1;
                         updateStepDisplay();
-                        showAlert('Token chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
+                        showAlert('Code chargé avec succès !', 'Votre configuration a été restaurée.', 'success');
                     } else if (token) {
-                        showAlert('Token invalide', 'Le token que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
+                        showAlert('Code invalide', 'Le code que vous avez entré n\'est pas valide. Veuillez vérifier le format.', 'error');
                     }
                 }
             );
@@ -5077,7 +5093,7 @@
                     <i class="fas fa-globe"></i> Voir le site d'exemple
                 </button>
                 <button class="modal-btn modal-btn-primary" onclick="copyToken(); closeModal();">
-                    <i class="fas fa-copy"></i> Copier le token
+                    <i class="fas fa-copy"></i> Copier le code
                 </button>
             `;
 
