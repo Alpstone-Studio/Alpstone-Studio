@@ -15,6 +15,29 @@
            ONBOARDING SPECIFIC STYLES
            ========================================== */
 
+        :root {
+            --text-dark: #1a1a1a;
+            --text-light: rgba(0, 0, 0, 0.6);
+            --text-secondary: rgba(0, 0, 0, 0.6);
+            --primary-color: #438DD7;
+        }
+
+        /* Smooth color transition for all text elements */
+        .step-title, .substep-title, h1, h2, h3,
+        .step-description, .substep-description,
+        p, .style-name, .typo-name, .typo-description,
+        .setting-label, .color-section-title, .color-label {
+            transition: color 0.3s ease;
+        }
+
+        /* Header and step indicator always black */
+        .onboarding-header .onboarding-title,
+        .onboarding-header .onboarding-subtitle,
+        .step-indicator .step-number,
+        .step-indicator .step-label {
+            color: #1a1a1a !important;
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
         }
@@ -2208,8 +2231,19 @@
                 console.warn('⚠️ Font loading timeout, proceeding anyway');
             }
 
-            applyGlobalStyles();
-            checkURLToken();
+            // Check if token in URL BEFORE applying styles
+            const hasToken = checkURLToken();
+
+            // Only apply default styles if no token was loaded
+            if (!hasToken) {
+                applyGlobalStyles();
+            }
+
+            // Final contrast check after everything is loaded (with longer delay for token scenarios)
+            setTimeout(() => {
+                console.log('🔄 Final contrast check on page load...');
+                autoAdjustTextContrast();
+            }, 300);
         });
 
         // Check if token in URL
@@ -2217,9 +2251,12 @@
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             if (token) {
+                console.log('🔑 Loading token from URL');
                 parseToken(token);
                 updateUI();
+                return true;
             }
+            return false;
         }
 
         // Style Cards
@@ -2255,6 +2292,7 @@
                     }
 
                     applyGlobalStyles();
+                    setTimeout(() => autoAdjustTextContrast(), 100);
                     enableNextButton();
                 });
             });
@@ -2275,6 +2313,7 @@
                     designState.colors[type] = color;
                     validateColors();
                     applyGlobalStyles();
+                    setTimeout(() => autoAdjustTextContrast(), 100);
                 });
 
                 textInput.addEventListener('input', (e) => {
@@ -2284,6 +2323,7 @@
                         designState.colors[type] = color;
                         validateColors();
                         applyGlobalStyles();
+                        setTimeout(() => autoAdjustTextContrast(), 100);
                     }
                 });
             });
@@ -2373,6 +2413,10 @@
                 feedbackPrimary.className = 'color-feedback warning';
                 const suggestionPrimary = getSuggestion(primary, background, 4.5);
                 const suggestionBg = getSuggestion(background, primary, 4.5);
+
+                // Only show background button if the suggestion is different from current background
+                const showBgButton = suggestionBg.toLowerCase() !== background.toLowerCase();
+
                 feedbackPrimary.innerHTML = `
                     <i class="fas fa-exclamation-triangle"></i>
                     <strong>Acceptable mais peut mieux faire</strong><br>
@@ -2383,16 +2427,22 @@
                                 onclick="applySuggestion('primary', '${suggestionPrimary}')">
                             <i class="fas fa-palette"></i> Modifier couleur principale
                         </button>
+                        ${showBgButton ? `
                         <button class="modal-btn modal-btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;"
                                 onclick="applySuggestion('background', '${suggestionBg}')">
                             <i class="fas fa-fill"></i> Modifier fond
                         </button>
+                        ` : ''}
                     </div>
                 `;
             } else {
                 feedbackPrimary.className = 'color-feedback error';
                 const suggestionPrimary = getSuggestion(primary, background, 4.5);
                 const suggestionBg = getSuggestion(background, primary, 4.5);
+
+                // Only show background button if the suggestion is different from current background
+                const showBgButton = suggestionBg.toLowerCase() !== background.toLowerCase();
+
                 feedbackPrimary.innerHTML = `
                     <i class="fas fa-times-circle"></i>
                     <strong>Attention : contraste trop faible</strong><br>
@@ -2404,10 +2454,12 @@
                                 onclick="applySuggestion('primary', '${suggestionPrimary}')">
                             <i class="fas fa-palette"></i> Corriger couleur (${suggestionPrimary})
                         </button>
+                        ${showBgButton ? `
                         <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
                                 onclick="applySuggestion('background', '${suggestionBg}')">
                             <i class="fas fa-fill"></i> Corriger fond (${suggestionBg})
                         </button>
+                        ` : ''}
                     </div>
                 `;
             }
@@ -2424,6 +2476,10 @@
                 feedbackAccent.className = 'color-feedback warning';
                 const suggestionAccent = getSuggestion(accent, background, 4.5);
                 const suggestionBg = getSuggestion(background, accent, 4.5);
+
+                // Only show background button if the suggestion is different from current background
+                const showBgButton = suggestionBg.toLowerCase() !== background.toLowerCase();
+
                 feedbackAccent.innerHTML = `
                     <i class="fas fa-exclamation-triangle"></i>
                     <strong>Contraste moyen</strong> (${accentBgContrast.toFixed(1)}:1) -
@@ -2433,16 +2489,22 @@
                                 onclick="applySuggestion('accent', '${suggestionAccent}')">
                             <i class="fas fa-palette"></i> Modifier couleur accent
                         </button>
+                        ${showBgButton ? `
                         <button class="modal-btn modal-btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;"
                                 onclick="applySuggestion('background', '${suggestionBg}')">
                             <i class="fas fa-fill"></i> Modifier fond
                         </button>
+                        ` : ''}
                     </div>
                 `;
             } else {
                 feedbackAccent.className = 'color-feedback error';
                 const suggestionAccent = getSuggestion(accent, background, 4.5);
                 const suggestionBg = getSuggestion(background, accent, 4.5);
+
+                // Only show background button if the suggestion is different from current background
+                const showBgButton = suggestionBg.toLowerCase() !== background.toLowerCase();
+
                 feedbackAccent.innerHTML = `
                     <i class="fas fa-times-circle"></i>
                     <strong>Contraste insuffisant</strong> (${accentBgContrast.toFixed(1)}:1)<br>
@@ -2452,10 +2514,12 @@
                                 onclick="applySuggestion('accent', '${suggestionAccent}')">
                             <i class="fas fa-palette"></i> Corriger accent (${suggestionAccent})
                         </button>
+                        ${showBgButton ? `
                         <button class="modal-btn modal-btn-primary" style="padding: 8px 16px; font-size: 0.9rem;"
                                 onclick="applySuggestion('background', '${suggestionBg}')">
                             <i class="fas fa-fill"></i> Corriger fond (${suggestionBg})
                         </button>
+                        ` : ''}
                     </div>
                 `;
             }
@@ -2533,6 +2597,7 @@
             updatePickerPreview(color);
             validateColors();
             applyGlobalStyles();
+            setTimeout(() => autoAdjustTextContrast(), 100);
         }
 
         function updatePickerPreview(color) {
@@ -2635,6 +2700,7 @@
                     option.classList.add('selected');
                     designState.typography = option.dataset.typo;
                     applyGlobalStyles();
+                    setTimeout(() => autoAdjustTextContrast(), 100);
                     enableNextButton();
                 });
             });
@@ -2676,6 +2742,7 @@
                     }
 
                     applyGlobalStyles();
+                    setTimeout(() => autoAdjustTextContrast(), 100);
                 });
             });
         }
@@ -2775,6 +2842,13 @@
 
             // Determine if we're in dark mode based on actual background color
             const isDarkBg = !isLightColor(background);
+
+            console.log('🔍 DEBUG applyGlobalStyles:', {
+                background,
+                isDarkBg,
+                isLight: isLightColor(background),
+                style
+            });
 
             // Apply background color to body and container
             if (style === 'GLS') {
@@ -2891,13 +2965,7 @@
                 // Skip if it's in the header or footer
                 if (!heading.closest('.onboarding-header') && !heading.closest('.step-indicator')) {
                     heading.style.fontFamily = headingFont;
-
-                    // Always check contrast - use primary if readable, otherwise use high contrast color
-                    const primaryContrast = getContrastColor(background);
-                    const usePrimary = Math.abs(isLightColor(primary) - isLightColor(background)) > 0.3;
-
-                    heading.style.color = usePrimary ? primary : primaryContrast;
-                    heading.style.transition = transition;
+                    heading.style.transition = 'color 0.3s ease';
                 }
             });
 
@@ -2906,8 +2974,7 @@
                 // Skip if it's in the header or footer
                 if (!text.closest('.onboarding-header') && !text.closest('.step-indicator')) {
                     text.style.fontFamily = bodyFont;
-                    text.style.color = getSecondaryTextColor(background);
-                    text.style.transition = transition;
+                    text.style.transition = 'color 0.3s ease';
                 }
             });
 
@@ -3408,6 +3475,187 @@
             });
 
             console.log('✅ Global styles applied successfully');
+
+            // Call the automatic contrast system after styles are applied
+            setTimeout(() => {
+                autoAdjustTextContrast();
+            }, 100);
+        }
+
+        // ============================================
+        // AUTOMATIC TEXT CONTRAST ADJUSTMENT SYSTEM
+        // ============================================
+        function autoAdjustTextContrast() {
+            console.log('🎨 Starting automatic contrast adjustment...');
+
+            // Calculate the REAL background color that's being displayed
+            // This takes into account theme defaults vs user overrides
+            const style = designState.style;
+            const userBg = designState.colors.background || '#ffffff';
+            let bgColor = userBg;
+
+            // For themes with dark defaults, check if user has overridden
+            if (!manualOverrides.colors) {
+                // User hasn't overridden, so theme defaults may apply
+                if (style === 'LUX' && styleDefaults['LUX']?.backgroundColor) {
+                    bgColor = styleDefaults['LUX'].backgroundColor;
+                } else if (style === 'BRT' && styleDefaults['BRT']?.backgroundColor) {
+                    bgColor = styleDefaults['BRT'].backgroundColor;
+                } else if (style === 'RTF' && styleDefaults['RTF']?.backgroundColor) {
+                    bgColor = styleDefaults['RTF'].backgroundColor;
+                } else if (style === 'GLS' && styleDefaults['GLS']?.backgroundColor) {
+                    bgColor = styleDefaults['GLS'].backgroundColor;
+                }
+            }
+
+            console.log('📍 Background color calculation:', {
+                style,
+                userBg,
+                manualOverrides: manualOverrides.colors,
+                finalBgColor: bgColor
+            });
+
+            // Calculate the best text color for this background
+            const textColor = getBestContrastColor(bgColor);
+            const secondaryTextColor = textColor === '#ffffff' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)';
+
+            console.log('📍 Calculated text color:', textColor);
+
+            // Set the CSS variables globally - this affects all elements using var(--text-dark) and var(--text-light)
+            document.documentElement.style.setProperty('--text-dark', textColor);
+            document.documentElement.style.setProperty('--text-light', secondaryTextColor);
+            document.documentElement.style.setProperty('--text-secondary', secondaryTextColor);
+
+            // Apply to primary text elements (titles, labels) - EXCLUDING header and steps (always black)
+            const primaryTextElements = document.querySelectorAll(
+                '.step-title, .substep-title, h1, h2, h3, ' +
+                '.style-name, .typo-name, .setting-label, ' +
+                '.color-section-title, .color-label'
+            );
+
+            // Apply to secondary text elements (descriptions)
+            const secondaryTextElements = document.querySelectorAll(
+                '.step-description, .substep-description, ' +
+                '.style-description, .typo-description, ' +
+                '.substep-dot-label'
+            );
+
+            let adjustedCount = 0;
+
+            primaryTextElements.forEach(element => {
+                // Skip elements in header, step indicator, modals, or hidden elements
+                if (element.closest('.onboarding-header') ||
+                    element.closest('.step-indicator') ||
+                    element.closest('.modal') ||
+                    element.closest('.color-picker-modal') ||
+                    element.offsetParent === null) {
+                    return;
+                }
+
+                // Apply the primary text color with !important to override CSS
+                element.style.setProperty('color', textColor, 'important');
+                adjustedCount++;
+            });
+
+            secondaryTextElements.forEach(element => {
+                // Skip elements in header, step indicator, modals, or hidden elements
+                if (element.closest('.onboarding-header') ||
+                    element.closest('.step-indicator') ||
+                    element.closest('.modal') ||
+                    element.closest('.color-picker-modal') ||
+                    element.offsetParent === null) {
+                    return;
+                }
+
+                // Apply the secondary text color with !important to override CSS
+                element.style.setProperty('color', secondaryTextColor, 'important');
+                adjustedCount++;
+            });
+
+            console.log(`✅ Contrast adjustment complete. CSS variables set, ${adjustedCount} elements directly adjusted.`);
+        }
+
+        // Get the effective background color of an element (walks up the DOM tree)
+        function getEffectiveBackgroundColor(element) {
+            let current = element;
+
+            while (current) {
+                const computed = window.getComputedStyle(current);
+                const bg = computed.backgroundColor;
+
+                // Check if background is not transparent
+                if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+                    const hex = rgbToHex(bg);
+                    if (hex) return hex;
+                }
+
+                // Check if we've reached the body
+                if (current === document.body) {
+                    break;
+                }
+
+                current = current.parentElement;
+            }
+
+            // Use designState.colors.background as the ultimate source of truth
+            // This is the most reliable since it's what the user actually selected
+            if (designState && designState.colors && designState.colors.background) {
+                return designState.colors.background;
+            }
+
+            return '#ffffff';
+        }
+
+        // Convert RGB/RGBA color to HEX
+        function rgbToHex(rgb) {
+            if (rgb.startsWith('#')) return rgb;
+
+            const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (!match) return null;
+
+            const r = parseInt(match[1]);
+            const g = parseInt(match[2]);
+            const b = parseInt(match[3]);
+
+            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        // Calculate contrast ratio between two colors (WCAG formula)
+        function calculateContrastRatio(color1, color2) {
+            const lum1 = getRelativeLuminance(color1);
+            const lum2 = getRelativeLuminance(color2);
+
+            const lighter = Math.max(lum1, lum2);
+            const darker = Math.min(lum1, lum2);
+
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        // Get relative luminance of a color (WCAG formula)
+        function getRelativeLuminance(color) {
+            const hex = color.startsWith('#') ? color : rgbToHex(color);
+            if (!hex) return 0;
+
+            const rgb = parseInt(hex.slice(1), 16);
+            const r = (rgb >> 16) & 0xff;
+            const g = (rgb >> 8) & 0xff;
+            const b = (rgb >> 0) & 0xff;
+
+            const [rs, gs, bs] = [r, g, b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+
+            return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+        }
+
+        // Get the best contrast color (white or black) for a given background
+        function getBestContrastColor(bgColor) {
+            const whiteContrast = calculateContrastRatio('#ffffff', bgColor);
+            const blackContrast = calculateContrastRatio('#1a1a1a', bgColor);
+
+            // Return the color with better contrast
+            return whiteContrast > blackContrast ? '#ffffff' : '#1a1a1a';
         }
 
         // Navigation
@@ -3416,6 +3664,7 @@
             if (currentStep === 4 && currentSubstep < totalSubsteps) {
                 currentSubstep++;
                 updateSubstepDisplay();
+                setTimeout(() => autoAdjustTextContrast(), 100);
                 return;
             }
 
@@ -3434,6 +3683,9 @@
                     updateSummary();
                     generateToken();
                 }
+
+                // Recheck contrast when navigating steps
+                setTimeout(() => autoAdjustTextContrast(), 100);
             }
         }
 
@@ -3442,6 +3694,7 @@
             if (currentStep === 4 && currentSubstep > 1) {
                 currentSubstep--;
                 updateSubstepDisplay();
+                setTimeout(() => autoAdjustTextContrast(), 100);
                 return;
             }
 
@@ -3452,6 +3705,9 @@
                     currentSubstep = totalSubsteps;
                 }
                 updateStepDisplay();
+
+                // Recheck contrast when navigating steps
+                setTimeout(() => autoAdjustTextContrast(), 100);
             }
         }
 
@@ -3600,6 +3856,9 @@
                         designState.colors.primary = '#' + colors[0];
                         designState.colors.background = '#' + colors[1];
                         designState.colors.accent = '#' + colors[2];
+                        // Mark colors as manually set so theme defaults don't override them
+                        manualOverrides.colors = true;
+                        console.log('🔑 Token colors loaded, manualOverrides.colors set to true');
                     } else if (part.startsWith('T:')) {
                         designState.typography = part.substring(2);
                     } else if (part.startsWith('A:')) {
@@ -3660,7 +3919,18 @@
             });
 
             validateColors();
-            applyGlobalStyles();
+
+            // Force a recalculation by calling applyGlobalStyles with a small delay
+            // This ensures all DOM updates are complete before applying styles
+            setTimeout(() => {
+                console.log('🎨 Applying styles after token load with colors:', designState.colors);
+                applyGlobalStyles();
+                // Longer delay for contrast adjustment to ensure all styles are rendered
+                setTimeout(() => {
+                    console.log('🎨 Running contrast adjustment after token load...');
+                    autoAdjustTextContrast();
+                }, 200);
+            }, 100);
         }
 
         // Welcome Screen Functions
