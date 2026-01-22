@@ -184,60 +184,23 @@
         /* Content Area */
         .onboarding-content {
             width: 100%;
-            max-width: 1400px;
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 32px;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
             animation: fadeInUp 0.8s ease 0.4s both;
         }
 
         .content-main {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
+            border-radius: 24px;
             padding: 48px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.2),
-                        -12px -12px 24px rgba(255, 255, 255, 0.8),
-                        inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+                        0 2px 8px rgba(0, 0, 0, 0.04);
             min-height: 500px;
         }
 
-        .content-sidebar {
-            position: sticky;
-            top: 90px;
-            height: fit-content;
-        }
-
-        .preview-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.2),
-                        -12px -12px 24px rgba(255, 255, 255, 0.8);
-        }
-
-        .preview-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: var(--text-dark);
-        }
-
-        .preview-content {
-            background: var(--bg-white);
-            border-radius: 16px;
-            padding: 24px;
-            min-height: 300px;
-            max-height: 400px;
-            box-shadow: inset 4px 4px 8px rgba(174, 174, 192, 0.15);
-            transition: all 0.4s ease;
-            scroll-behavior: smooth;
-            position: relative;
-            overflow-y: auto;
-        }
 
         /* Animation indicator */
         .animation-indicator {
@@ -280,6 +243,229 @@
             font-size: 1.8rem;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            padding: 12px;
+            gap: 8px;
+        }
+
+        /* MIN - Minimal Pro: Clean animations */
+        .style-preview-min {
+            background: #ffffff;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .preview-header {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            animation: minPulse 2s ease-in-out infinite;
+        }
+        .preview-card {
+            width: 100%;
+            height: 16px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            animation: minSlide 3s ease-in-out infinite;
+        }
+        .preview-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        @keyframes minPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes minSlide {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+
+        /* GLS - Modern Glass: Floating glass cards */
+        .style-preview-gls {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            gap: 10px;
+        }
+        .preview-glass-card {
+            width: 40px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: glassFloat 3s ease-in-out infinite;
+        }
+        .preview-glass-card-2 {
+            animation-delay: 1.5s;
+        }
+        @keyframes glassFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.05); }
+        }
+
+        /* SFT - Soft UI: Soft elevating elements */
+        .style-preview-sft {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            flex-direction: column;
+            gap: 8px;
+        }
+        .preview-soft-card {
+            width: 70%;
+            height: 28px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
+            animation: softElevate 2.5s ease-in-out infinite;
+        }
+        .preview-soft-btn {
+            width: 40%;
+            height: 18px;
+            background: #4285F4;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.4);
+            animation: softPulse 2s ease-in-out infinite;
+        }
+        @keyframes softElevate {
+            0%, 100% { transform: translateY(0); box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2); }
+            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3); }
+        }
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* EDT - Editorial: Bold borders */
+        .style-preview-edt {
+            background: #ffffff;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .preview-edt-header {
+            width: 100%;
+            height: 12px;
+            background: transparent;
+            border-top: 4px solid #E91E63;
+            animation: edtExpand 2s ease-in-out infinite;
+        }
+        .preview-edt-box {
+            width: 60%;
+            height: 35px;
+            background: transparent;
+            border: 3px solid #E91E63;
+            border-radius: 4px;
+            animation: edtRotate 3s ease-in-out infinite;
+        }
+        @keyframes edtExpand {
+            0%, 100% { width: 100%; }
+            50% { width: 80%; }
+        }
+        @keyframes edtRotate {
+            0%, 100% { transform: rotate(0deg); border-color: #E91E63; }
+            50% { transform: rotate(2deg); border-color: #9C27B0; }
+        }
+
+        /* LUX - Luxury Dark: Glowing gold accents */
+        .style-preview-lux {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            gap: 10px;
+        }
+        .preview-lux-card {
+            width: 45px;
+            height: 50px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #D4AF37;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: luxGlow 2s ease-in-out infinite;
+        }
+        .preview-lux-accent {
+            width: 20px;
+            height: 20px;
+            background: #D4AF37;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: luxPulse 2s ease-in-out infinite;
+        }
+        @keyframes luxGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3); }
+        }
+        @keyframes luxPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+            50% { transform: scale(1.2); box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
+        }
+
+        /* BRT - Brutal Modern: Hard shadows */
+        .style-preview-brt {
+            background: #000000;
+            gap: 12px;
+        }
+        .preview-brt-box {
+            width: 45px;
+            height: 45px;
+            background: #ffffff;
+            border: 3px solid #FF5722;
+            border-radius: 4px;
+            box-shadow: 6px 6px 0 #FF5722;
+            animation: brtShift 2s ease-in-out infinite;
+        }
+        .preview-brt-line {
+            width: 25px;
+            height: 4px;
+            background: #FF5722;
+            animation: brtGrow 2s ease-in-out infinite;
+        }
+        @keyframes brtShift {
+            0%, 100% { transform: translate(0, 0); box-shadow: 6px 6px 0 #FF5722; }
+            50% { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #FF5722; }
+        }
+        @keyframes brtGrow {
+            0%, 100% { width: 25px; }
+            50% { width: 35px; }
+        }
+
+        /* RTF - Retro Future: Neon glow */
+        .style-preview-rtf {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 100%);
+            gap: 10px;
+        }
+        .preview-rtf-grid {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid #9C27B0;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(156, 39, 176, 0.6), inset 0 0 10px rgba(156, 39, 176, 0.2);
+            animation: rtfGlow 2s ease-in-out infinite;
+            position: relative;
+        }
+        .preview-rtf-grid::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #9C27B0;
+            box-shadow: 0 0 8px rgba(156, 39, 176, 0.8);
+        }
+        .preview-rtf-glow {
+            width: 15px;
+            height: 15px;
+            background: #9C27B0;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(156, 39, 176, 0.8), 0 0 40px rgba(156, 39, 176, 0.4);
+            animation: rtfPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes rtfGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.6), inset 0 0 10px rgba(156, 39, 176, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(156, 39, 176, 0.8), 0 0 50px rgba(156, 39, 176, 0.4), inset 0 0 15px rgba(156, 39, 176, 0.3); }
+        }
+        @keyframes rtfPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(156, 39, 176, 0.8), 0 0 40px rgba(156, 39, 176, 0.4); }
+            50% { transform: scale(1.3); box-shadow: 0 0 30px rgba(156, 39, 176, 1), 0 0 60px rgba(156, 39, 176, 0.6); }
         }
 
         .style-name {
@@ -621,26 +807,30 @@
         }
 
         .typo-option {
-            background: rgba(255, 255, 255, 0.6);
+            background: #ffffff;
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 20px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 24px 20px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
+                        0 1px 2px rgba(0, 0, 0, 0.04);
         }
 
         .typo-option:hover {
-            transform: translateY(-4px);
-            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 4px 8px rgba(0, 0, 0, 0.06);
+            border-color: rgba(67, 141, 215, 0.3);
         }
 
         .typo-option.selected {
             border-color: var(--primary-color);
-            background: rgba(67, 141, 215, 0.05);
-            box-shadow: 0 0 0 3px rgba(67, 141, 215, 0.2);
+            background: rgba(67, 141, 215, 0.04);
+            box-shadow: 0 0 0 3px rgba(67, 141, 215, 0.15),
+                        0 4px 12px rgba(67, 141, 215, 0.2);
         }
 
         .typo-sample {
@@ -739,19 +929,21 @@
         }
 
         .setting-option {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            background: #ffffff;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            box-shadow: 4px 4px 8px rgba(174, 174, 192, 0.15);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         .setting-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 6px 6px 12px rgba(174, 174, 192, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: rgba(67, 141, 215, 0.3);
         }
 
         .setting-option.selected {
@@ -759,6 +951,7 @@
             color: white;
             border-color: var(--primary-color);
             box-shadow: 0 4px 16px rgba(67, 141, 215, 0.3);
+            font-weight: 600;
         }
 
         /* Summary Section */
@@ -774,7 +967,7 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 16px;
-            color: var(--text-dark);
+            color: #1a1a1a !important;
         }
 
         .summary-item {
@@ -790,12 +983,12 @@
 
         .summary-label {
             font-weight: 500;
-            color: var(--text-light);
+            color: #2c3e50 !important;
         }
 
         .summary-value {
             font-weight: 600;
-            color: var(--text-dark);
+            color: #1a1a1a !important;
         }
 
         /* Token Display */
@@ -1129,14 +1322,14 @@
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: #1a1a1a !important;
             flex: 1;
         }
 
         .modal-body {
             margin-bottom: 32px;
             font-size: 1.05rem;
-            color: var(--text-light);
+            color: #2c3e50 !important;
             line-height: 1.6;
         }
 
@@ -1303,30 +1496,30 @@
         }
 
         .style-card {
-            background: rgba(255, 255, 255, 0.6);
+            background: #ffffff;
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 8px 8px 16px rgba(174, 174, 192, 0.15),
-                        -8px -8px 16px rgba(255, 255, 255, 0.7);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
+                        0 1px 2px rgba(0, 0, 0, 0.04);
             position: relative;
         }
 
         .style-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 12px 12px 24px rgba(174, 174, 192, 0.25),
-                        -12px -12px 24px rgba(255, 255, 255, 0.9),
-                        0 8px 32px rgba(67, 141, 215, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 4px 8px rgba(0, 0, 0, 0.06);
+            border-color: rgba(67, 141, 215, 0.3);
         }
 
         .style-card.selected {
             border-color: var(--primary-color);
-            background: rgba(67, 141, 215, 0.05);
-            box-shadow: 0 0 0 3px rgba(67, 141, 215, 0.2),
-                        12px 12px 24px rgba(174, 174, 192, 0.25);
+            background: rgba(67, 141, 215, 0.04);
+            box-shadow: 0 0 0 3px rgba(67, 141, 215, 0.15),
+                        0 4px 12px rgba(67, 141, 215, 0.2);
         }
 
         .style-preview-btn {
@@ -1343,7 +1536,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
+            opacity: 1;
             transition: all 0.3s ease;
             z-index: 10;
         }
@@ -1359,15 +1552,6 @@
 
         /* Responsive */
         @media (max-width: 968px) {
-            .onboarding-content {
-                grid-template-columns: 1fr;
-            }
-
-            .content-sidebar {
-                position: relative;
-                top: 0;
-                order: -1;
-            }
 
             .step-indicator {
                 flex-wrap: wrap;
@@ -1401,10 +1585,6 @@
                 padding: 24px;
             }
 
-            .preview-card {
-                padding: 20px;
-            }
-
             .nav-buttons {
                 flex-direction: column;
             }
@@ -1426,6 +1606,30 @@
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
                 gap: 12px;
             }
+        }
+
+        /* Set animations and transitions to 0 duration when animations are off */
+        body.no-animations *,
+        body.no-animations *::before,
+        body.no-animations *::after {
+            animation-duration: 0s !important;
+            animation-delay: 0s !important;
+            transition-duration: 0s !important;
+            transition-delay: 0s !important;
+        }
+
+        /* Disable hover transform effects when animations are off (keep colors/shadows) */
+        body.no-animations .style-card:hover,
+        body.no-animations .typo-option:hover,
+        body.no-animations .setting-option:hover,
+        body.no-animations .btn:hover,
+        body.no-animations .btn-next:hover,
+        body.no-animations .btn-prev:hover,
+        body.no-animations .btn-validate:hover,
+        body.no-animations .custom-color-picker:hover,
+        body.no-animations .color-preset:hover,
+        body.no-animations .substep-dot:hover {
+            transform: none !important;
         }
     </style>
 </head>
@@ -1515,10 +1719,12 @@
                     <div class="style-grid">
                         <div class="style-card" data-style="MIN" data-category="Classique">
                             <button class="style-preview-btn" onclick="showExample('MIN', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-mobile-alt" style="color: #000;"></i>
+                            <div class="style-preview style-preview-min">
+                                <div class="preview-header"></div>
+                                <div class="preview-card"></div>
+                                <div class="preview-card"></div>
                             </div>
                             <div class="style-category">Classique</div>
                             <div class="style-name">Minimal Pro</div>
@@ -1527,10 +1733,11 @@
 
                         <div class="style-card" data-style="GLS" data-category="Moderne">
                             <button class="style-preview-btn" onclick="showExample('GLS', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-gem" style="color: #438DD7;"></i>
+                            <div class="style-preview style-preview-gls">
+                                <div class="preview-glass-card"></div>
+                                <div class="preview-glass-card preview-glass-card-2"></div>
                             </div>
                             <div class="style-category">Moderne</div>
                             <div class="style-name">Modern Glass</div>
@@ -1539,10 +1746,11 @@
 
                         <div class="style-card" data-style="SFT" data-category="Classique">
                             <button class="style-preview-btn" onclick="showExample('SFT', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-circle" style="color: #4285F4;"></i>
+                            <div class="style-preview style-preview-sft">
+                                <div class="preview-soft-card"></div>
+                                <div class="preview-soft-btn"></div>
                             </div>
                             <div class="style-category">Classique</div>
                             <div class="style-name">Soft UI</div>
@@ -1551,10 +1759,11 @@
 
                         <div class="style-card" data-style="EDT" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('EDT', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-palette" style="color: #E91E63;"></i>
+                            <div class="style-preview style-preview-edt">
+                                <div class="preview-edt-header"></div>
+                                <div class="preview-edt-box"></div>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Editorial</div>
@@ -1563,10 +1772,11 @@
 
                         <div class="style-card" data-style="LUX" data-category="Premium">
                             <button class="style-preview-btn" onclick="showExample('LUX', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-crown" style="color: #D4AF37;"></i>
+                            <div class="style-preview style-preview-lux">
+                                <div class="preview-lux-card"></div>
+                                <div class="preview-lux-accent"></div>
                             </div>
                             <div class="style-category">Premium</div>
                             <div class="style-name">Luxury Dark</div>
@@ -1575,10 +1785,11 @@
 
                         <div class="style-card" data-style="BRT" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('BRT', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-cube" style="color: #FF5722;"></i>
+                            <div class="style-preview style-preview-brt">
+                                <div class="preview-brt-box"></div>
+                                <div class="preview-brt-line"></div>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Brutal Modern</div>
@@ -1587,10 +1798,11 @@
 
                         <div class="style-card" data-style="RTF" data-category="Audacieux">
                             <button class="style-preview-btn" onclick="showExample('RTF', event)">
-                                <i class="fas fa-expand"></i>
+                                <i class="fas fa-eye"></i>
                             </button>
-                            <div class="style-preview">
-                                <i class="fas fa-rocket" style="color: #9C27B0;"></i>
+                            <div class="style-preview style-preview-rtf">
+                                <div class="preview-rtf-grid"></div>
+                                <div class="preview-rtf-glow"></div>
                             </div>
                             <div class="style-category">Audacieux</div>
                             <div class="style-name">Retro Future</div>
@@ -1837,69 +2049,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar Preview -->
-            <div class="content-sidebar">
-                <div class="preview-card">
-                    <h3 class="preview-title">Aperçu en temps réel</h3>
-                    <div class="preview-content" id="preview" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;">
-                        <!-- Navigation -->
-                        <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; padding: 8px;" id="preview-nav">
-                            <div style="font-weight: 700; font-size: 0.9rem;" id="preview-logo">Logo</div>
-                            <div style="display: flex; gap: 8px; font-size: 0.7rem;">
-                                <div id="preview-link1" style="opacity: 0.7; cursor: pointer;">Home</div>
-                                <div id="preview-link2" style="opacity: 0.7; cursor: pointer;">About</div>
-                                <div id="preview-link3" style="opacity: 0.7; cursor: pointer;">Services</div>
-                            </div>
-                        </div>
-
-                        <!-- Hero Section -->
-                        <div style="margin-bottom: 12px; padding: 16px; text-align: center;" id="preview-hero">
-                            <div style="font-size: 1rem; font-weight: 700; margin-bottom: 6px;" id="preview-title">Your Title</div>
-                            <div style="font-size: 0.65rem; opacity: 0.8; margin-bottom: 10px;" id="preview-subtitle">Subtitle text here</div>
-                            <div style="width: 60px; height: 20px; margin: 0 auto; cursor: pointer;" id="preview-cta"></div>
-                        </div>
-
-                        <!-- Cards Grid -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
-                            <div style="padding: 10px; cursor: pointer;" id="preview-card1">
-                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon1"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 4px;" id="preview-card-title1">Feature 1</div>
-                                <div style="font-size: 0.55rem; opacity: 0.7;" id="preview-card-desc1">Description</div>
-                            </div>
-                            <div style="padding: 10px; cursor: pointer;" id="preview-card2">
-                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon2"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600; margin-bottom: 4px;" id="preview-card-title2">Feature 2</div>
-                                <div style="font-size: 0.55rem; opacity: 0.7;" id="preview-card-desc2">Description</div>
-                            </div>
-                        </div>
-
-                        <!-- Additional Content Section -->
-                        <div style="padding: 12px; margin-bottom: 12px;" id="preview-section">
-                            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;" id="preview-section-title">Section Title</div>
-                            <div style="font-size: 0.6rem; line-height: 1.4; opacity: 0.8;" id="preview-section-text">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-                            </div>
-                        </div>
-
-                        <!-- More Cards for Scrolling -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
-                            <div style="padding: 10px;" id="preview-card3">
-                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon3"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title3">Feature 3</div>
-                            </div>
-                            <div style="padding: 10px;" id="preview-card4">
-                                <div style="width: 20px; height: 20px; margin-bottom: 6px;" id="preview-icon4"></div>
-                                <div style="font-size: 0.7rem; font-weight: 600;" id="preview-card-title4">Feature 4</div>
-                            </div>
-                        </div>
-
-                        <!-- Footer -->
-                        <div style="padding: 8px; text-align: center; font-size: 0.6rem; opacity: 0.6; margin-top: 16px;" id="preview-footer">
-                            © 2024 Your Brand • Made with ❤️
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Step Indicator -->
@@ -1983,6 +2132,26 @@
             }
         };
 
+        // Track manual overrides - true means user has manually changed this setting
+        const manualOverrides = {
+            radius: false,
+            density: false,
+            animations: false,
+            transitions: false,
+            colors: false  // Track if user manually changed colors
+        };
+
+        // Default settings for each style (including default colors for dark themes)
+        const styleDefaults = {
+            'MIN': { radius: 1, density: 1 },
+            'GLS': { radius: 2, density: 2, backgroundColor: '#0a0a0a' },
+            'SFT': { radius: 3, density: 3 },
+            'EDT': { radius: 1, density: 2 },
+            'LUX': { radius: 2, density: 2, backgroundColor: '#0a0a0a' },
+            'BRT': { radius: 1, density: 2, backgroundColor: '#000000' },
+            'RTF': { radius: 2, density: 2, backgroundColor: '#0a0a0a' }
+        };
+
         // Style mappings
         const styleNames = {
             'MIN': 'Minimal Pro',
@@ -2009,41 +2178,6 @@
             scroll: ['Standard', 'Animé léger']
         };
 
-        // Prevent page scroll when scrolling preview
-        function initPreviewScroll() {
-            const preview = document.getElementById('preview');
-            if (preview) {
-                let isMouseOver = false;
-
-                // Detect when mouse is over preview
-                preview.addEventListener('mouseenter', () => {
-                    isMouseOver = true;
-                    document.body.style.overflow = 'hidden'; // Lock page scroll
-                });
-
-                preview.addEventListener('mouseleave', () => {
-                    isMouseOver = false;
-                    document.body.style.overflow = ''; // Unlock page scroll
-                });
-
-                // Handle wheel event
-                preview.addEventListener('wheel', (e) => {
-                    if (isMouseOver) {
-                        const isAtTop = preview.scrollTop === 0;
-                        const isAtBottom = preview.scrollTop + preview.clientHeight >= preview.scrollHeight;
-
-                        // Always prevent default when mouse is over preview
-                        if ((!isAtTop && e.deltaY < 0) || (!isAtBottom && e.deltaY > 0)) {
-                            // Scroll is within bounds, allow scrolling the preview but not the page
-                            e.stopPropagation();
-                        } else {
-                            // At boundary, prevent page scroll completely
-                            e.preventDefault();
-                        }
-                    }
-                }, { passive: false });
-            }
-        }
 
         // Initialize substeps
         function initSubsteps() {
@@ -2064,7 +2198,6 @@
             initCustomColorPicker();
             initTypoOptions();
             initSettings();
-            initPreviewScroll();
             initSubsteps();
 
             // Wait for fonts to load before first preview update
@@ -2075,7 +2208,7 @@
                 console.warn('⚠️ Font loading timeout, proceeding anyway');
             }
 
-            updatePreview();
+            applyGlobalStyles();
             checkURLToken();
         });
 
@@ -2095,8 +2228,33 @@
                 card.addEventListener('click', () => {
                     document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
-                    designState.style = card.dataset.style;
-                    updatePreview();
+                    const selectedStyle = card.dataset.style;
+                    designState.style = selectedStyle;
+
+                    // Apply style defaults only for settings that haven't been manually changed
+                    if (styleDefaults[selectedStyle]) {
+                        if (!manualOverrides.radius) {
+                            designState.settings.radius = styleDefaults[selectedStyle].radius;
+                            updateSettingUI('radius', styleDefaults[selectedStyle].radius);
+                        }
+                        if (!manualOverrides.density) {
+                            designState.settings.density = styleDefaults[selectedStyle].density;
+                            updateSettingUI('density', styleDefaults[selectedStyle].density);
+                        }
+                        // Always reset colors to theme defaults when changing theme
+                        if (styleDefaults[selectedStyle].backgroundColor) {
+                            designState.colors.background = styleDefaults[selectedStyle].backgroundColor;
+                            console.log('✨ Applied default background color for ' + selectedStyle + ':', styleDefaults[selectedStyle].backgroundColor);
+                        } else {
+                            // Reset to default white for themes without specific background
+                            designState.colors.background = '#FFFFFF';
+                            console.log('✨ Reset background to white for ' + selectedStyle);
+                        }
+                        // Reset the manual override flag since we're changing themes
+                        manualOverrides.colors = false;
+                    }
+
+                    applyGlobalStyles();
                     enableNextButton();
                 });
             });
@@ -2116,7 +2274,7 @@
                     textInput.value = color;
                     designState.colors[type] = color;
                     validateColors();
-                    updatePreview();
+                    applyGlobalStyles();
                 });
 
                 textInput.addEventListener('input', (e) => {
@@ -2125,7 +2283,7 @@
                         colorInput.value = color;
                         designState.colors[type] = color;
                         validateColors();
-                        updatePreview();
+                        applyGlobalStyles();
                     }
                 });
             });
@@ -2306,11 +2464,12 @@
         // Apply color suggestion
         function applySuggestion(colorType, suggestedColor) {
             designState.colors[colorType] = suggestedColor;
+            manualOverrides.colors = true;  // Mark colors as manually changed
             document.getElementById(`color-${colorType}`).value = suggestedColor;
             document.getElementById(`color-${colorType}-text`).value = suggestedColor;
             document.getElementById(`picker-${colorType}`).style.backgroundColor = suggestedColor;
             validateColors();
-            updatePreview();
+            applyGlobalStyles();
         }
 
         // Custom Color Picker
@@ -2367,12 +2526,13 @@
 
         function applyPickerColor(color) {
             designState.colors[currentColorType] = color;
+            manualOverrides.colors = true;  // Mark colors as manually changed
             document.getElementById(`color-${currentColorType}`).value = color;
             document.getElementById(`color-${currentColorType}-text`).value = color;
             document.getElementById(`picker-${currentColorType}`).style.backgroundColor = color;
             updatePickerPreview(color);
             validateColors();
-            updatePreview();
+            applyGlobalStyles();
         }
 
         function updatePickerPreview(color) {
@@ -2474,10 +2634,21 @@
                     document.querySelectorAll('.typo-option').forEach(o => o.classList.remove('selected'));
                     option.classList.add('selected');
                     designState.typography = option.dataset.typo;
-                    updatePreview();
+                    applyGlobalStyles();
                     enableNextButton();
                 });
             });
+        }
+
+        // Helper to update setting UI
+        function updateSettingUI(setting, value) {
+            const dataAttr = setting === 'animations' ? 'anim' :
+                           setting === 'transitions' ? 'trans' : setting;
+            document.querySelectorAll(`.setting-option[data-setting="${dataAttr}"]`).forEach(o => o.classList.remove('selected'));
+            const targetOption = document.querySelector(`.setting-option[data-setting="${dataAttr}"][data-value="${value}"]`);
+            if (targetOption) {
+                targetOption.classList.add('selected');
+            }
         }
 
         // Settings
@@ -2487,38 +2658,102 @@
                     const setting = option.dataset.setting;
                     const value = parseInt(option.dataset.value);
 
+                    console.log('🖱️ Setting clicked:', setting, value);
+
                     document.querySelectorAll(`.setting-option[data-setting="${setting}"]`).forEach(o => o.classList.remove('selected'));
                     option.classList.add('selected');
 
-                    designState.settings[setting === 'anim' ? 'animations' :
-                                        setting === 'trans' ? 'transitions' : setting] = value;
-                    updatePreview();
+                    const mappedSetting = setting === 'anim' ? 'animations' :
+                                         setting === 'trans' ? 'transitions' : setting;
+
+                    console.log('📝 Updating designState.settings.' + mappedSetting + ' to', value);
+                    designState.settings[mappedSetting] = value;
+
+                    // Mark as manually overridden
+                    if (manualOverrides.hasOwnProperty(mappedSetting)) {
+                        manualOverrides[mappedSetting] = true;
+                        console.log('✅ Marked ' + mappedSetting + ' as manually overridden');
+                    }
+
+                    applyGlobalStyles();
                 });
             });
         }
 
+        // Helper function to check if a color is light or dark
+        function isLightColor(hexColor) {
+            if (!hexColor || hexColor === 'transparent') return true;
+            const hex = hexColor.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            return luminance > 0.55; // Slightly higher threshold for better readability
+        }
+
+        // Helper function to get contrasting text color
+        function getContrastColor(bgColor) {
+            return isLightColor(bgColor) ? '#1a1a1a' : '#ffffff';
+        }
+
+        // Helper function to get readable text color with better contrast
+        function getReadableTextColor(bgColor) {
+            // Check if background is transparent or undefined
+            if (!bgColor || bgColor === 'transparent' || bgColor.includes('rgba(0, 0, 0, 0)')) {
+                return 'rgba(0, 0, 0, 0.85)'; // Default to dark text
+            }
+            return isLightColor(bgColor) ? 'rgba(0, 0, 0, 0.85)' : 'rgba(255, 255, 255, 0.95)';
+        }
+
+        // Helper function to get secondary text color
+        function getSecondaryTextColor(bgColor) {
+            // Check if background is transparent or undefined
+            if (!bgColor || bgColor === 'transparent' || bgColor.includes('rgba(0, 0, 0, 0)')) {
+                return 'rgba(0, 0, 0, 0.6)'; // Default to dark text
+            }
+            return isLightColor(bgColor) ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.75)';
+        }
+
+        // Reset all style-specific properties
+        function resetElementStyles(element) {
+            element.style.backdropFilter = '';
+            element.style.boxShadow = '';
+            element.style.transform = '';
+            element.style.textShadow = '';
+            element.style.filter = '';
+            element.style.background = '';
+            element.style.position = '';
+            element.onmouseenter = null;
+            element.onmouseleave = null;
+        }
+
         // Update Preview - Enhanced with ALL design choices
-        function updatePreview() {
+        function applyGlobalStyles() {
             const { primary, background, accent } = designState.colors;
             const { radius, density, animations, transitions } = designState.settings;
             const style = designState.style;
             const typo = designState.typography;
 
-            console.log('🔄 UpdatePreview called:', { typo, animations, radius, density, transitions });
+            console.log('🎨 Applying global styles:', { style, colors: designState.colors, typo, radius, density, animations, transitions });
 
             // Calculate values based on settings
-            const borderRadius = radius === 1 ? '4px' : radius === 2 ? '8px' : '16px';
-            const padding = density === 1 ? '8px' : density === 2 ? '12px' : '16px';
-            const gap = density === 1 ? '6px' : density === 2 ? '8px' : '12px';
-            const transition = transitions === 1 ? 'none' : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            const borderRadius = radius === 1 ? '4px' : radius === 2 ? '12px' : '20px';
+            const cardPadding = density === 1 ? '16px' : density === 2 ? '20px' : '24px';
+            const buttonPadding = density === 1 ? '10px 20px' : density === 2 ? '12px 24px' : '14px 28px';
+            const gap = density === 1 ? '12px' : density === 2 ? '16px' : '20px';
 
-            // Update animation indicator - DISABLED as per user request
-            // const animIndicator = document.getElementById('animationIndicator');
-            // if (animIndicator) {
-            //     const animLabels = ['🚫 Aucune', '⚡ Rapide (0.2s)', '✨ Fluide (0.3s)'];
-            //     animIndicator.textContent = `Animations: ${animLabels[animations]}`;
-            //     animIndicator.style.transition = transition;
-            // }
+            // If animations are disabled, add class to body to disable all CSS animations/transitions
+            if (animations === 0) {
+                document.body.classList.add('no-animations');
+            } else {
+                document.body.classList.remove('no-animations');
+            }
+
+            // If animations are disabled, force transitions to none
+            const transition = animations === 0 ? 'none' :
+                              (transitions === 1 ? 'none' :
+                              (transitions === 2 ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' :
+                              'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'));
 
             // Get typography fonts
             const fonts = {
@@ -2538,243 +2773,641 @@
             const headingFont = selectedFont.heading;
             const bodyFont = selectedFont.body;
 
-            console.log('📝 Font applied:', { typo, headingFont, bodyFont });
+            // Determine if we're in dark mode based on actual background color
+            const isDarkBg = !isLightColor(background);
 
-            // Main container
-            const previewEl = document.getElementById('preview');
-            previewEl.style.backgroundColor = background;
-            previewEl.style.transition = transition;
-
-            // Navigation
-            const nav = document.getElementById('preview-nav');
-            nav.style.backgroundColor = background;
-            nav.style.borderRadius = borderRadius;
-            nav.style.padding = padding;
-            nav.style.gap = gap;
-            nav.style.border = `2px solid ${primary}40`;
-            nav.style.marginBottom = gap;
-            nav.style.transition = transition;
-
-            const logo = document.getElementById('preview-logo');
-            logo.style.color = primary;
-            logo.style.fontFamily = headingFont;
-
-            const link1 = document.getElementById('preview-link1');
-            const link2 = document.getElementById('preview-link2');
-            const link3 = document.getElementById('preview-link3');
-            [link1, link2, link3].forEach(link => {
-                link.style.color = primary;
-                link.style.transition = transition;
-                link.style.fontFamily = bodyFont;
-            });
-
-            // Hero section
-            const hero = document.getElementById('preview-hero');
-            hero.style.backgroundColor = primary;
-            hero.style.borderRadius = borderRadius;
-            hero.style.padding = `${parseInt(padding) * 1.5}px ${padding}`;
-            hero.style.marginBottom = gap;
-            hero.style.transition = transition;
-
-            // Apply style-specific effects
+            // Apply background color to body and container
             if (style === 'GLS') {
-                hero.style.backdropFilter = 'blur(10px)';
-                hero.style.backgroundColor = `${primary}E6`;
-                hero.style.border = `1px solid ${primary}40`;
-                hero.style.boxShadow = `0 8px 32px ${primary}40`;
-            } else if (style === 'SFT') {
-                hero.style.boxShadow = `0 4px 16px ${primary}30`;
-            } else if (style === 'LUX') {
-                hero.style.border = `2px solid ${accent}`;
-                hero.style.backgroundColor = '#000';
-            } else if (style === 'BRT') {
-                hero.style.border = `4px solid ${accent}`;
-                hero.style.borderRadius = '0';
-                hero.style.boxShadow = `4px 4px 0 ${accent}`;
-            } else if (style === 'RTF') {
-                hero.style.border = `2px solid ${primary}`;
-                hero.style.boxShadow = `0 0 20px ${primary}80, inset 0 0 20px rgba(0,0,0,0.5)`;
-                hero.style.backgroundColor = '#000';
-            }
-
-            const title = document.getElementById('preview-title');
-            title.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? accent : 'white';
-            title.style.transition = transition;
-            title.style.fontFamily = headingFont;
-
-            const subtitle = document.getElementById('preview-subtitle');
-            subtitle.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${accent}CC` : 'rgba(255,255,255,0.9)';
-            subtitle.style.transition = transition;
-            subtitle.style.fontFamily = bodyFont;
-
-            const cta = document.getElementById('preview-cta');
-            cta.style.backgroundColor = accent;
-            cta.style.borderRadius = borderRadius;
-            cta.style.transition = transition;
-            cta.style.fontFamily = headingFont;
-            cta.style.padding = padding;
-
-            // Add pulsing animation to show transition effect
-            if (transitions === 1) {
-                // Instant - no animation
-                cta.style.animation = 'none';
+                // For glass style, add a gradient to make transparency more visible
+                document.body.style.background = `linear-gradient(135deg, ${background} 0%, ${primary}15 100%)`;
             } else {
-                // Fluide - smooth pulse animation
-                cta.style.animation = 'ctaPulse 2s ease-in-out infinite';
+                document.body.style.backgroundColor = background;
+                document.body.style.background = background;
+            }
+            document.body.style.transition = transition;
+
+            const container = document.querySelector('.onboarding-container');
+            if (container) {
+                container.style.transition = transition;
             }
 
-            if (style === 'GLS') {
-                cta.style.boxShadow = `0 4px 16px ${accent}50`;
-            } else if (style === 'BRT') {
-                cta.style.borderRadius = '0';
-                cta.style.boxShadow = `2px 2px 0 ${primary}`;
-            } else if (style === 'RTF') {
-                cta.style.boxShadow = `0 0 20px ${accent}`;
-            }
+            // Apply styles to .content-main (the main content area)
+            const contentMain = document.querySelector('.content-main');
+            if (contentMain) {
+                // Reset all previous styles
+                resetElementStyles(contentMain);
 
-            // Cards
-            const card1 = document.getElementById('preview-card1');
-            const card2 = document.getElementById('preview-card2');
-            const card3 = document.getElementById('preview-card3');
-            const card4 = document.getElementById('preview-card4');
-
-            [card1, card2, card3, card4].forEach(card => {
-                if (style === 'GLS') {
-                    card.style.backgroundColor = `${background}CC`;
-                    card.style.backdropFilter = 'blur(10px)';
-                    card.style.border = `1px solid ${primary}30`;
-                    card.style.boxShadow = `0 4px 16px rgba(0,0,0,0.1)`;
-                } else if (style === 'LUX') {
-                    card.style.backgroundColor = '#0a0a0a';
-                    card.style.border = `1px solid ${primary}40`;
-                } else if (style === 'BRT') {
-                    card.style.backgroundColor = '#000';
-                    card.style.border = `2px solid ${primary}`;
-                    card.style.borderRadius = '0';
-                } else if (style === 'RTF') {
-                    card.style.backgroundColor = 'rgba(0,0,0,0.8)';
-                    card.style.border = `2px solid ${primary}`;
-                    card.style.boxShadow = `0 0 15px ${primary}30`;
-                } else {
-                    card.style.backgroundColor = background;
-                    card.style.border = `1px solid ${primary}30`;
-                    card.style.boxShadow = `0 2px 8px rgba(0,0,0,0.08)`;
+                // Remove RTF-specific elements if they exist (cleanup from previous theme)
+                const existingScanline = contentMain.querySelector('.rtf-scanline');
+                if (existingScanline) {
+                    existingScanline.remove();
                 }
 
-                card.style.borderRadius = borderRadius;
-                card.style.padding = padding;
+                contentMain.style.transition = transition;
+
+                // MIN - Minimal: Clean, simple, maximum white space
+                if (style === 'MIN') {
+                    contentMain.style.backgroundColor = background;
+                    contentMain.style.border = `1px solid rgba(0, 0, 0, 0.06)`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.04)';
+                }
+                // GLS - Glass: Transparent, blur effect, light borders (like hero-glass-container)
+                else if (style === 'GLS') {
+                    contentMain.style.backdropFilter = 'blur(20px) saturate(180%)';
+                    contentMain.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'; // Very transparent like original
+                    contentMain.style.border = `1px solid rgba(255, 255, 255, 0.18)`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = `0 8px 32px rgba(0, 0, 0, 0.1),
+                                                    inset 0 1px 1px rgba(255, 255, 255, 0.2)`;
+                }
+                // SFT - Soft: Material Design inspired, solid colors, elevated cards
+                else if (style === 'SFT') {
+                    contentMain.style.backgroundColor = background;
+                    contentMain.style.border = 'none';
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = `0 8px 16px rgba(0, 0, 0, 0.1),
+                                                    0 4px 8px rgba(0, 0, 0, 0.06)`;
+                }
+                // EDT - Editorial: Magazine-like, clean lines, serif-friendly
+                else if (style === 'EDT') {
+                    contentMain.style.backgroundColor = background;
+                    contentMain.style.border = `3px solid ${primary}`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = 'none';
+                    contentMain.style.borderTop = `8px solid ${primary}`;
+                }
+                // LUX - Luxury: Dark, gold accents, premium feel
+                else if (style === 'LUX') {
+                    const luxBg = manualOverrides.colors ? background : (styleDefaults['LUX'].backgroundColor || background);
+                    contentMain.style.backgroundColor = luxBg;
+                    contentMain.style.border = `2px solid ${accent}`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = `0 0 80px ${accent}15,
+                                                    0 20px 60px rgba(0, 0, 0, 0.6),
+                                                    inset 0 1px 0 ${accent}30`;
+                }
+                // BRT - Brutal: Hard edges, bold borders, no shadows
+                else if (style === 'BRT') {
+                    const brtBg = manualOverrides.colors ? background : (styleDefaults['BRT'].backgroundColor || background);
+                    contentMain.style.backgroundColor = brtBg;
+                    contentMain.style.border = `5px solid ${accent}`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = `12px 12px 0 ${accent}`;
+                    contentMain.style.transform = 'rotate(-0.5deg)'; // Slight tilt
+                }
+                // RTF - Retro Future: Neon, glow, cyber aesthetic (inspired by example)
+                else if (style === 'RTF') {
+                    const rtfBg = manualOverrides.colors ? background : (styleDefaults['RTF'].backgroundColor || background);
+                    contentMain.style.background = `linear-gradient(180deg, ${rtfBg} 0%, ${rtfBg}dd 50%, ${rtfBg} 100%)`;
+                    contentMain.style.border = `3px solid ${primary}`;
+                    contentMain.style.borderRadius = borderRadius;
+                    contentMain.style.boxShadow = `0 0 40px ${primary}80,
+                                                    0 0 80px ${primary}40,
+                                                    inset 0 0 60px ${primary}08`;
+                    contentMain.style.position = 'relative';
+
+                    // Add scanline overlay if not already present
+                    if (!contentMain.querySelector('.rtf-scanline')) {
+                        const scanline = document.createElement('div');
+                        scanline.className = 'rtf-scanline';
+                        scanline.style.cssText = `
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: repeating-linear-gradient(0deg, transparent, transparent 2px, ${primary}06 2px, ${primary}06 4px);
+                            pointer-events: none;
+                            z-index: 1;
+                        `;
+                        contentMain.appendChild(scanline);
+                    }
+                }
+            }
+
+            // Apply typography to all headings (step-title, substep-title)
+            document.querySelectorAll('.step-title, .substep-title, h1, h2, h3').forEach(heading => {
+                // Skip if it's in the header or footer
+                if (!heading.closest('.onboarding-header') && !heading.closest('.step-indicator')) {
+                    heading.style.fontFamily = headingFont;
+
+                    // Always check contrast - use primary if readable, otherwise use high contrast color
+                    const primaryContrast = getContrastColor(background);
+                    const usePrimary = Math.abs(isLightColor(primary) - isLightColor(background)) > 0.3;
+
+                    heading.style.color = usePrimary ? primary : primaryContrast;
+                    heading.style.transition = transition;
+                }
+            });
+
+            // Apply typography to all body text (step-description, substep-description, p)
+            document.querySelectorAll('.step-description, .substep-description, p, .style-name, .typo-name, .typo-description, .setting-label').forEach(text => {
+                // Skip if it's in the header or footer
+                if (!text.closest('.onboarding-header') && !text.closest('.step-indicator')) {
+                    text.style.fontFamily = bodyFont;
+                    text.style.color = getSecondaryTextColor(background);
+                    text.style.transition = transition;
+                }
+            });
+
+            // Apply styles to all cards (style-card, typo-option)
+            document.querySelectorAll('.style-card, .typo-option').forEach(card => {
+                // Reset previous styles
+                resetElementStyles(card);
                 card.style.transition = transition;
-            });
+                card.style.cursor = animations === 0 ? 'default' : 'pointer';
 
-            // Icons
-            const icon1 = document.getElementById('preview-icon1');
-            const icon2 = document.getElementById('preview-icon2');
-            const icon3 = document.getElementById('preview-icon3');
-            const icon4 = document.getElementById('preview-icon4');
+                // Determine card background and text color
+                let cardBgColor;
 
-            [icon1, icon2, icon3, icon4].forEach(icon => {
-                icon.style.backgroundColor = primary;
-                icon.style.borderRadius = borderRadius;
-                icon.style.transition = transition;
+                // MIN - Minimal: Ultra clean
+                if (style === 'MIN') {
+                    cardBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.05)' : '#ffffff';
+                    card.style.backgroundColor = cardBgColor;
+                    card.style.border = `1px solid ${isDarkBg ? primary + '30' : 'rgba(0, 0, 0, 0.08)'}`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+                }
+                // GLS - Glass: Frosted glass effect with high transparency
+                else if (style === 'GLS') {
+                    cardBgColor = 'rgba(255, 255, 255, 0.1)'; // Original low opacity for glass effect
+                    card.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    card.style.backdropFilter = 'blur(15px) saturate(180%)';
+                    card.style.border = `1px solid rgba(255, 255, 255, 0.2)`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = `0 8px 32px rgba(0, 0, 0, 0.08),
+                                            inset 0 1px 1px rgba(255, 255, 255, 0.3)`;
+                }
+                // SFT - Soft: Material Design elevated cards, solid
+                else if (style === 'SFT') {
+                    cardBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.08)' : '#ffffff';
+                    card.style.backgroundColor = cardBgColor;
+                    card.style.border = 'none';
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = `0 4px 8px rgba(0, 0, 0, 0.12),
+                                            0 2px 4px rgba(0, 0, 0, 0.08)`;
+                }
+                // EDT - Editorial: Clean borders
+                else if (style === 'EDT') {
+                    cardBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.05)' : '#ffffff';
+                    card.style.backgroundColor = cardBgColor;
+                    card.style.border = `2px solid ${primary}40`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = 'none';
+                }
+                // LUX - Luxury: Dark premium
+                else if (style === 'LUX') {
+                    const luxCardBg = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#141414';
+                    cardBgColor = luxCardBg;
+                    card.style.backgroundColor = manualOverrides.colors ? (isDarkBg ? `${background}E6` : '#ffffff') : 'rgba(20, 20, 20, 0.9)';
+                    card.style.border = `1px solid ${accent}60`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = `0 4px 20px rgba(0, 0, 0, 0.5), 0 0 20px ${accent}10`;
+                }
+                // BRT - Brutal: Hard edges, bold
+                else if (style === 'BRT') {
+                    const brtCardBg = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#000000';
+                    cardBgColor = brtCardBg;
+                    card.style.backgroundColor = brtCardBg;
+                    card.style.border = `3px solid ${primary}`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = `4px 4px 0 ${primary}60`;
+                }
+                // RTF - Retro Future: Neon glow
+                else if (style === 'RTF') {
+                    const rtfCardBg = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#0a0a0a';
+                    cardBgColor = rtfCardBg;
+                    card.style.backgroundColor = manualOverrides.colors ? (isDarkBg ? `${background}E6` : '#ffffff') : 'rgba(10, 10, 10, 0.9)';
+                    card.style.border = `1px solid ${primary}`;
+                    card.style.borderRadius = borderRadius;
+                    card.style.boxShadow = `0 0 20px ${primary}40, 0 4px 12px rgba(0, 0, 0, 0.4)`;
+                }
 
-                if (style === 'GLS') {
-                    icon.style.boxShadow = `0 4px 12px ${primary}40`;
-                } else if (style === 'RTF') {
-                    icon.style.boxShadow = `0 0 10px ${primary}`;
+                // Set text color based on card background
+                const cardTextColor = getReadableTextColor(cardBgColor);
+                card.style.color = cardTextColor;
+
+                // Apply text color to all child elements in the card
+                card.querySelectorAll('.style-name, .typo-name, .typo-description').forEach(textEl => {
+                    textEl.style.color = cardTextColor;
+                });
+
+                // Apply padding based on density setting
+                card.style.padding = cardPadding;
+
+                // Apply animations based on level: 0 = none, 1 = subtle, 2 = full
+                if (animations === 0) {
+                    // No animations - ensure no hover effects
+                    card.onmouseenter = null;
+                    card.onmouseleave = null;
+                } else {
+                    // Animation intensity multiplier
+                    const animIntensity = animations === 1 ? 0.5 : 1;
+
+                    card.onmouseenter = () => {
+                        if (style === 'MIN') {
+                            card.style.transform = `translateY(${-2 * animIntensity}px)`;
+                            card.style.boxShadow = `0 ${4 * animIntensity}px ${12 * animIntensity}px ${primary}15`;
+                        } else if (style === 'GLS') {
+                            card.style.transform = `translateY(${-2 * animIntensity}px)`;
+                            card.style.boxShadow = `0 ${8 * animIntensity}px ${24 * animIntensity}px ${primary}20, inset 0 1px 0 rgba(255, 255, 255, 0.4)`;
+                        } else if (style === 'SFT') {
+                            card.style.transform = `translateY(${-3 * animIntensity}px)`;
+                            card.style.boxShadow = `0 ${12 * animIntensity}px ${32 * animIntensity}px ${primary}15`;
+                        } else if (style === 'EDT') {
+                            card.style.borderColor = primary;
+                            card.style.boxShadow = animations === 2 ? `0 0 0 2px ${primary}30` : 'none';
+                        } else if (style === 'LUX') {
+                            card.style.boxShadow = `0 ${8 * animIntensity}px ${32 * animIntensity}px rgba(0, 0, 0, 0.6), 0 0 ${30 * animIntensity}px ${accent}30`;
+                        } else if (style === 'BRT') {
+                            card.style.transform = `translate(${-2 * animIntensity}px, ${-2 * animIntensity}px)`;
+                            card.style.boxShadow = `${6 * animIntensity}px ${6 * animIntensity}px 0 ${primary}`;
+                        } else if (style === 'RTF') {
+                            card.style.boxShadow = `0 0 ${30 * animIntensity}px ${primary}60, 0 0 ${60 * animIntensity}px ${primary}30`;
+                        }
+                    };
+                    card.onmouseleave = () => {
+                        card.style.transform = '';
+                        // Restore original shadow based on style
+                        if (style === 'MIN') {
+                            card.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+                        } else if (style === 'GLS') {
+                            card.style.boxShadow = `0 4px 16px ${primary}10, inset 0 1px 0 rgba(255, 255, 255, 0.3)`;
+                        } else if (style === 'SFT') {
+                            card.style.boxShadow = `0 8px 24px ${primary}08, 0 2px 6px rgba(0, 0, 0, 0.04)`;
+                        } else if (style === 'EDT') {
+                            card.style.borderColor = `${primary}40`;
+                            card.style.boxShadow = 'none';
+                        } else if (style === 'LUX') {
+                            card.style.boxShadow = `0 4px 20px rgba(0, 0, 0, 0.5), 0 0 20px ${accent}10`;
+                        } else if (style === 'BRT') {
+                            card.style.boxShadow = `4px 4px 0 ${primary}60`;
+                        } else if (style === 'RTF') {
+                            card.style.boxShadow = `0 0 20px ${primary}40, 0 4px 12px rgba(0, 0, 0, 0.4)`;
+                        }
+                    };
                 }
             });
 
-            // Card titles
-            const cardTitle1 = document.getElementById('preview-card-title1');
-            const cardTitle2 = document.getElementById('preview-card-title2');
-            const cardTitle3 = document.getElementById('preview-card-title3');
-            const cardTitle4 = document.getElementById('preview-card-title4');
+            // Apply styles to setting options separately
+            document.querySelectorAll('.setting-option').forEach(option => {
+                resetElementStyles(option);
+                option.style.padding = buttonPadding;
+                option.style.transition = transition;
+                option.style.cursor = animations === 0 ? 'default' : 'pointer';
 
-            [cardTitle1, cardTitle2, cardTitle3, cardTitle4].forEach(title => {
-                title.style.color = primary;
-                title.style.transition = transition;
-                title.style.fontFamily = headingFont;
+                const isSelected = option.classList.contains('selected');
+                let optionBgColor;
+
+                if (!isSelected) {
+
+                    if (style === 'MIN') {
+                        optionBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.05)' : '#ffffff';
+                        option.style.backgroundColor = optionBgColor;
+                        option.style.border = `1px solid ${isDarkBg ? primary + '30' : 'rgba(0, 0, 0, 0.08)'}`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.04)';
+                    } else if (style === 'GLS') {
+                        optionBgColor = 'rgba(255, 255, 255, 0.08)'; // Original low opacity
+                        option.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+                        option.style.backdropFilter = 'blur(12px) saturate(180%)';
+                        option.style.border = `1px solid rgba(255, 255, 255, 0.15)`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = `0 4px 16px rgba(0, 0, 0, 0.05),
+                                                  inset 0 1px 1px rgba(255, 255, 255, 0.2)`;
+                    } else if (style === 'SFT') {
+                        optionBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.06)' : '#ffffff';
+                        option.style.backgroundColor = optionBgColor;
+                        option.style.border = 'none';
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = `0 2px 4px rgba(0, 0, 0, 0.1),
+                                                  0 1px 2px rgba(0, 0, 0, 0.06)`;
+                    } else if (style === 'EDT') {
+                        optionBgColor = isDarkBg ? 'rgba(255, 255, 255, 0.05)' : '#ffffff';
+                        option.style.backgroundColor = optionBgColor;
+                        option.style.border = `2px solid ${primary}30`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = 'none';
+                    } else if (style === 'LUX') {
+                        optionBgColor = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#141414';
+                        option.style.backgroundColor = manualOverrides.colors ? (isDarkBg ? `${background}CC` : '#ffffff') : 'rgba(20, 20, 20, 0.8)';
+                        option.style.border = `1px solid ${accent}40`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = `0 2px 8px rgba(0, 0, 0, 0.4)`;
+                    } else if (style === 'BRT') {
+                        optionBgColor = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#000000';
+                        option.style.backgroundColor = optionBgColor;
+                        option.style.border = `2px solid ${primary}`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = `3px 3px 0 ${primary}40`;
+                    } else if (style === 'RTF') {
+                        optionBgColor = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#0a0a0a';
+                        option.style.backgroundColor = manualOverrides.colors ? (isDarkBg ? `${background}CC` : '#ffffff') : 'rgba(10, 10, 10, 0.8)';
+                        option.style.border = `1px solid ${primary}60`;
+                        option.style.borderRadius = borderRadius;
+                        option.style.boxShadow = `0 0 10px ${primary}20`;
+                    }
+
+                    // Set text color based on option background
+                    option.style.color = getReadableTextColor(optionBgColor);
+
+                    // Hover effects for non-selected options - with animation level support
+                    if (animations === 0) {
+                        option.onmouseenter = null;
+                        option.onmouseleave = null;
+                    } else {
+                        const animIntensity = animations === 1 ? 0.5 : 1;
+                        option.onmouseenter = () => {
+                            if (style === 'MIN') {
+                                option.style.borderColor = primary;
+                                option.style.boxShadow = `0 ${2 * animIntensity}px ${8 * animIntensity}px ${primary}15`;
+                            } else if (style === 'GLS') {
+                                option.style.borderColor = primary;
+                                option.style.boxShadow = `0 ${4 * animIntensity}px ${12 * animIntensity}px ${primary}20`;
+                            } else if (style === 'SFT') {
+                                option.style.borderColor = primary;
+                                option.style.transform = `translateY(${-1 * animIntensity}px)`;
+                                option.style.boxShadow = `0 ${6 * animIntensity}px ${16 * animIntensity}px ${primary}15`;
+                            } else if (style === 'EDT') {
+                                option.style.borderColor = primary;
+                                if (animations === 2) option.style.backgroundColor = `${primary}05`;
+                            } else if (style === 'LUX') {
+                                option.style.borderColor = accent;
+                                option.style.boxShadow = `0 ${4 * animIntensity}px ${16 * animIntensity}px ${accent}30`;
+                            } else if (style === 'BRT') {
+                                option.style.transform = `translate(${-1 * animIntensity}px, ${-1 * animIntensity}px)`;
+                                option.style.boxShadow = `${4 * animIntensity}px ${4 * animIntensity}px 0 ${primary}`;
+                            } else if (style === 'RTF') {
+                                option.style.boxShadow = `0 0 ${20 * animIntensity}px ${primary}50`;
+                            }
+                        };
+                        option.onmouseleave = () => {
+                            option.style.transform = '';
+                            // Restore original styles
+                            if (style === 'MIN') {
+                                option.style.borderColor = isDarkBg ? `${primary}30` : 'rgba(0, 0, 0, 0.08)';
+                                option.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.04)';
+                            } else if (style === 'GLS') {
+                                option.style.borderColor = `${primary}30`;
+                                option.style.boxShadow = `0 2px 6px ${primary}08`;
+                            } else if (style === 'SFT') {
+                                option.style.borderColor = `${primary}20`;
+                                option.style.boxShadow = `0 4px 12px ${primary}06`;
+                            } else if (style === 'EDT') {
+                                option.style.borderColor = `${primary}30`;
+                                option.style.backgroundColor = optionBgColor;
+                            } else if (style === 'LUX') {
+                                option.style.borderColor = `${accent}40`;
+                                option.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.4)';
+                            } else if (style === 'BRT') {
+                                option.style.boxShadow = `3px 3px 0 ${primary}40`;
+                            } else if (style === 'RTF') {
+                                option.style.boxShadow = `0 0 10px ${primary}20`;
+                            }
+                        };
+                    }
+                }
             });
 
-            // Card descriptions
-            const cardDesc1 = document.getElementById('preview-card-desc1');
-            const cardDesc2 = document.getElementById('preview-card-desc2');
+            // Apply primary color to selected state
+            document.querySelectorAll('.style-card.selected, .typo-option.selected').forEach(selected => {
+                if (style === 'MIN') {
+                    selected.style.borderColor = primary;
+                    selected.style.backgroundColor = `${primary}08`;
+                    selected.style.boxShadow = `0 0 0 2px ${primary}40, 0 2px 8px ${primary}15`;
+                } else if (style === 'GLS') {
+                    selected.style.borderColor = primary;
+                    selected.style.backgroundColor = `${primary}20`;
+                    selected.style.boxShadow = `0 0 0 3px ${primary}30, 0 8px 24px ${primary}20, inset 0 1px 0 rgba(255, 255, 255, 0.4)`;
+                } else if (style === 'SFT') {
+                    selected.style.borderColor = primary;
+                    selected.style.backgroundColor = `${primary}12`;
+                    selected.style.boxShadow = `0 0 0 4px ${primary}20, 0 12px 32px ${primary}20`;
+                } else if (style === 'EDT') {
+                    selected.style.borderColor = primary;
+                    selected.style.backgroundColor = `${primary}10`;
+                    selected.style.boxShadow = `inset 0 0 0 2px ${primary}`;
+                } else if (style === 'LUX') {
+                    selected.style.borderColor = accent;
+                    selected.style.backgroundColor = `${accent}15`;
+                    selected.style.boxShadow = `0 0 40px ${accent}40, 0 8px 32px rgba(0, 0, 0, 0.6)`;
+                } else if (style === 'BRT') {
+                    selected.style.borderColor = accent;
+                    selected.style.backgroundColor = manualOverrides.colors ? (isDarkBg ? background : '#ffffff') : '#000';
+                    selected.style.boxShadow = `8px 8px 0 ${accent}`;
+                } else if (style === 'RTF') {
+                    selected.style.borderColor = primary;
+                    selected.style.backgroundColor = `${primary}15`;
+                    selected.style.boxShadow = `0 0 40px ${primary}80, 0 0 80px ${primary}40`;
+                }
+            });
 
-            if (cardDesc1 && cardDesc2) {
-                [cardDesc1, cardDesc2].forEach(desc => {
-                    desc.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${primary}80` : accent;
-                    desc.style.transition = transition;
-                    desc.style.fontFamily = bodyFont;
+            // Handle selected setting options separately
+            document.querySelectorAll('.setting-option.selected').forEach(selected => {
+                selected.style.backgroundColor = primary;
+                selected.style.color = getContrastColor(primary);
+                selected.style.borderColor = primary;
+                selected.style.fontWeight = '600';
+
+                if (style === 'MIN') {
+                    selected.style.boxShadow = `0 2px 8px ${primary}30`;
+                } else if (style === 'GLS') {
+                    selected.style.backdropFilter = 'none';
+                    selected.style.boxShadow = `0 4px 16px ${primary}40, inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
+                } else if (style === 'SFT') {
+                    selected.style.boxShadow = `0 6px 20px ${primary}40`;
+                } else if (style === 'EDT') {
+                    selected.style.boxShadow = 'none';
+                    selected.style.border = `2px solid ${primary}`;
+                } else if (style === 'LUX') {
+                    selected.style.backgroundColor = accent;
+                    selected.style.color = getContrastColor(accent);
+                    selected.style.borderColor = accent;
+                    selected.style.boxShadow = `0 0 30px ${accent}50, 0 4px 16px rgba(0, 0, 0, 0.4)`;
+                } else if (style === 'BRT') {
+                    selected.style.backgroundColor = accent;
+                    selected.style.color = getContrastColor(accent);
+                    selected.style.borderColor = accent;
+                    selected.style.boxShadow = `5px 5px 0 ${primary}`;
+                } else if (style === 'RTF') {
+                    selected.style.boxShadow = `0 0 30px ${primary}70, 0 4px 12px ${primary}40`;
+                }
+            });
+
+            // Apply styles to buttons
+            document.querySelectorAll('.btn, .btn-primary, .btn-secondary, .btn-next, .btn-prev, .btn-validate').forEach(btn => {
+                // Skip if it's in the header or footer
+                if (!btn.closest('.onboarding-header') && !btn.closest('.step-indicator')) {
+                    resetElementStyles(btn);
+                    btn.style.padding = buttonPadding;
+                    btn.style.transition = transition;
+                    btn.style.fontFamily = headingFont;
+                    btn.style.fontWeight = '600';
+                    btn.style.cursor = animations === 0 ? 'default' : 'pointer';
+
+                    if (btn.classList.contains('btn-primary') || btn.classList.contains('btn-next') || btn.classList.contains('btn-validate')) {
+                        btn.style.backgroundColor = primary;
+                        btn.style.color = getContrastColor(primary);
+
+                        if (style === 'MIN') {
+                            btn.style.border = 'none';
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = `0 2px 8px ${primary}30`;
+                        } else if (style === 'GLS') {
+                            btn.style.backgroundColor = primary; // Use solid color for buttons in glass mode for better readability
+                            btn.style.border = `1px solid ${isDarkBg ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.1)'}`;
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.backdropFilter = 'blur(10px) saturate(180%)';
+                            btn.style.boxShadow = `0 8px 24px ${primary}50,
+                                                   inset 0 1px 1px ${isDarkBg ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.8)'}`;
+                        } else if (style === 'SFT') {
+                            btn.style.backgroundColor = primary;
+                            btn.style.border = 'none';
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = `0 4px 8px rgba(0, 0, 0, 0.15),
+                                                   0 2px 4px rgba(0, 0, 0, 0.1)`;
+                        } else if (style === 'EDT') {
+                            btn.style.border = `2px solid ${primary}`;
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = 'none';
+                        } else if (style === 'LUX') {
+                            btn.style.backgroundColor = accent;
+                            btn.style.color = getContrastColor(accent);
+                            btn.style.border = `1px solid ${accent}`;
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = `0 0 40px ${accent}50, 0 8px 24px rgba(0, 0, 0, 0.4)`;
+                        } else if (style === 'BRT') {
+                            btn.style.backgroundColor = accent;
+                            btn.style.color = getContrastColor(accent);
+                            btn.style.border = `4px solid ${primary}`;
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = `6px 6px 0 ${primary}`;
+                        } else if (style === 'RTF') {
+                            btn.style.border = `2px solid ${primary}`;
+                            btn.style.borderRadius = borderRadius;
+                            btn.style.boxShadow = `0 0 30px ${primary}70, 0 0 60px ${primary}30`;
+                        }
+
+                        // Add hover effect if animations are enabled
+                        if (animations === 0) {
+                            btn.onmouseenter = null;
+                            btn.onmouseleave = null;
+                        } else {
+                            const animIntensity = animations === 1 ? 0.5 : 1;
+
+                            btn.onmouseenter = () => {
+                                if (style === 'MIN') {
+                                    btn.style.transform = `translateY(${-2 * animIntensity}px)`;
+                                    btn.style.boxShadow = `0 ${4 * animIntensity}px ${16 * animIntensity}px ${primary}40`;
+                                } else if (style === 'GLS') {
+                                    btn.style.transform = `translateY(${-2 * animIntensity}px)`;
+                                    btn.style.boxShadow = `0 ${6 * animIntensity}px ${24 * animIntensity}px ${primary}50, inset 0 1px 0 rgba(255, 255, 255, 0.3)`;
+                                } else if (style === 'SFT') {
+                                    btn.style.transform = `translateY(${-3 * animIntensity}px)`;
+                                    btn.style.boxShadow = `0 ${12 * animIntensity}px ${32 * animIntensity}px ${primary}50`;
+                                } else if (style === 'EDT') {
+                                    if (animations === 2) {
+                                        btn.style.backgroundColor = accent;
+                                        btn.style.color = getContrastColor(accent);
+                                        btn.style.borderColor = accent;
+                                    }
+                                } else if (style === 'LUX') {
+                                    btn.style.boxShadow = `0 0 ${60 * animIntensity}px ${accent}70, 0 ${12 * animIntensity}px ${32 * animIntensity}px rgba(0, 0, 0, 0.5)`;
+                                } else if (style === 'BRT') {
+                                    btn.style.transform = `translate(${-2 * animIntensity}px, ${-2 * animIntensity}px)`;
+                                    btn.style.boxShadow = `${8 * animIntensity}px ${8 * animIntensity}px 0 ${primary}`;
+                                } else if (style === 'RTF') {
+                                    btn.style.boxShadow = `0 0 ${50 * animIntensity}px ${primary}90, 0 0 ${100 * animIntensity}px ${primary}50`;
+                                }
+                            };
+                            btn.onmouseleave = () => {
+                                btn.style.transform = 'none';
+                                // Restore original button styles
+                                if (style === 'MIN') {
+                                    btn.style.boxShadow = `0 2px 8px ${primary}30`;
+                                } else if (style === 'GLS') {
+                                    btn.style.boxShadow = `0 4px 16px ${primary}40, inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
+                                } else if (style === 'SFT') {
+                                    btn.style.boxShadow = `0 8px 24px ${primary}40`;
+                                } else if (style === 'EDT') {
+                                    btn.style.backgroundColor = primary;
+                                    btn.style.color = getContrastColor(primary);
+                                    btn.style.borderColor = primary;
+                                } else if (style === 'LUX') {
+                                    btn.style.boxShadow = `0 0 40px ${accent}50, 0 8px 24px rgba(0, 0, 0, 0.4)`;
+                                } else if (style === 'BRT') {
+                                    btn.style.boxShadow = `6px 6px 0 ${primary}`;
+                                } else if (style === 'RTF') {
+                                    btn.style.boxShadow = `0 0 30px ${primary}70, 0 0 60px ${primary}30`;
+                                }
+                            };
+                        }
+                    }
+                }
+            });
+
+            // Apply styles to color sections
+            document.querySelectorAll('.color-section').forEach(el => {
+                el.style.borderRadius = borderRadius;
+                el.style.transition = transition;
+                if (isDarkBg && style !== 'GLS') {
+                    el.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                } else {
+                    el.style.backgroundColor = '';
+                }
+            });
+
+            // Apply styles to custom color pickers
+            document.querySelectorAll('.custom-color-picker').forEach(el => {
+                el.style.borderRadius = borderRadius;
+                el.style.transition = transition;
+            });
+
+            // Add subtle frosted overlay to text containers in Glass mode for readability
+            if (style === 'GLS') {
+                // Determine overlay color based on background
+                const textOverlayColor = isLightColor(background) ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)';
+                const textColor = isLightColor(background) ? '#000000' : '#ffffff';
+
+                // Add frosted overlay to cards with text
+                document.querySelectorAll('.style-card, .typo-option').forEach(el => {
+                    el.style.backgroundColor = textOverlayColor;
                 });
-            }
 
-            // Additional Section
-            const section = document.getElementById('preview-section');
-            section.style.borderRadius = borderRadius;
-            section.style.transition = transition;
-
-            const sectionTitle = document.getElementById('preview-section-title');
-            sectionTitle.style.color = primary;
-            sectionTitle.style.fontFamily = headingFont;
-            sectionTitle.style.transition = transition;
-
-            const sectionText = document.getElementById('preview-section-text');
-            sectionText.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? `${primary}CC` : accent;
-            sectionText.style.fontFamily = bodyFont;
-            sectionText.style.transition = transition;
-
-            // Footer
-            const footer = document.getElementById('preview-footer');
-            footer.style.color = style === 'LUX' || style === 'BRT' || style === 'RTF' ? primary : accent;
-            footer.style.transition = transition;
-            footer.style.fontFamily = bodyFont;
-
-            // Force reflow to apply font changes immediately
-            void previewEl.offsetHeight;
-
-            // Add hover animations if enabled
-            if (animations > 0) {
-                [card1, card2, card3, card4].forEach((card, index) => {
-                    card.style.cursor = 'pointer';
-                    card.onmouseover = () => {
-                        card.style.transform = 'translateY(-4px)';
-                        card.style.boxShadow = style === 'GLS'
-                            ? `0 8px 24px rgba(0,0,0,0.15)`
-                            : style === 'RTF'
-                            ? `0 0 20px ${primary}60`
-                            : `0 4px 16px rgba(0,0,0,0.12)`;
-                    };
-                    card.onmouseout = () => {
-                        card.style.transform = 'translateY(0)';
-                        card.style.boxShadow = style === 'GLS'
-                            ? `0 4px 16px rgba(0,0,0,0.1)`
-                            : style === 'RTF'
-                            ? `0 0 15px ${primary}30`
-                            : `0 2px 8px rgba(0,0,0,0.08)`;
-                    };
+                // Add frosted overlay to setting options (non-selected)
+                document.querySelectorAll('.setting-option:not(.selected)').forEach(el => {
+                    el.style.backgroundColor = textOverlayColor;
                 });
 
-                // CTA hover effect
-                cta.style.cursor = 'pointer';
-                cta.onmouseover = () => {
-                    cta.style.transform = 'scale(1.05)';
-                };
-                cta.onmouseout = () => {
-                    cta.style.transform = 'scale(1)';
-                };
+                // Add frosted overlay to color sections
+                document.querySelectorAll('.color-section').forEach(el => {
+                    el.style.backgroundColor = textOverlayColor;
+                    el.style.padding = cardPadding;
+                    el.style.backdropFilter = 'blur(10px) saturate(180%)';
+                });
+
+                // Ensure readable text color
+                document.querySelectorAll('.style-name, .typo-name, .typo-description, .setting-label').forEach(el => {
+                    if (!el.closest('.onboarding-header') && !el.closest('.step-indicator')) {
+                        el.style.color = textColor;
+                    }
+                });
             } else {
-                // Disable hover effects when animations are off
-                [card1, card2, card3, card4].forEach(card => {
-                    card.style.cursor = 'default';
-                    card.onmouseover = null;
-                    card.onmouseout = null;
-                    card.style.transform = 'none';
+                // Reset for non-glass modes
+                document.querySelectorAll('.color-section').forEach(el => {
+                    el.style.padding = '';
+                    el.style.backdropFilter = '';
                 });
-                cta.style.cursor = 'default';
-                cta.onmouseover = null;
-                cta.onmouseout = null;
-                cta.style.transform = 'none';
             }
+
+            // Apply accent color to specific elements
+            document.querySelectorAll('.style-category').forEach(el => {
+                el.style.color = accent;
+                el.style.transition = transition;
+            });
+
+            console.log('✅ Global styles applied successfully');
         }
 
         // Navigation
@@ -2842,6 +3475,23 @@
             // Initialize substeps if on step 4
             if (currentStep === 4) {
                 updateSubstepDisplay();
+            }
+
+            // Update color inputs if on step 2 (colors)
+            if (currentStep === 2) {
+                document.getElementById('color-primary').value = designState.colors.primary;
+                document.getElementById('color-primary-text').value = designState.colors.primary;
+                document.getElementById('picker-primary').style.backgroundColor = designState.colors.primary;
+
+                document.getElementById('color-background').value = designState.colors.background;
+                document.getElementById('color-background-text').value = designState.colors.background;
+                document.getElementById('picker-background').style.backgroundColor = designState.colors.background;
+
+                document.getElementById('color-accent').value = designState.colors.accent;
+                document.getElementById('color-accent-text').value = designState.colors.accent;
+                document.getElementById('picker-accent').style.backgroundColor = designState.colors.accent;
+
+                validateColors();
             }
 
             // Update navigation buttons
@@ -3010,7 +3660,7 @@
             });
 
             validateColors();
-            updatePreview();
+            applyGlobalStyles();
         }
 
         // Welcome Screen Functions
@@ -3237,11 +3887,370 @@
             const exampleSite = document.getElementById('exampleSite');
             exampleSite.innerHTML = generateExampleSite(styleCode);
 
+            // Add interactive animations after DOM is ready
+            setTimeout(() => {
+                applyExampleAnimations(styleCode, exampleSite);
+            }, 100);
+
             document.getElementById('exampleModal').classList.add('active');
         }
 
         function closeExample() {
             document.getElementById('exampleModal').classList.remove('active');
+        }
+
+        function applyExampleAnimations(styleCode, container) {
+            const buttons = container.querySelectorAll('button');
+            const links = container.querySelectorAll('a');
+
+            // Select only feature cards in grid sections (not nav, sections, etc.)
+            const cards = [];
+            const gridSections = container.querySelectorAll('[style*="grid-template-columns"]');
+            gridSections.forEach(grid => {
+                grid.querySelectorAll(':scope > div').forEach(card => cards.push(card));
+            });
+
+            if (styleCode === 'MIN') {
+                // Minimal: Subtle hover effects
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.3s ease';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'translateY(-2px)';
+                        btn.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translateY(0)';
+                        btn.style.boxShadow = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.2s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.opacity = '0.7';
+                        link.style.transform = 'translateY(-1px)';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.opacity = '1';
+                        link.style.transform = 'translateY(0)';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.3s ease';
+                    // Force animation replay by removing and re-adding
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `fadeIn 0.5s ease ${i * 0.1}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+                    });
+                });
+            } else if (styleCode === 'GLS') {
+                // Glass: Floating and glow effects
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'translateY(-3px) scale(1.02)';
+                        btn.style.boxShadow = '0 8px 32px rgba(67, 141, 215, 0.5), 0 16px 48px rgba(67, 141, 215, 0.3)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translateY(0) scale(1)';
+                        btn.style.boxShadow = '0 4px 16px rgba(67, 141, 215, 0.4)';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.3s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.textShadow = '0 0 8px rgba(67, 141, 215, 0.8)';
+                        link.style.transform = 'translateY(-1px)';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.textShadow = '0 1px 2px rgba(255,255,255,0.8)';
+                        link.style.transform = 'translateY(0)';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `glassSlide 0.6s ease ${i * 0.15}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-6px)';
+                        card.style.boxShadow = '0 16px 48px rgba(0,0,0,0.2), inset 0 2px 2px rgba(255,255,255,0.3)';
+                        card.style.background = 'rgba(255, 255, 255, 0.15)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.15)';
+                        card.style.background = 'rgba(255, 255, 255, 0.08)';
+                    });
+                });
+            } else if (styleCode === 'SFT') {
+                // Soft UI: Bouncy elevations
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'translateY(-3px) scale(1.05)';
+                        btn.style.boxShadow = '0 12px 32px rgba(66, 133, 244, 0.4)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translateY(0) scale(1)';
+                        btn.style.boxShadow = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.transform = 'scale(1.1)';
+                        link.style.fontWeight = 'bold';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.transform = 'scale(1)';
+                        link.style.fontWeight = '';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `softBounce 0.6s ease ${i * 0.1}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-6px) scale(1.02)';
+                        card.style.boxShadow = '0 16px 40px rgba(66, 133, 244, 0.3)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0) scale(1)';
+                        card.style.boxShadow = '';
+                    });
+                });
+            } else if (styleCode === 'EDT') {
+                // Editorial: Color shifts and borders
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.3s ease';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'scale(1.05)';
+                        btn.style.filter = 'brightness(1.1)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'scale(1)';
+                        btn.style.filter = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.2s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.textDecoration = 'underline';
+                        link.style.textUnderlineOffset = '4px';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.textDecoration = 'none';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `edtSlide 0.5s ease ${i * 0.1}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.borderWidth = '4px';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.borderWidth = '';
+                    });
+                });
+            } else if (styleCode === 'LUX') {
+                // Luxury: Gold glow effects
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.4s ease';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'translateY(-2px)';
+                        btn.style.boxShadow = '0 0 40px rgba(212, 175, 55, 0.6), 0 8px 24px rgba(0,0,0,0.8)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translateY(0)';
+                        btn.style.boxShadow = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.3s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.textShadow = '0 0 20px rgba(212, 175, 55, 0.8)';
+                        link.style.letterSpacing = '3px';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.textShadow = '';
+                        link.style.letterSpacing = '2px';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.4s ease';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `luxGlowIn 0.8s ease ${i * 0.2}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.boxShadow = '0 0 60px rgba(212, 175, 55, 0.5), 0 12px 40px rgba(0,0,0,0.9)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '';
+                    });
+                });
+            } else if (styleCode === 'BRT') {
+                // Brutal: Hard shifts
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.2s ease';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'translate(-3px, -3px)';
+                        btn.style.boxShadow = '8px 8px 0 ' + (btn.style.boxShadow.match(/#[0-9A-F]{6}/i) || ['#000'])[0];
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'translate(0, 0)';
+                        btn.style.boxShadow = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.15s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.textDecoration = 'line-through';
+                        link.style.fontWeight = 'bold';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.textDecoration = 'none';
+                        link.style.fontWeight = '';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.2s ease';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `brtPop 0.4s ease ${i * 0.1}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translate(-3px, -3px)';
+                        card.style.boxShadow = '8px 8px 0 ' + (card.style.boxShadow.match(/#[0-9A-F]{6}/i) || ['#000'])[0];
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translate(0, 0)';
+                        card.style.boxShadow = '';
+                    });
+                });
+            } else if (styleCode === 'RTF') {
+                // Retro Future: Neon pulses
+                buttons.forEach(btn => {
+                    btn.style.transition = 'all 0.3s ease';
+                    btn.style.cursor = 'pointer';
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.transform = 'scale(1.05)';
+                        btn.style.boxShadow = '0 0 30px rgba(156, 39, 176, 0.8), 0 0 60px rgba(156, 39, 176, 0.5)';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'scale(1)';
+                        btn.style.boxShadow = '';
+                    });
+                });
+
+                links.forEach(link => {
+                    link.style.transition = 'all 0.2s ease';
+                    link.addEventListener('mouseenter', () => {
+                        link.style.textShadow = '0 0 15px rgba(156, 39, 176, 1)';
+                        link.style.transform = 'scale(1.05)';
+                    });
+                    link.addEventListener('mouseleave', () => {
+                        link.style.textShadow = '';
+                        link.style.transform = 'scale(1)';
+                    });
+                });
+
+                cards.forEach((card, i) => {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = `rtfFlicker 0.6s ease ${i * 0.15}s both`;
+                    }, 10);
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.boxShadow = '0 0 40px rgba(156, 39, 176, 0.7), 0 8px 32px rgba(0,0,0,0.5)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '';
+                    });
+                });
+            }
+
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes glassSlide {
+                    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                @keyframes softBounce {
+                    0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+                    60% { transform: translateY(-10px) scale(1.02); }
+                    100% { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                @keyframes edtSlide {
+                    from { opacity: 0; transform: translateX(-30px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes luxGlowIn {
+                    from { opacity: 0; transform: scale(0.9); filter: brightness(0.5); }
+                    to { opacity: 1; transform: scale(1); filter: brightness(1); }
+                }
+                @keyframes brtPop {
+                    0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+                    70% { transform: scale(1.05) rotate(2deg); }
+                    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+                }
+                @keyframes rtfFlicker {
+                    0%, 50% { opacity: 0; }
+                    55% { opacity: 0.5; }
+                    60%, 100% { opacity: 1; }
+                }
+            `;
+            container.appendChild(style);
         }
 
         function generateExampleSite(styleCode) {
@@ -3359,42 +4368,53 @@
                     </div>
                 `;
             } else if (styleCode === 'LUX') {
-                const luxBg = '#0a0a0a';
-                const luxGold = '#D4AF37';
+                const luxBg = manualOverrides.colors ? background : '#0a0a0a';
+                const luxGold = accent || '#D4AF37';
                 siteHTML = `
-                    <div style="background: ${luxBg}; min-height: 600px; font-family: Georgia, serif; color: #fff;">
-                        <nav style="padding: ${padding}; background: rgba(0, 0, 0, 0.8); border-bottom: 1px solid ${luxGold};">
+                    <div style="background: ${luxBg}; min-height: 600px; font-family: 'Cormorant Garamond', Georgia, serif; color: #fff; position: relative; overflow: hidden;">
+                        <!-- Subtle ambient glow -->
+                        <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, ${luxGold}15 0%, transparent 70%); top: -200px; right: -200px; filter: blur(100px); pointer-events: none;"></div>
+                        <div style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, ${luxGold}08 0%, transparent 70%); bottom: -150px; left: -150px; filter: blur(80px); pointer-events: none;"></div>
+
+                        <nav style="padding: ${padding}; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid ${luxGold}40; box-shadow: 0 4px 24px rgba(0,0,0,0.8); position: relative; z-index: 10;">
                             <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                                <div style="font-weight: 700; font-size: 1.5rem; color: ${luxGold};">LUXURY</div>
-                                <div style="display: flex; gap: ${gap};">
-                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Collection</a>
-                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Boutique</a>
-                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;">Contact</a>
+                                <div style="font-weight: 500; font-size: 2rem; color: ${luxGold}; letter-spacing: 6px; font-family: 'Cinzel', serif;">LUXXE</div>
+                                <div style="display: flex; gap: 40px; font-family: 'Montserrat', sans-serif;">
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; font-weight: 400; transition: all 0.3s; position: relative; padding-bottom: 4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='${luxGold}'">Collection</a>
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; font-weight: 400; transition: all 0.3s; position: relative; padding-bottom: 4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='${luxGold}'">Boutique</a>
+                                    <a href="#" style="color: ${luxGold}; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; font-weight: 400; transition: all 0.3s; position: relative; padding-bottom: 4px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='${luxGold}'">Contact</a>
                                 </div>
                             </div>
                         </nav>
-                        <section style="padding: 100px ${padding}; text-align: center;">
-                            <h1 style="font-size: 4rem; font-weight: 400; margin-bottom: 20px; color: ${luxGold}; letter-spacing: 4px;">EXCELLENCE</h1>
-                            <p style="font-size: 1.2rem; color: #aaa; max-width: 600px; margin: 0 auto 40px; font-style: italic;">
-                                L'art de la perfection et du raffinement
+
+                        <section style="padding: 120px ${padding}; text-align: center; position: relative; z-index: 5;">
+                            <div style="font-size: 0.9rem; color: ${luxGold}; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 24px; font-family: 'Montserrat', sans-serif; font-weight: 300;">Collection Exclusive 2026</div>
+                            <h1 style="font-size: 5rem; font-weight: 300; margin-bottom: 32px; color: #fff; letter-spacing: 8px; line-height: 1.1; text-shadow: 0 0 40px ${luxGold}30;">EXCELLENCE<br/><span style="color: ${luxGold}; font-style: italic; font-size: 3.5rem;">Éternelle</span></h1>
+                            <p style="font-size: 1.15rem; color: #ccc; max-width: 650px; margin: 0 auto 50px; font-style: italic; line-height: 1.8; font-weight: 300;">
+                                L'art de la perfection rencontre le raffinement absolu.<br/>
+                                Découvrez une expérience de luxe inégalée.
                             </p>
-                            <button style="background: transparent; color: ${luxGold}; padding: 16px 48px; border: 2px solid ${luxGold}; border-radius: ${borderRadius}; font-size: 1rem; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">
-                                Découvrir
+                            <button style="background: linear-gradient(135deg, ${luxGold} 0%, ${luxGold}dd 100%); color: #000; padding: 18px 56px; border: none; border-radius: ${borderRadius}; font-size: 0.9rem; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 8px 32px ${luxGold}40, 0 0 60px ${luxGold}20; transition: all 0.4s; font-family: 'Montserrat', sans-serif; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 40px ${luxGold}60, 0 0 80px ${luxGold}30';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px ${luxGold}40, 0 0 60px ${luxGold}20';">
+                                <span style="position: relative; z-index: 1;">Découvrir la Collection</span>
                             </button>
                         </section>
-                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto;">
+
+                        <section style="padding: 60px ${padding}; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5;">
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
-                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
-                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Prestige</h3>
-                                    <p style="color: #aaa; font-size: 0.95rem;">Excellence et sophistication.</p>
+                                <div style="padding: 40px ${padding}; background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%); border-radius: ${borderRadius}; border: 1px solid ${luxGold}30; box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 ${luxGold}20; position: relative; overflow: hidden;">
+                                    <div style="width: 60px; height: 60px; margin: 0 auto 20px; background: linear-gradient(135deg, ${luxGold}20 0%, ${luxGold}10 100%); border: 2px solid ${luxGold}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px ${luxGold}40, inset 0 2px 8px ${luxGold}20;">👑</div>
+                                    <h3 style="color: ${luxGold}; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 3px; font-size: 1.1rem; font-family: 'Montserrat', sans-serif; font-weight: 500;">Prestige</h3>
+                                    <p style="color: #bbb; font-size: 0.95rem; line-height: 1.7; font-weight: 300;">Excellence et sophistication dans chaque détail.</p>
                                 </div>
-                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
-                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Exclusif</h3>
-                                    <p style="color: #aaa; font-size: 0.95rem;">Créations uniques et rares.</p>
+                                <div style="padding: 40px ${padding}; background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%); border-radius: ${borderRadius}; border: 1px solid ${luxGold}30; box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 ${luxGold}20; position: relative; overflow: hidden;">
+                                    <div style="width: 60px; height: 60px; margin: 0 auto 20px; background: linear-gradient(135deg, ${luxGold}20 0%, ${luxGold}10 100%); border: 2px solid ${luxGold}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px ${luxGold}40, inset 0 2px 8px ${luxGold}20;">💎</div>
+                                    <h3 style="color: ${luxGold}; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 3px; font-size: 1.1rem; font-family: 'Montserrat', sans-serif; font-weight: 500;">Exclusif</h3>
+                                    <p style="color: #bbb; font-size: 0.95rem; line-height: 1.7; font-weight: 300;">Créations uniques en édition limitée.</p>
                                 </div>
-                                <div style="padding: ${padding}; background: rgba(212, 175, 55, 0.05); border-radius: ${borderRadius}; border: 1px solid ${luxGold}40;">
-                                    <h3 style="color: ${luxGold}; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px;">Élégance</h3>
-                                    <p style="color: #aaa; font-size: 0.95rem;">Finitions haut de gamme.</p>
+                                <div style="padding: 40px ${padding}; background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%); border-radius: ${borderRadius}; border: 1px solid ${luxGold}30; box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 ${luxGold}20; position: relative; overflow: hidden;">
+                                    <div style="width: 60px; height: 60px; margin: 0 auto 20px; background: linear-gradient(135deg, ${luxGold}20 0%, ${luxGold}10 100%); border: 2px solid ${luxGold}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px ${luxGold}40, inset 0 2px 8px ${luxGold}20;">✨</div>
+                                    <h3 style="color: ${luxGold}; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 3px; font-size: 1.1rem; font-family: 'Montserrat', sans-serif; font-weight: 500;">Élégance</h3>
+                                    <p style="color: #bbb; font-size: 0.95rem; line-height: 1.7; font-weight: 300;">Finitions raffinées haut de gamme.</p>
                                 </div>
                             </div>
                         </section>
@@ -3540,53 +4560,109 @@
                     </div>
                 `;
             } else if (styleCode === 'RTF') {
-                // Retro Future - Synthwave/Cyberpunk
+                // Retro Future - Synthwave/Cyberpunk with more effects
+                const rtfBg = manualOverrides.colors ? background : '#0a0a1a';
+                const neonPink = '#ff00ff';
+                const neonCyan = '#00ffff';
                 siteHTML = `
-                    <div style="background: linear-gradient(180deg, #0a0a1a 0%, #1a0a2e 50%, #0a0a1a 100%); min-height: 600px; font-family: 'Courier New', monospace; color: #fff; position: relative;">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, ${primary}08 2px, ${primary}08 4px); pointer-events: none;"></div>
-                        <nav style="padding: ${padding}; background: rgba(0,0,0,0.8); border-bottom: 2px solid ${primary}; box-shadow: 0 0 20px ${primary}80; position: relative; z-index: 10;">
+                    <div style="background: linear-gradient(180deg, ${rtfBg} 0%, #1a0a2e 30%, #2e0a3e 60%, ${rtfBg} 100%); min-height: 600px; font-family: 'Orbitron', 'Courier New', monospace; color: #fff; position: relative; overflow: hidden;">
+                        <!-- Grid scanlines -->
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, ${primary}08 2px, ${primary}08 4px); pointer-events: none; z-index: 1;"></div>
+
+                        <!-- Animated neon orbs -->
+                        <div style="position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, ${primary}40 0%, transparent 70%); top: 10%; right: 10%; filter: blur(80px); animation: float 8s ease-in-out infinite; pointer-events: none; z-index: 2;"></div>
+                        <div style="position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, ${accent}30 0%, transparent 70%); bottom: 15%; left: 15%; filter: blur(70px); animation: float 6s ease-in-out infinite reverse; pointer-events: none; z-index: 2;"></div>
+                        <div style="position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, ${neonPink}25 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(90px); animation: pulse 4s ease-in-out infinite; pointer-events: none; z-index: 2;"></div>
+
+                        <nav style="padding: ${padding}; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); border-bottom: 3px solid ${primary}; box-shadow: 0 0 30px ${primary}60, 0 4px 20px rgba(0,0,0,0.8); position: relative; z-index: 10;">
                             <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                                <div style="font-weight: 900; font-size: 1.8rem; color: ${primary}; text-shadow: 0 0 10px ${primary}, 0 0 20px ${primary}; letter-spacing: 4px;">RETRO█FUTURE</div>
-                                <div style="display: flex; gap: ${gap}; font-size: 0.95rem; font-weight: 700; letter-spacing: 2px;">
-                                    <a href="#" style="color: ${primary}; text-decoration: none; text-shadow: 0 0 8px ${primary};">[HOME]</a>
-                                    <a href="#" style="color: ${accent}; text-decoration: none; text-shadow: 0 0 8px ${accent};">[GAMES]</a>
-                                    <a href="#" style="color: #ff00ff; text-decoration: none; text-shadow: 0 0 8px #ff00ff;">[INFO]</a>
+                                <div style="font-weight: 900; font-size: 2rem; color: ${primary}; text-shadow: 0 0 10px ${primary}, 0 0 20px ${primary}, 0 0 30px ${primary}; letter-spacing: 6px; position: relative;">
+                                    <span style="animation: glitch 3s infinite;">CYBER█WAVE</span>
+                                </div>
+                                <div style="display: flex; gap: 30px; font-size: 0.95rem; font-weight: 700; letter-spacing: 3px;">
+                                    <a href="#" style="color: ${primary}; text-decoration: none; text-shadow: 0 0 10px ${primary}; transition: all 0.3s; position: relative;" onmouseover="this.style.textShadow='0 0 20px ${primary}, 0 0 40px ${primary}'; this.style.color='${neonCyan}';" onmouseout="this.style.textShadow='0 0 10px ${primary}'; this.style.color='${primary}';">[ENTER]</a>
+                                    <a href="#" style="color: ${accent}; text-decoration: none; text-shadow: 0 0 10px ${accent}; transition: all 0.3s;" onmouseover="this.style.textShadow='0 0 20px ${accent}, 0 0 40px ${accent}'; this.style.color='${neonPink}';" onmouseout="this.style.textShadow='0 0 10px ${accent}'; this.style.color='${accent}';">[ARCADE]</a>
+                                    <a href="#" style="color: ${neonPink}; text-decoration: none; text-shadow: 0 0 10px ${neonPink}; transition: all 0.3s;" onmouseover="this.style.textShadow='0 0 20px ${neonPink}, 0 0 40px ${neonPink}';" onmouseout="this.style.textShadow='0 0 10px ${neonPink}';">[CREDITS]</a>
                                 </div>
                             </div>
                         </nav>
-                        <section style="padding: 120px ${padding}; text-align: center; position: relative; z-index: 5;">
-                            <div style="font-size: 1rem; color: ${primary}; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px; text-shadow: 0 0 10px ${primary};">&gt;&gt; WELCOME TO THE FUTURE &lt;&lt;</div>
-                            <h1 style="font-size: 5rem; font-weight: 900; line-height: 1; margin-bottom: 24px; color: ${primary}; text-shadow: 0 0 20px ${primary}, 0 0 40px ${primary}, 4px 4px 0 ${accent}; letter-spacing: 6px;">CYBER<br/>RETRO</h1>
-                            <p style="font-size: 1.2rem; color: ${accent}; max-width: 700px; margin: 0 auto 40px; text-shadow: 0 0 10px ${accent}; line-height: 1.8;">
-                                [ SYNTHWAVE ] + [ CYBERPUNK ] + [ 80s VIBES ]<br/>
-                                Néons vibrants • Géométrie audacieuse • Nostalgie futuriste
+
+                        <section style="padding: 140px ${padding}; text-align: center; position: relative; z-index: 5;">
+                            <div style="font-size: 1rem; color: ${neonCyan}; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 24px; text-shadow: 0 0 10px ${neonCyan}; animation: flicker 2s infinite; font-family: 'Courier New', monospace; font-weight: 700;">&gt;&gt; SYSTEM ONLINE // INITIALIZING &lt;&lt;</div>
+
+                            <h1 style="font-size: 5.5rem; font-weight: 900; line-height: 0.95; margin-bottom: 32px; color: ${primary}; text-shadow: 0 0 20px ${primary}, 0 0 40px ${primary}, 0 0 60px ${primary}, 5px 5px 0 ${accent}; letter-spacing: 8px; position: relative;">
+                                <span style="display: block; font-size: 2rem; color: ${neonPink}; text-shadow: 0 0 15px ${neonPink}, 0 0 30px ${neonPink}; margin-bottom: 16px; letter-spacing: 12px; font-weight: 700;">▼▼▼</span>
+                                SYNTHWAVE<br/>
+                                <span style="color: ${accent}; text-shadow: 0 0 20px ${accent}, 0 0 40px ${accent}, 0 0 60px ${accent}, 5px 5px 0 ${primary};">DREAMS</span>
+                            </h1>
+
+                            <p style="font-size: 1.25rem; color: #fff; max-width: 750px; margin: 0 auto 48px; text-shadow: 0 0 10px ${accent}; line-height: 1.9; font-weight: 500; font-family: 'Courier New', monospace;">
+                                <span style="color: ${neonCyan}; text-shadow: 0 0 10px ${neonCyan};">[ SYNTHWAVE ]</span> × <span style="color: ${neonPink}; text-shadow: 0 0 10px ${neonPink};">[ CYBERPUNK ]</span> × <span style="color: ${primary}; text-shadow: 0 0 10px ${primary};">[ 80s VIBES ]</span><br/>
+                                <span style="font-size: 1rem; color: ${accent}; letter-spacing: 3px;">━━━━━━━━━━━━━━━━━━━━━━━━━</span><br/>
+                                Néons vibrants • Géométrie futuriste • Nostalgie digitale
                             </p>
-                            <button style="background: ${primary}; color: #000; padding: 20px 60px; border: 3px solid ${accent}; border-radius: 0; font-size: 1.2rem; cursor: pointer; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 0 30px ${primary}, inset 0 0 20px rgba(255,255,255,0.2); transition: all 0.3s; position: relative;">
-                                ▶ START
+
+                            <button style="background: linear-gradient(135deg, ${primary} 0%, ${accent} 100%); color: #000; padding: 22px 70px; border: 4px solid ${neonPink}; border-radius: 0; font-size: 1.3rem; cursor: pointer; font-weight: 900; text-transform: uppercase; letter-spacing: 6px; box-shadow: 0 0 40px ${primary}80, 0 0 80px ${primary}40, inset 0 0 30px rgba(255,255,255,0.3); transition: all 0.3s; position: relative; font-family: 'Orbitron', sans-serif;" onmouseover="this.style.transform='translateY(-4px) scale(1.05)'; this.style.boxShadow='0 0 60px ${primary}, 0 0 100px ${primary}60, inset 0 0 40px rgba(255,255,255,0.5)'; this.style.borderColor='${neonCyan}';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 0 40px ${primary}80, 0 0 80px ${primary}40, inset 0 0 30px rgba(255,255,255,0.3)'; this.style.borderColor='${neonPink}';">
+                                <span style="position: relative; z-index: 1;">▶ ENTER THE GRID</span>
                             </button>
                         </section>
-                        <section style="padding: ${padding}; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5;">
+
+                        <section style="padding: 60px ${padding}; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5;">
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: ${gap};">
-                                <div style="background: rgba(0,0,0,0.8); padding: ${padding}; border: 2px solid ${primary}; box-shadow: 0 0 20px ${primary}40, inset 0 0 20px rgba(0,0,0,0.5); position: relative;">
-                                    <div style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 2px solid ${primary}; transform: rotate(45deg); box-shadow: 0 0 10px ${primary};"></div>
-                                    <div style="font-size: 3rem; color: ${primary}; margin-bottom: 16px; text-shadow: 0 0 20px ${primary};">◢</div>
-                                    <h3 style="font-size: 1.3rem; font-weight: 900; margin-bottom: 12px; color: ${primary}; text-shadow: 0 0 10px ${primary}; letter-spacing: 2px;">NEON_STYLE</h3>
-                                    <p style="color: ${accent}; line-height: 1.6; text-shadow: 0 0 5px ${accent};">Couleurs néon vibrantes et éclatantes</p>
+                                <!-- Card 1 -->
+                                <div style="background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(10,10,26,0.9) 100%); padding: ${padding}; border: 3px solid ${primary}; box-shadow: 0 0 30px ${primary}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8); position: relative; transition: all 0.4s; overflow: hidden;" onmouseover="this.style.transform='translateY(-12px)'; this.style.borderColor='${neonCyan}'; this.style.boxShadow='0 0 50px ${primary}80, 0 0 100px ${primary}40, 0 16px 48px rgba(0,0,0,0.8)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='${primary}'; this.style.boxShadow='0 0 30px ${primary}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8)';">
+                                    <!-- Corner decorations -->
+                                    <div style="position: absolute; top: 12px; right: 12px; width: 50px; height: 50px; border: 3px solid ${primary}; transform: rotate(45deg); box-shadow: 0 0 15px ${primary}; transition: all 0.3s;"></div>
+                                    <div style="position: absolute; bottom: 12px; left: 12px; width: 30px; height: 30px; border: 3px solid ${accent}; transform: rotate(45deg); box-shadow: 0 0 15px ${accent};"></div>
+
+                                    <div style="font-size: 3.5rem; color: ${primary}; margin-bottom: 20px; text-shadow: 0 0 30px ${primary}; position: relative; z-index: 1;">◢</div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 16px; color: ${primary}; text-shadow: 0 0 15px ${primary}; letter-spacing: 3px; position: relative; z-index: 1; font-family: 'Orbitron', sans-serif;">NEON_AESTHETIC</h3>
+                                    <p style="color: ${accent}; line-height: 1.7; text-shadow: 0 0 8px ${accent}; position: relative; z-index: 1; font-family: 'Courier New', monospace;">Couleurs néon vibrantes qui illuminent l'obscurité</p>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.8); padding: ${padding}; border: 2px solid ${accent}; box-shadow: 0 0 20px ${accent}40, inset 0 0 20px rgba(0,0,0,0.5); position: relative;">
-                                    <div style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 2px solid ${accent}; transform: rotate(45deg); box-shadow: 0 0 10px ${accent};"></div>
-                                    <div style="font-size: 3rem; color: ${accent}; margin-bottom: 16px; text-shadow: 0 0 20px ${accent};">▲</div>
-                                    <h3 style="font-size: 1.3rem; font-weight: 900; margin-bottom: 12px; color: ${accent}; text-shadow: 0 0 10px ${accent}; letter-spacing: 2px;">RETRO_WAVE</h3>
-                                    <p style="color: #ff00ff; line-height: 1.6; text-shadow: 0 0 5px #ff00ff;">Esthétique années 80 réinventée</p>
+
+                                <!-- Card 2 -->
+                                <div style="background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(10,10,26,0.9) 100%); padding: ${padding}; border: 3px solid ${accent}; box-shadow: 0 0 30px ${accent}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8); position: relative; transition: all 0.4s; overflow: hidden;" onmouseover="this.style.transform='translateY(-12px)'; this.style.borderColor='${neonPink}'; this.style.boxShadow='0 0 50px ${accent}80, 0 0 100px ${accent}40, 0 16px 48px rgba(0,0,0,0.8)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='${accent}'; this.style.boxShadow='0 0 30px ${accent}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8)';">
+                                    <div style="position: absolute; top: 12px; right: 12px; width: 50px; height: 50px; border: 3px solid ${accent}; transform: rotate(45deg); box-shadow: 0 0 15px ${accent};"></div>
+                                    <div style="position: absolute; bottom: 12px; left: 12px; width: 30px; height: 30px; border: 3px solid ${neonPink}; transform: rotate(45deg); box-shadow: 0 0 15px ${neonPink};"></div>
+
+                                    <div style="font-size: 3.5rem; color: ${accent}; margin-bottom: 20px; text-shadow: 0 0 30px ${accent}; position: relative; z-index: 1;">▲</div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 16px; color: ${accent}; text-shadow: 0 0 15px ${accent}; letter-spacing: 3px; position: relative; z-index: 1; font-family: 'Orbitron', sans-serif;">RETRO_WAVE</h3>
+                                    <p style="color: ${neonPink}; line-height: 1.7; text-shadow: 0 0 8px ${neonPink}; position: relative; z-index: 1; font-family: 'Courier New', monospace;">Esthétique années 80 réinventée pour le futur</p>
                                 </div>
-                                <div style="background: rgba(0,0,0,0.8); padding: ${padding}; border: 2px solid #ff00ff; box-shadow: 0 0 20px #ff00ff40, inset 0 0 20px rgba(0,0,0,0.5); position: relative;">
-                                    <div style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 2px solid #ff00ff; transform: rotate(45deg); box-shadow: 0 0 10px #ff00ff;"></div>
-                                    <div style="font-size: 3rem; color: #ff00ff; margin-bottom: 16px; text-shadow: 0 0 20px #ff00ff;">◆</div>
-                                    <h3 style="font-size: 1.3rem; font-weight: 900; margin-bottom: 12px; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; letter-spacing: 2px;">GEOMETRY</h3>
-                                    <p style="color: ${primary}; line-height: 1.6; text-shadow: 0 0 5px ${primary};">Formes géométriques audacieuses</p>
+
+                                <!-- Card 3 -->
+                                <div style="background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(10,10,26,0.9) 100%); padding: ${padding}; border: 3px solid ${neonPink}; box-shadow: 0 0 30px ${neonPink}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8); position: relative; transition: all 0.4s; overflow: hidden;" onmouseover="this.style.transform='translateY(-12px)'; this.style.borderColor='${neonCyan}'; this.style.boxShadow='0 0 50px ${neonPink}80, 0 0 100px ${neonPink}40, 0 16px 48px rgba(0,0,0,0.8)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='${neonPink}'; this.style.boxShadow='0 0 30px ${neonPink}50, 0 8px 32px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.8)';">
+                                    <div style="position: absolute; top: 12px; right: 12px; width: 50px; height: 50px; border: 3px solid ${neonPink}; transform: rotate(45deg); box-shadow: 0 0 15px ${neonPink};"></div>
+                                    <div style="position: absolute; bottom: 12px; left: 12px; width: 30px; height: 30px; border: 3px solid ${primary}; transform: rotate(45deg); box-shadow: 0 0 15px ${primary};"></div>
+
+                                    <div style="font-size: 3.5rem; color: ${neonPink}; margin-bottom: 20px; text-shadow: 0 0 30px ${neonPink}; position: relative; z-index: 1;">◆</div>
+                                    <h3 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 16px; color: ${neonPink}; text-shadow: 0 0 15px ${neonPink}; letter-spacing: 3px; position: relative; z-index: 1; font-family: 'Orbitron', sans-serif;">GEOMETRY_GRID</h3>
+                                    <p style="color: ${primary}; line-height: 1.7; text-shadow: 0 0 8px ${primary}; position: relative; z-index: 1; font-family: 'Courier New', monospace;">Formes géométriques et grilles infinies</p>
                                 </div>
                             </div>
                         </section>
+
+                        <style>
+                            @keyframes glitch {
+                                0%, 90%, 100% { transform: translate(0); }
+                                92% { transform: translate(-2px, 2px); }
+                                94% { transform: translate(2px, -2px); }
+                                96% { transform: translate(-2px, -2px); }
+                            }
+                            @keyframes float {
+                                0%, 100% { transform: translateY(0); }
+                                50% { transform: translateY(-30px); }
+                            }
+                            @keyframes pulse {
+                                0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+                                50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+                            }
+                            @keyframes flicker {
+                                0%, 100% { opacity: 1; }
+                                50% { opacity: 0.8; }
+                                75% { opacity: 0.95; }
+                            }
+                        </style>
                     </div>
                 `;
             }
