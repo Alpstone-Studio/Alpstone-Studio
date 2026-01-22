@@ -1510,6 +1510,76 @@
             padding: 0;
         }
 
+        /* Full Site Demo Modal */
+        .full-site-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
+            display: none;
+            z-index: 4000;
+            flex-direction: column;
+        }
+
+        .full-site-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .full-site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 32px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .full-site-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .full-site-title i {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .full-site-close {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .full-site-close:hover {
+            background: rgba(255, 59, 48, 0.8);
+            border-color: rgba(255, 59, 48, 1);
+            transform: rotate(90deg);
+        }
+
+        .full-site-content {
+            flex: 1;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+
         /* Smaller cards for full picture mode */
         .style-grid {
             display: grid;
@@ -1717,6 +1787,22 @@
                     <!-- Dynamic content will be inserted here -->
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Full Site Demo Modal -->
+    <div class="full-site-modal" id="fullSiteModal">
+        <div class="full-site-header">
+            <div class="full-site-title">
+                <i class="fas fa-globe"></i>
+                <span>Aperçu du site complet</span>
+            </div>
+            <button class="full-site-close" onclick="closeFullSite()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="full-site-content">
+            <iframe id="fullSiteFrame" style="width: 100%; height: 100%; border: none;"></iframe>
         </div>
     </div>
 
@@ -4970,13 +5056,802 @@
         // Validate Design
         function validateDesign() {
             const token = generateToken();
-            showConfirm(
-                'Configuration prête !',
-                'Votre design est configuré. Voulez-vous copier le token dans le presse-papier ?',
-                'success',
-                () => { copyToken(); },
-                null
-            );
+            const modal = document.getElementById('customModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalActions = document.getElementById('modalActions');
+            const modalInputContainer = document.getElementById('modalInputContainer');
+
+            modalIcon.className = 'modal-icon success';
+            modalIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            modalTitle.textContent = 'Configuration prête !';
+            modalBody.textContent = 'Votre design est configuré. Que souhaitez-vous faire ?';
+            modalInputContainer.innerHTML = '';
+
+            modalActions.innerHTML = `
+                <button class="modal-btn modal-btn-secondary" onclick="openFullSiteDemo()">
+                    <i class="fas fa-globe"></i> Voir le site d'exemple
+                </button>
+                <button class="modal-btn modal-btn-primary" onclick="copyToken(); closeModal();">
+                    <i class="fas fa-copy"></i> Copier le token
+                </button>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Open Full Site Demo
+        function openFullSiteDemo() {
+            closeModal();
+
+            // Generate complete HTML for the demo site
+            const demoHTML = generateFullSiteDemo();
+
+            // Create a blob URL and open in new tab
+            const blob = new Blob([demoHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+
+            window.open(url, '_blank');
+        }
+
+        // Close Full Site Demo
+        function closeFullSite() {
+            const modal = document.getElementById('fullSiteModal');
+            const iframe = document.getElementById('fullSiteFrame');
+
+            modal.classList.remove('active');
+
+            // Clean up blob URL after animation
+            setTimeout(() => {
+                if (iframe.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(iframe.src);
+                }
+                iframe.src = '';
+            }, 300);
+        }
+
+        // Generate Full Site Demo
+        function generateFullSiteDemo() {
+            const { style, colors, typography, settings } = designState;
+            const { primary, background, accent } = colors;
+            const { animations, radius, density, transitions, scroll } = settings;
+
+            // Typography mapping
+            const fonts = {
+                'M1': { heading: 'Inter', body: 'Inter' },
+                'M2': { heading: 'Roboto', body: 'Roboto' },
+                'C1': { heading: 'Playfair Display', body: 'Source Sans Pro' },
+                'C2': { heading: 'Montserrat', body: 'Open Sans' },
+                'E1': { heading: 'Poppins', body: 'Poppins' },
+                'E2': { heading: 'Nunito', body: 'Nunito' },
+                'U1': { heading: 'Raleway', body: 'Lato' },
+                'U2': { heading: 'Kaushan Script', body: 'Aref Ruqaa' }
+            };
+
+            const font = fonts[typography] || fonts['M1'];
+
+            // Calculate values based on settings
+            const borderRadius = radius === 1 ? '4px' : radius === 2 ? '12px' : '24px';
+            const spacing = density === 1 ? '12px' : density === 2 ? '24px' : '40px';
+            const transition = transitions === 1 ? 'none' : transitions === 2 ? 'all 0.2s ease' : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            // Animation styles
+            const animationCSS = animations === 0 ? `
+                * { animation: none !important; }
+            ` : animations === 1 ? `
+                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+            ` : `
+                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+                @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+                @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+            `;
+
+            // Scroll behavior - we'll handle this with JavaScript for better iframe support
+            const scrollBehavior = scroll === 1 ? 'auto' : 'smooth';
+            const smoothScrollJS = scroll === 2 ? `
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+
+                // Scroll storytelling effect
+                const storyItems = document.querySelectorAll('.story-item');
+                const storyImage = document.querySelector('.story-image img');
+                const storyImages = [
+                    'https://picsum.photos/800/600?random=story1',
+                    'https://picsum.photos/800/600?random=story2',
+                    'https://picsum.photos/800/600?random=story3',
+                    'https://picsum.photos/800/600?random=story4'
+                ];
+
+                if (storyItems.length > 0 && storyImage) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const index = parseInt(entry.target.dataset.index);
+                                storyItems.forEach(item => item.classList.remove('active'));
+                                entry.target.classList.add('active');
+                                storyImage.style.opacity = '0';
+                                setTimeout(() => {
+                                    storyImage.src = storyImages[index];
+                                    storyImage.style.opacity = '1';
+                                }, 200);
+                            }
+                        });
+                    }, { threshold: 0.5 });
+
+                    storyItems.forEach(item => observer.observe(item));
+                }
+            ` : '';
+
+            // CSS for scroll storytelling section
+            const scrollStoryCSS = scroll === 2 ? `
+                .scroll-story {
+                    display: flex;
+                    min-height: 100vh;
+                    position: relative;
+                }
+
+                .story-image {
+                    flex: 1;
+                    position: sticky;
+                    top: 0;
+                    height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: ${spacing};
+                }
+
+                .story-image img {
+                    max-width: 100%;
+                    max-height: 80vh;
+                    object-fit: cover;
+                    border-radius: ${borderRadius};
+                    transition: opacity 0.4s ease;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                }
+
+                .story-content {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .story-item {
+                    min-height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding: calc(${spacing} * 3);
+                    opacity: 0.3;
+                    transition: opacity 0.5s ease;
+                }
+
+                .story-item.active {
+                    opacity: 1;
+                }
+
+                .story-item h3 {
+                    font-size: 2rem;
+                    margin-bottom: ${spacing};
+                    color: ${primary};
+                }
+
+                .story-item p {
+                    font-size: 1.125rem;
+                    line-height: 1.8;
+                }
+
+                @media (max-width: 768px) {
+                    .scroll-story {
+                        flex-direction: column;
+                    }
+                    .story-image {
+                        position: relative;
+                        height: 50vh;
+                    }
+                    .story-item {
+                        min-height: 50vh;
+                    }
+                }
+            ` : '';
+
+            // HTML for scroll storytelling section
+            const scrollStoryHTML = scroll === 2 ? `
+                <section class="scroll-story" id="histoire">
+                    <div class="story-image">
+                        <img src="https://picsum.photos/800/600?random=story1" alt="Histoire">
+                    </div>
+                    <div class="story-content">
+                        <div class="story-item active" data-index="0">
+                            <h3>Notre Vision</h3>
+                            <p>Nous croyons en un web accessible à tous, où chaque entreprise peut avoir une présence digitale à la hauteur de ses ambitions. Notre équipe met son expertise au service de vos projets.</p>
+                        </div>
+                        <div class="story-item" data-index="1">
+                            <h3>Notre Expertise</h3>
+                            <p>Avec des années d'expérience dans le développement web et le design, nous maîtrisons les dernières technologies pour créer des sites performants et esthétiques.</p>
+                        </div>
+                        <div class="story-item" data-index="2">
+                            <h3>Notre Approche</h3>
+                            <p>Chaque projet est unique. Nous prenons le temps de comprendre vos besoins pour proposer des solutions sur mesure qui correspondent à votre identité.</p>
+                        </div>
+                        <div class="story-item" data-index="3">
+                            <h3>Votre Succès</h3>
+                            <p>Votre réussite est notre priorité. Nous vous accompagnons à chaque étape, de la conception au lancement, et au-delà avec un support continu.</p>
+                        </div>
+                    </div>
+                </section>
+            ` : '';
+
+            // Determine if background is dark
+            const isDarkBg = getLuminance(background) < 0.5;
+            const textColor = isDarkBg ? '#ffffff' : '#1a1a1a';
+            const textSecondary = isDarkBg ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)';
+
+            // Style-specific adjustments
+            let cardBg, cardBorder, navBg, navStyle;
+
+            if (style === 'GLS') {
+                cardBg = 'rgba(255,255,255,0.1)';
+                cardBorder = 'rgba(255,255,255,0.2)';
+                navBg = 'rgba(255,255,255,0.1)';
+                navStyle = 'backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);';
+            } else if (style === 'LUX') {
+                cardBg = isDarkBg ? `${background}E6` : '#ffffff';
+                cardBorder = isDarkBg ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                navBg = isDarkBg ? background : '#ffffff';
+                navStyle = `box-shadow: 0 4px 24px rgba(0,0,0,${isDarkBg ? '0.3' : '0.1'});`;
+            } else if (style === 'BRT') {
+                cardBg = isDarkBg ? `${background}E6` : '#ffffff';
+                cardBorder = 'transparent';
+                navBg = isDarkBg ? background : '#ffffff';
+                navStyle = 'border-bottom: 3px solid ' + primary + ';';
+            } else { // RTF
+                cardBg = isDarkBg ? `${background}E6` : '#ffffff';
+                cardBorder = isDarkBg ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                navBg = isDarkBg ? background : '#ffffff';
+                navStyle = 'box-shadow: 0 2px 8px rgba(0,0,0,0.05);';
+            }
+
+            return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site d'exemple - ${style}</title>
+    <link href="https://fonts.googleapis.com/css2?family=${font.heading.replace(' ', '+')}:wght@400;600;700;900&family=${font.body.replace(' ', '+')}:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: ${scrollBehavior};
+        }
+
+        body {
+            font-family: '${font.body}', sans-serif;
+            background: ${background};
+            color: ${textColor};
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ${animationCSS}
+
+        ${scrollStoryCSS}
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: '${font.heading}', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: ${navBg};
+            ${navStyle}
+            padding: ${spacing};
+            z-index: 1000;
+            transition: ${transition};
+        }
+
+        .nav-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: ${primary};
+            text-decoration: none;
+            transition: ${transition};
+        }
+
+        .nav-links {
+            display: flex;
+            gap: calc(${spacing} * 1.5);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: ${textColor};
+            text-decoration: none;
+            font-weight: 500;
+            transition: ${transition};
+            padding: 8px 16px;
+            border-radius: ${borderRadius};
+        }
+
+        .nav-links a:hover {
+            color: ${primary};
+            background: ${style === 'GLS' ? 'rgba(255,255,255,0.1)' : primary + '15'};
+            ${animations >= 2 ? 'transform: translateY(-2px);' : ''}
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(${spacing} * 4) ${spacing};
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, ${primary}20 0%, transparent 70%);
+            ${animations >= 2 ? 'animation: float 6s ease-in-out infinite;' : ''}
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            ${animations >= 1 ? 'animation: fadeIn 1s ease;' : ''}
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: ${spacing};
+            color: ${textColor};
+            ${animations >= 1 ? 'animation: slideUp 1s ease;' : ''}
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: ${textSecondary};
+            margin-bottom: calc(${spacing} * 2);
+            ${animations >= 1 ? 'animation: slideUp 1s ease 0.2s both;' : ''}
+        }
+
+        .btn {
+            display: inline-block;
+            padding: ${density === 1 ? '12px 24px' : density === 2 ? '16px 32px' : '20px 40px'};
+            background: ${primary};
+            color: white;
+            text-decoration: none;
+            border-radius: ${borderRadius};
+            font-weight: 600;
+            transition: ${transition};
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            ${animations >= 1 ? 'animation: slideUp 1s ease 0.4s both;' : ''}
+        }
+
+        .btn:hover {
+            background: ${accent};
+            ${animations >= 2 ? 'transform: translateY(-4px); box-shadow: 0 8px 24px ' + primary + '40;' : ''}
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid ${primary};
+            color: ${primary};
+            margin-left: ${spacing};
+        }
+
+        .btn-secondary:hover {
+            background: ${primary};
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: calc(${spacing} * 4) 60px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: calc(${spacing} * 2);
+            color: ${textColor};
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: ${textSecondary};
+            max-width: 600px;
+            margin: 0 auto calc(${spacing} * 3);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: ${spacing};
+        }
+
+        .feature-card {
+            background: ${cardBg};
+            padding: calc(${spacing} * 1.5);
+            border-radius: ${borderRadius};
+            border: 1px solid ${cardBorder};
+            transition: ${transition};
+            ${style === 'GLS' ? 'backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);' : ''}
+            ${style === 'LUX' ? 'box-shadow: 0 8px 32px rgba(0,0,0,' + (isDarkBg ? '0.3' : '0.1') + ');' : ''}
+        }
+
+        .feature-card:hover {
+            ${animations >= 1 ? 'transform: translateY(-8px);' : ''}
+            ${style === 'LUX' ? 'box-shadow: 0 16px 48px rgba(0,0,0,' + (isDarkBg ? '0.4' : '0.15') + ');' : ''}
+            border-color: ${primary};
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: ${spacing};
+            color: ${primary};
+            ${animations === 2 ? 'animation: pulse 2s ease-in-out infinite;' : ''}
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: calc(${spacing} * 0.5);
+            color: ${textColor};
+        }
+
+        .feature-card p {
+            color: ${textSecondary};
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: ${spacing};
+        }
+
+        .gallery-item {
+            height: 300px;
+            border-radius: ${borderRadius};
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: ${transition};
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: ${transition};
+        }
+
+        .gallery-item:hover img {
+            ${animations >= 1 ? 'transform: scale(1.1);' : ''}
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, ${primary}DD 0%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: ${spacing};
+            opacity: 0;
+            transition: ${transition};
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: ${cardBg};
+            padding: calc(${spacing} * 2);
+            border-radius: ${borderRadius};
+            border: 1px solid ${cardBorder};
+            ${style === 'GLS' ? 'backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);' : ''}
+            ${style === 'LUX' ? 'box-shadow: 0 8px 32px rgba(0,0,0,' + (isDarkBg ? '0.3' : '0.1') + ');' : ''}
+        }
+
+        .form-group {
+            margin-bottom: ${spacing};
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: ${textColor};
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: ${density === 1 ? '8px 12px' : density === 2 ? '12px 16px' : '16px 20px'};
+            border: 1px solid ${cardBorder};
+            border-radius: ${borderRadius};
+            background: ${isDarkBg ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)'};
+            color: ${textColor};
+            font-family: '${font.body}', sans-serif;
+            font-size: 1rem;
+            transition: ${transition};
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: ${primary};
+            ${style === 'GLS' ? 'box-shadow: 0 0 0 3px ' + primary + '20;' : ''}
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: ${navBg};
+            ${navStyle}
+            padding: calc(${spacing} * 3) ${spacing};
+            margin-top: calc(${spacing} * 4);
+        }
+
+        .footer-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: ${spacing};
+        }
+
+        .footer-section h3 {
+            margin-bottom: ${spacing};
+            color: ${primary};
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: ${textSecondary};
+            text-decoration: none;
+            transition: ${transition};
+        }
+
+        .footer-section a:hover {
+            color: ${primary};
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: calc(${spacing} * 2);
+            padding-top: ${spacing};
+            border-top: 1px solid ${cardBorder};
+            color: ${textSecondary};
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Votre Site</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>Bienvenue sur votre site</h1>
+            <p>Découvrez notre plateforme innovante conçue avec le style ${style} et des couleurs soigneusement choisies pour une expérience utilisateur optimale.</p>
+            <div>
+                <a href="#services" class="btn">Découvrir</a>
+                <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    ${scrollStoryHTML}
+
+    <section id="services">
+        <h2 class="section-title">Nos Services</h2>
+        <p class="section-subtitle">Des solutions adaptées à vos besoins avec une interface moderne et accessible</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Performance</h3>
+                <p>Une expérience ultra-rapide grâce à une architecture optimisée et moderne.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Design</h3>
+                <p>Une interface élégante qui s'adapte à votre identité visuelle avec ${radius === 1 ? 'des angles nets' : radius === 2 ? 'des coins arrondis' : 'des formes douces'}.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">♿</div>
+                <h3>Accessibilité</h3>
+                <p>Un contraste optimal garantissant une lisibilité parfaite pour tous les utilisateurs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Responsive</h3>
+                <p>Une expérience fluide sur tous les appareils, du mobile au desktop.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Interactivité</h3>
+                <p>Des animations ${animations === 0 ? 'désactivées pour plus de sobriété' : animations === 1 ? 'subtiles' : 'fluides et engageantes'}.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Sécurité</h3>
+                <p>Vos données sont protégées grâce à des protocoles de sécurité avancés.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerie">
+        <h2 class="section-title">Notre Galerie</h2>
+        <p class="section-subtitle">Découvrez quelques-unes de nos réalisations</p>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=1" alt="Projet 1" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 1</h3>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=2" alt="Projet 2" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 2</h3>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=3" alt="Projet 3" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 3</h3>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=4" alt="Projet 4" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 4</h3>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=5" alt="Projet 5" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 5</h3>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/400/300?random=6" alt="Projet 6" loading="lazy">
+                <div class="gallery-overlay">
+                    <h3>Projet 6</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contactez-nous</h2>
+        <p class="section-subtitle">Une question ? N'hésitez pas à nous écrire</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulaire d\\'exemple - aucune donnée n\\'est envoyée');">
+            <div class="form-group">
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" placeholder="Marie Müller" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="marie@exemple.ch" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Votre message..." required></textarea>
+            </div>
+            <button type="submit" class="btn">Envoyer le message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Un site d'exemple créé avec Alpstone Studio, démontrant le style ${style} avec des animations ${animations === 0 ? 'désactivées' : animations === 1 ? 'subtiles' : 'avancées'} et un défilement ${scroll === 1 ? 'instantané' : 'fluide'}.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens rapides</h3>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li>Email: contact@votresite.ch</li>
+                    <li>Tél: +41 26 321 45 67</li>
+                    <li>Adresse: 1700 Fribourg, Suisse</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Votre Site. Tous droits réservés. Design créé avec Alpstone Studio.</p>
+        </div>
+    </footer>
+    <script>${smoothScrollJS}<\/script>
+</body>
+</html>`;
         }
 
         // Replace alert and prompt calls
