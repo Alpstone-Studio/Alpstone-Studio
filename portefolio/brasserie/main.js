@@ -1,4 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Back to Alpstone Button
+    const backBtn = document.createElement('a');
+    backBtn.href = '../../index.html';
+    backBtn.className = 'alpstone-back-btn';
+    // Using simple white styling for logo if it's an image, or just keeping the pill effect.
+    // Assuming the path is correct relative to current location.
+    backBtn.innerHTML = `
+        <img src="../../Logos/Alpstone-studio-vertical/White-vertical.png" alt="AS" class="alpstone-btn-logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:20px;\'>🔙</span>' + this.parentElement.innerHTML.split('</span>')[1]">
+        <span class="alpstone-btn-text">Retour à Alpstone</span>
+    `;
+    // Fallback logic in onerror just in case image path is slightly off, though logically it should be White-vertical based on footer usage in index.html
+
+    document.body.appendChild(backBtn);
+
+    // Auto Collapse Logic
+    const collapseBtn = () => {
+        backBtn.classList.add('collapsed');
+    };
+
+    let idleTimer = setTimeout(collapseBtn, 3000); // Collapse after 3s initial idle
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            collapseBtn();
+        }
+        // Reset timer on hover (optional, handled by CSS :hover mostly for expanding)
+    });
+
+    backBtn.addEventListener('mouseenter', () => {
+        clearTimeout(idleTimer);
+        backBtn.classList.remove('collapsed');
+    });
+
+    backBtn.addEventListener('mouseleave', () => {
+        idleTimer = setTimeout(collapseBtn, 2000);
+    });
+
     // Mobile Menu Toggle
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
