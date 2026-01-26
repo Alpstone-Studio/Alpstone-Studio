@@ -36,6 +36,44 @@
             min-height: 100vh;
         }
 
+        /* When user disables animations, force-stop all CSS animations/transitions */
+        .no-animations *,
+        .no-animations *::before,
+        .no-animations *::after {
+            animation: none !important;
+            transition: none !important;
+            scroll-behavior: auto !important;
+            will-change: auto !important;
+        }
+
+        /* Light animations: keep small, subtle transitions */
+        .anim-light *,
+        .anim-light *::before,
+        .anim-light *::after {
+            transition-duration: 150ms !important;
+            transition-timing-function: ease !important;
+            animation-duration: 300ms !important;
+        }
+
+        /* Tweak common interactions for light vs present */
+        .anim-light .step-content.active { animation-duration: 0.2s !important; }
+        .anim-present .step-content.active { animation-duration: 0.4s !important; }
+
+        .anim-light .back-button:hover { transform: translateX(-2px) !important; }
+        .anim-present .back-button:hover { transform: translateX(-4px) !important; }
+
+        .anim-light .step.active .step-number { transform: scale(1.04) !important; }
+        .anim-present .step.active .step-number { transform: scale(1.08) !important; }
+
+        /* Present animations: full experience */
+        .anim-present *,
+        .anim-present *::before,
+        .anim-present *::after {
+            transition-duration: 300ms !important;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+            animation-duration: 600ms !important;
+        }
+
         /* Container principal */
         .onboarding-container {
             min-height: 100vh;
@@ -97,6 +135,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             z-index: 1001;
+            line-height: 1;
         }
 
         .back-button:hover {
@@ -126,6 +165,8 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .step-number {
@@ -140,6 +181,7 @@
             font-weight: 600;
             color: var(--text-light);
             transition: all 0.3s ease;
+            pointer-events: none;
         }
 
         .step.active .step-number {
@@ -159,6 +201,9 @@
             font-size: 0.7rem;
             color: var(--text-light);
             font-weight: 500;
+            user-select: none;
+            -webkit-user-select: none;
+            pointer-events: none;
         }
 
         .step.active .step-label {
@@ -652,6 +697,8 @@
             font-weight: 600;
             min-width: 80px;
             text-align: center;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .typo-info {
@@ -689,6 +736,8 @@
 
         .typo-preview-content {
             color: white;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .typo-preview-content h1 {
@@ -1529,6 +1578,8 @@
             transition: all 0.3s ease;
             padding: 4px 8px;
             border-radius: 12px;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .toolbar-tab:hover {
@@ -1547,6 +1598,7 @@
             color: var(--text-light);
             font-size: 0.95rem;
             transition: all 0.3s ease;
+            pointer-events: none;
         }
 
         .toolbar-tab.active .toolbar-tab-icon {
@@ -1561,6 +1613,9 @@
             color: var(--text-light);
             font-weight: 500;
             white-space: nowrap;
+            user-select: none;
+            -webkit-user-select: none;
+            pointer-events: none;
         }
 
         .toolbar-tab.active .toolbar-tab-label {
@@ -1751,6 +1806,66 @@
         .toolbar-close-btn:hover {
             background: #e74c3c;
             color: white;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: 0 8px;
+            align-self: center;
+        }
+
+        .toolbar-direct-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .toolbar-direct-btn i {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .toolbar-direct-btn.btn-copy i {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .toolbar-direct-btn.btn-copy:hover i {
+            background: var(--primary-dark);
+            transform: scale(1.08);
+        }
+
+        .toolbar-direct-btn.btn-close i {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .toolbar-direct-btn.btn-close:hover i {
+            background: #c0392b;
+            transform: scale(1.08);
+        }
+
+        .toolbar-direct-btn span {
+            color: var(--text-light);
         }
 
         /* Token Display */
@@ -1957,6 +2072,10 @@
             cursor: pointer;
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
         .color-picker-close:hover {
@@ -2885,12 +3004,16 @@
                     </div>
                     <div class="toolbar-tab-label">Effets</div>
                 </div>
-                <div class="toolbar-tab" onclick="switchToolbarTab('actions')">
-                    <div class="toolbar-tab-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <div class="toolbar-tab-label">Actions</div>
-                </div>
+                <!-- Boutons directs au lieu du menu Actions -->
+                <div class="toolbar-divider"></div>
+                <button class="toolbar-direct-btn btn-copy" onclick="copyToken()">
+                    <i class="fas fa-copy"></i>
+                    <span>Copier</span>
+                </button>
+                <button class="toolbar-direct-btn btn-close" onclick="closeFullscreenPreview()">
+                    <i class="fas fa-times"></i>
+                    <span>Fermer</span>
+                </button>
             </div>
 
             <!-- Panels -->
@@ -2974,21 +3097,6 @@
                         onclick="setToolbarSetting('scroll', 1)">Normal</button>
                     <button class="toolbar-btn" data-setting="scroll" data-value="2"
                         onclick="setToolbarSetting('scroll', 2)">Cinématique</button>
-                </div>
-            </div>
-
-            <!-- Actions Panel -->
-            <!-- Actions Panel -->
-            <div class="toolbar-panel" id="panel-actions">
-                <div class="toolbar-panel-close" onclick="closeToolbarPanel()"><i class="fas fa-times"></i></div>
-                <div class="toolbar-panel-title">Actions rapides</div>
-                <div class="toolbar-actions">
-                    <button class="toolbar-action" onclick="copyToken()">
-                        <i class="fas fa-copy"></i> Copier le code
-                    </button>
-                    <button class="toolbar-close-btn" onclick="closeFullscreenPreview()">
-                        <i class="fas fa-times"></i> Fermer
-                    </button>
                 </div>
             </div>
         </div>
@@ -3369,7 +3477,7 @@
         <div class="color-picker-content">
             <div class="color-picker-header">
                 <h3 class="color-picker-title">Choisir une couleur</h3>
-                <button class="color-picker-close" onclick="closeColorPicker()">×</button>
+                <button class="color-picker-close" onclick="closeColorPicker()"><i class="fas fa-times"></i></button>
             </div>
 
             <!-- Saturation/Brightness selection area -->
@@ -3613,6 +3721,8 @@
         let pickerSat = 70;       // 0-100
         let pickerVal = 84;       // 0-100 (brightness/value)
         let isDraggingSV = false;
+        // Timestamp of last SV drag end/start to avoid accidental modal close on drag release
+        let lastSVDragTime = 0;
 
         function initColorPickers() {
             ['primary', 'background', 'accent'].forEach(type => {
@@ -3655,6 +3765,7 @@
 
             svArea.addEventListener('mousedown', (e) => {
                 isDraggingSV = true;
+                lastSVDragTime = Date.now();
                 handleSVDrag(e);
             });
 
@@ -3663,12 +3774,17 @@
             });
 
             document.addEventListener('mouseup', () => {
-                isDraggingSV = false;
+                // Marquer le moment de fin de drag et laisser un petit délai
+                lastSVDragTime = Date.now();
+                setTimeout(() => {
+                    isDraggingSV = false;
+                }, 50);
             });
 
             // Touch events for mobile
             svArea.addEventListener('touchstart', (e) => {
                 isDraggingSV = true;
+                lastSVDragTime = Date.now();
                 handleSVDrag(e.touches[0]);
                 e.preventDefault();
             });
@@ -3681,6 +3797,7 @@
             });
 
             svArea.addEventListener('touchend', () => {
+                lastSVDragTime = Date.now();
                 isDraggingSV = false;
             });
         }
@@ -4264,8 +4381,32 @@
             const mappedSetting = setting === 'anim' ? 'animations' : setting;
             designState.settings[mappedSetting] = value;
             updateToolbarButtonGroup(setting, value);
+            // Apply animation setting to the UI
+            applyAnimationSetting();
+            // Update demo visuals when toolbar setting changes
+            updateSettingDemos();
             regeneratePreview();
             generateToken();
+        }
+
+        function applyAnimationSetting() {
+            try {
+                const animations = designState.settings.animations;
+                const root = document.documentElement;
+                if (animations === 0) {
+                    root.classList.add('no-animations');
+                    root.classList.remove('anim-light');
+                    root.classList.remove('anim-present');
+                } else if (animations === 1) {
+                    root.classList.remove('no-animations');
+                    root.classList.add('anim-light');
+                    root.classList.remove('anim-present');
+                } else {
+                    root.classList.remove('no-animations');
+                    root.classList.remove('anim-light');
+                    root.classList.add('anim-present');
+                }
+            } catch (e) { console.error(e); }
         }
 
         function regeneratePreview() {
@@ -4273,6 +4414,16 @@
             const html = generateSiteHTML();
             const blob = new Blob([html], { type: 'text/html' });
             iframe.src = URL.createObjectURL(blob);
+
+            // Fermer les panels quand on interagit avec l'iframe
+            iframe.onload = function () {
+                try {
+                    iframe.contentWindow.addEventListener('scroll', closeToolbarPanel, { passive: true });
+                    iframe.contentWindow.addEventListener('click', closeToolbarPanel);
+                } catch (e) {
+                    // Ignore cross-origin errors
+                }
+            };
         }
 
         // ============================================
@@ -4287,6 +4438,12 @@
             const spacing = density === 1 ? '16px' : density === 2 ? '24px' : '40px';
             const font = fontFamilies[typography] || fontFamilies['M1'];
             const parallaxEnabled = scroll === 2;
+
+            // Animation scale helpers: 0 = none, 1 = light, 2 = present
+            const btnTransition = animations === 0 ? 'none' : animations === 1 ? 'all 0.18s ease' : 'all 0.3s ease';
+            const btnHoverTransform = animations === 0 ? '' : animations === 1 ? 'transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px rgba(0,0,0,0.08);' : 'transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 32px rgba(0,0,0,0.15);';
+            const featureTransition = animations === 0 ? 'none' : animations === 1 ? 'all 0.18s ease' : 'all 0.3s ease';
+            const featureHover = animations === 0 ? '' : animations === 1 ? 'transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.08);' : 'transform: translateY(-8px); box-shadow: 0 12px 32px rgba(0,0,0,0.15);';
 
             const isDark = getLuminance(background) < 0.5;
             const textColor = isDark ? '#ffffff' : '#1a1a1a';
@@ -4543,8 +4700,10 @@
         }
         nav {
             padding: ${spacing};
-            background: ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)'};
-            border-bottom: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'};
+            background: ${isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.01)'};
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'};
             position: ${parallaxEnabled ? 'sticky' : 'relative'};
             top: 0;
             z-index: 100;
@@ -4600,11 +4759,11 @@
             text-decoration: none;
             border-radius: ${borderRadius};
             font-weight: 600;
-            transition: ${animations > 0 ? 'all 0.3s ease' : 'none'};
+            transition: ${btnTransition};
         }
         .btn:hover {
             background: ${accent};
-            ${animations > 1 ? 'transform: translateY(-4px); box-shadow: 0 8px 24px ' + primary + '40;' : ''}
+            ${btnHoverTransform}
         }
         .features {
             padding: calc(${spacing} * 3) ${spacing};
@@ -4626,10 +4785,10 @@
             padding: ${spacing};
             border-radius: ${borderRadius};
             border: 1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'};
-            transition: ${animations > 0 ? 'all 0.3s ease' : 'none'};
+            transition: ${featureTransition};
         }
         .feature-card:hover {
-            ${animations > 1 ? 'transform: translateY(-8px); box-shadow: 0 12px 32px rgba(0,0,0,0.15);' : ''}
+            ${featureHover}
         }
         .feature-card h3 {
             color: ${primary};
@@ -4778,6 +4937,7 @@
                 if (token && parseToken(token)) {
                     updateUIFromState();
                     startOnboarding();
+                    goToStep(5); // Aller directement à l'étape 5
                     showAlert('Code chargé !', 'Votre configuration a été restaurée.', 'success');
                 } else if (token) {
                     showAlert('Code invalide', 'Le code entré n\'est pas valide.', 'error');
@@ -4860,11 +5020,27 @@
 
         // Close modals on outside click
         document.getElementById('colorPickerModal')?.addEventListener('click', (e) => {
-            if (e.target.id === 'colorPickerModal') closeColorPicker();
+            // Ne pas fermer si on est en train de dragger le color picker
+            // ou si un drag vient juste d'avoir lieu (évite fermeture lors du release hors du svArea)
+            const now = Date.now();
+            const recentDrag = (lastSVDragTime && (now - lastSVDragTime) < 300);
+            if (e.target.id === 'colorPickerModal' && !isDraggingSV && !recentDrag) closeColorPicker();
         });
 
         document.getElementById('examplesModal')?.addEventListener('click', (e) => {
             if (e.target.id === 'examplesModal') closeExamples();
+        });
+
+        // Fermer les panels de la toolbar au scroll ou clic en dehors
+        document.addEventListener('scroll', () => {
+            closeToolbarPanel();
+        }, { passive: true });
+
+        document.addEventListener('click', (e) => {
+            const toolbar = document.querySelector('.floating-toolbar');
+            if (toolbar && !toolbar.contains(e.target)) {
+                closeToolbarPanel();
+            }
         });
 
         // Close fullscreen preview on Escape key
