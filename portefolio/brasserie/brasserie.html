@@ -1,565 +1,165 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brasserie du Pont Noir</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&family=Island+Moments&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --cream: #F5F0E8;
-            --dark: #2C2C2C;
-            --gold: #F5A623;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: 'Jaldi', sans-serif;
-            background: var(--cream);
-            color: var(--dark);
-            overflow-x: hidden;
-        }
-
-        .fancy-text {
-            font-family: 'Island Moments', cursive;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(135deg, transparent 0%, rgba(245, 166, 35, 0.05) 100%);
-            z-index: 0;
-        }
-
-        .logo {
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            text-align: center;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(-50px);
-            animation: fadeInDown 1s ease forwards;
-            z-index: 1;
-        }
-
-        .nav-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-            max-width: 500px;
-            z-index: 1;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Jaldi', sans-serif;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px var(--shadow);
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .btn:nth-child(1) {
-            animation: slideInLeft 0.6s ease 0.3s forwards;
-        }
-
-        .btn:nth-child(2) {
-            animation: slideInLeft 0.6s ease 0.5s forwards;
-        }
-
-        .btn:nth-child(3) {
-            animation: slideInLeft 0.6s ease 0.7s forwards;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: var(--dark);
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 25px var(--shadow);
-        }
-
-        .btn:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        /* Menu Section */
-        .menu-section {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-            padding-top: 5rem;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .menu-section.active {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .menu-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--gold);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Jaldi', sans-serif;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px var(--shadow);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px var(--shadow);
-        }
-
-        .section-title {
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .menu-category {
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .menu-category:nth-child(2) { animation-delay: 0.1s; }
-        .menu-category:nth-child(3) { animation-delay: 0.2s; }
-        .menu-category:nth-child(4) { animation-delay: 0.3s; }
-        .menu-category:nth-child(5) { animation-delay: 0.4s; }
-        .menu-category:nth-child(6) { animation-delay: 0.5s; }
-
-        .category-title {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px dashed var(--dark);
-        }
-
-        .menu-item {
-            margin-bottom: 1.5rem;
-            padding: 0.5rem 0;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-item:hover {
-            transform: translateX(10px);
-        }
-
-        .item-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .item-description {
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            padding: 3rem 2rem;
-            padding-top: 5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-header .logo {
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            margin-bottom: 0;
-            opacity: 1;
-            transform: none;
-        }
-
-        .beer-showcase {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px var(--shadow);
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease;
-        }
-
-        .quality-section {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .quality-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .quality-title .fancy-text {
-            font-size: 4rem;
-        }
-
-        .quality-text {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .quality-text .fancy-text {
-            font-size: 2rem;
-        }
-
-        /* Histoire Section */
-        .histoire-section {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            padding-top: 5rem;
-            text-align: center;
-        }
-
-        .histoire-header {
-            margin-bottom: 2rem;
-        }
-
-        .histoire-header .logo {
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            margin-bottom: 1rem;
-            opacity: 1;
-            transform: none;
-        }
-
-        .histoire-content {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-top: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Hidden class */
-        .hidden {
-            display: none;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 3rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .category-title {
-                font-size: 2.2rem;
-            }
-
-            .quality-title .fancy-text {
-                font-size: 3rem;
-            }
-
-            .quality-text .fancy-text {
-                font-size: 1.6rem;
-            }
-
-            .back-btn {
-                top: 1rem;
-                left: 1rem;
-                font-size: 0.9rem;
-                padding: 0.6rem 1.2rem;
-            }
-
-            .beer-showcase {
-                height: 300px;
-            }
-
-            .menu-section,
-            .gallery-section,
-            .histoire-section {
-                padding-top: 4rem;
-            }
-        }
-    </style>
+    <title>Brasserie du Pont Noir | Accueil</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
 </head>
+
 <body>
-    <!-- Home Page -->
-    <div id="home" class="hero">
-        <h1 class="logo fancy-text">Brasserie du pont noir</h1>
-        <div class="nav-buttons">
-            <button class="btn btn-primary" onclick="showSection('menu')">Notre Menu</button>
-            <button class="btn btn-secondary" onclick="showSection('gallery')">Galerie photo</button>
-            <button class="btn btn-secondary" onclick="showSection('histoire')">Histoire</button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="brasserie.html" class="brand-logo">Le Pont Noir</a>
+            <div class="mobile-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="brasserie.html" class="nav-link active">Accueil</a></li>
+                <li><a href="menu.html" class="nav-link">La Carte</a></li>
+                <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="histoire.html" class="nav-link">Histoire</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    <!-- Menu Page -->
-    <div id="menu" class="hidden">
-        <button class="back-btn" onclick="showSection('home')">← Retour</button>
-        <div class="menu-section">
-            <div class="menu-header">
-                <h1 class="logo fancy-text">Brasserie du pont noir</h1>
-                <h2 class="section-title fancy-text">Menu</h2>
-            </div>
+    <!-- Hero Section -->
+    <header class="hero"
+        style="background: radial-gradient(circle at center, #2a2a2a 0%, #121212 80%); height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative;">
 
-            <div class="menu-category">
-                <h3 class="category-title fancy-text">Entrées</h3>
-                <div class="menu-item">
-                    <div class="item-name">• Œufs mayo de la maison</div>
-                    <div class="item-description">Mayonnaise à l'ancienne, pointe de moutarde</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Velouté du jour</div>
-                    <div class="item-description">Selon l'humeur du chef et le marché</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Salade de chèvre chaud</div>
-                    <div class="item-description">Toast croustillant, miel, noix et jeunes pousses</div>
-                </div>
-            </div>
+        <!-- Decorative Frame -->
+        <div
+            style="position: absolute; inset: 2rem; border: 1px solid var(--color-primary); opacity: 0.2; pointer-events: none;">
+        </div>
+        <div
+            style="position: absolute; inset: 2.5rem; border: 1px solid var(--color-primary); opacity: 0.1; pointer-events: none;">
+        </div>
 
-            <div class="menu-category">
-                <h3 class="category-title fancy-text">Plats</h3>
-                <div class="menu-item">
-                    <div class="item-name">• Steak de bœuf grillé</div>
-                    <div class="item-description">Sauce au poivre ou beurre café de Paris, frites maison</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Saucisse de campagne</div>
-                    <div class="item-description">Purée onctueuse, jus réduit à l'oignon</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Burger de la brasserie</div>
-                    <div class="item-description">Bœuf suisse, cheddar, lard, oignons confits, frites</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Plat végétarien du moment</div>
-                    <div class="item-description">Inspiré des légumes de saison</div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3 class="category-title fancy-text">Fromages</h3>
-                <div class="menu-item">
-                    <div class="item-name">• Assiette de fromages régionaux</div>
-                    <div class="item-description">Sélection du moment</div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3 class="category-title fancy-text">Desserts</h3>
-                <div class="menu-item">
-                    <div class="item-name">• Crème brûlée à la vanille</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Mousse au chocolat noir</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Tarte du jour</div>
-                    <div class="item-description">Servie tiède, selon l'inspiration</div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3 class="category-title fancy-text">Boissons</h3>
-                <div class="menu-item">
-                    <div class="item-name">• Cafés & thés</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Bières pression</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Vins au verre</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-name">• Sirops & eaux minérales</div>
-                </div>
+        <div class="container fade-in">
+            <span
+                style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 4px; font-size: 0.9rem; margin-bottom: 1rem; display: block;">Sion,
+                Suisse</span>
+            <h1 style="font-size: clamp(3.5rem, 6vw, 7rem); margin-bottom: 2rem; line-height: 1.1;">
+                <span style="color: var(--color-text);">Brasserie du</span><br>
+                Pont Noir
+            </h1>
+            <div style="width: 80px; height: 1px; background: var(--color-primary); margin: 0 auto 2rem;"></div>
+            <p
+                style="font-size: 1.3rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; color: var(--color-text-muted);">
+                L'excellence de la tradition suisse dans un cadre d'exception.</p>
+            <div class="hero-actions">
+                <a href="menu.html" class="btn btn-primary">Découvrir le Menu</a>
+                <a href="contact.html" class="btn"
+                    style="border-color: rgba(255,255,255,0.2); color: #fff; margin-left: 1rem;">Réserver</a>
             </div>
         </div>
-        <footer>Brasserie du pont noir © 2026</footer>
-    </div>
+    </header>
 
-    <!-- Gallery Page -->
-    <div id="gallery" class="hidden">
-        <button class="back-btn" onclick="showSection('home')">← Retour</button>
-        <div class="gallery-section">
-            <div class="gallery-header">
-                <h1 class="logo fancy-text">Brasserie du pont noir</h1>
-            </div>
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 400'%3E%3Crect fill='%23C9A66B' width='1000' height='400'/%3E%3Ctext x='500' y='200' font-family='Arial' font-size='48' fill='white' text-anchor='middle'%3EBeer Bottles Showcase%3C/text%3E%3C/svg%3E" alt="Bières artisanales" class="beer-showcase">
-            
-            <div class="quality-section">
-                <h2 class="quality-title">Des Produits de <span class="fancy-text">Qualité</span></h2>
-                <p class="quality-text">
-                    afin de vous fournir la meilleur <span class="fancy-text">expérience</span>, nous nous appliquons à vous fournir des produits <span class="fancy-text">locaux</span> et de <span class="fancy-text">qualité</span>
+    <!-- Presentation Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center fade-in">
+                <h2 style="margin-bottom: 1rem;">Bienvenue</h2>
+                <div style="width: 50px; height: 3px; background: var(--color-primary); margin: 0 auto 2rem;"></div>
+                <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: var(--color-text-muted);">
+                    Située au cœur de la ville, la <strong>Brasserie du Pont Noir</strong> vous accueille dans une
+                    atmosphère chaleureuse et raffinée.
+                    Découvrez une cuisine authentique, mettant à l'honneur les produits du terroir et le savoir-faire de
+                    nos chefs.
                 </p>
             </div>
         </div>
-        <footer>Brasserie du pont noir © 2026</footer>
-    </div>
+    </section>
 
-    <!-- Histoire Page -->
-    <div id="histoire" class="hidden">
-        <button class="back-btn" onclick="showSection('home')">← Retour</button>
-        <div class="histoire-section">
-            <div class="histoire-header">
-                <h1 class="logo fancy-text">Brasserie du pont noir</h1>
-                <h2 class="section-title fancy-text">Histoire</h2>
+    <!-- Featured Section -->
+    <section class="section" style="background-color: var(--color-surface);">
+        <div class="container">
+            <h2 class="text-center fade-in" style="margin-bottom: 3rem;">Nos Spécialités</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <article class="card fade-in">
+                    <div style="height: 250px; overflow: hidden;">
+                        <img src="images/dish-steak.png" alt="Steak Frites"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <div style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Entrecôte Café de Paris</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 1rem;">Bœuf du Simmental, beurre Café
+                            de Paris, frites maison.</p>
+                        <span style="color: var(--color-primary); font-weight: 700; font-size: 1.2rem;">42.-</span>
+                    </div>
+                </article>
+
+                <article class="card fade-in">
+                    <div style="height: 250px; overflow: hidden;">
+                        <img src="images/dish-burger.png" alt="Burger Gourmet"
+                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <div style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Burger du Pont</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 1rem;">Pain brioché, fromage d'alpage,
+                            oignons confits au Fendant.</p>
+                        <span style="color: var(--color-primary); font-weight: 700; font-size: 1.2rem;">28.-</span>
+                    </div>
+                </article>
+
+                <article class="card fade-in">
+                    <div
+                        style="height: 250px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                        <img src="images/interior.png" alt="Ambiance"
+                            style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                    </div>
+                    <div style="padding: 2rem;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Cadre Unique</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 1rem;">Profitez d'un moment de détente
+                            dans notre salle historique.</p>
+                        <a href="galerie.html" style="color: var(--color-primary); text-decoration: underline;">Voir la
+                            galerie →</a>
+                    </div>
+                </article>
+
             </div>
-            <div class="histoire-content">
-                <p>
-                    La Brasserie du Pont Noir est née de la passion pour les bières artisanales et la gastronomie locale. 
-                    Située au cœur de notre belle région, notre établissement familial perpétue les traditions brassicoles 
-                    tout en innovant constamment pour vous offrir des saveurs uniques et mémorables.
-                </p>
-                <br>
-                <p>
-                    Chaque bière est brassée avec soin, en utilisant des ingrédients locaux de première qualité. 
-                    Notre cuisine met en valeur les produits du terroir, dans une ambiance chaleureuse et conviviale 
-                    qui fait de chaque visite un moment inoubliable.
-                </p>
+            <div class="text-center fade-in" style="margin-top: 3rem;">
+                <a href="menu.html" class="btn btn-primary">Voir toute la carte</a>
             </div>
         </div>
-        <footer>Brasserie du pont noir © 2026</footer>
-    </div>
+    </section>
 
-    <script>
-        function showSection(sectionName) {
-            // Hide all sections
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('menu').classList.add('hidden');
-            document.getElementById('gallery').classList.add('hidden');
-            document.getElementById('histoire').classList.add('hidden');
+    <!-- Footer -->
+    <footer style="background: #000; padding: 4rem 0 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h4 style="margin-bottom: 1.5rem;">Brasserie du Pont Noir</h4>
+                    <p style="color: var(--color-text-muted);">L'art de vivre.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem;">Horaires</h4>
+                    <ul style="color: var(--color-text-muted);">
+                        <li>Lun - Ven: 11h - 23h</li>
+                        <li>Sam - Dim: 10h - 00h</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1.5rem;">Contact</h4>
+                    <ul style="color: var(--color-text-muted);">
+                        <li>12 Rue du Pont Noir</li>
+                        <li>1950 Sion</li>
+                        <li>+41 27 123 45 67</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                <p style="font-size: 0.9rem; color: var(--color-text-muted);">© 2026 Brasserie du Pont Noir. Tous droits
+                    réservés.</p>
+            </div>
+        </div>
+    </footer>
 
-            // Show requested section
-            const section = document.getElementById(sectionName);
-            section.classList.remove('hidden');
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Add active class for animations
-            if (sectionName === 'menu') {
-                setTimeout(() => {
-                    section.querySelector('.menu-section').classList.add('active');
-                }, 100);
-            }
-        }
-
-        // Smooth scroll behavior
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
-
-        // Add parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.menu-item');
-            
-            parallaxElements.forEach((el, index) => {
-                const speed = 0.5;
-                el.style.transform = `translateY(${scrolled * speed * 0.01}px)`;
-            });
-        });
-    </script>
 </body>
+
 </html>

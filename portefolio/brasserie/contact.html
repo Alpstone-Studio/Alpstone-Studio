@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasserie du Pont Noir | Contact</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
+    <style>
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: var(--color-bg);
+            border: 1px solid #333;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .info-card {
+            background: var(--color-surface);
+            padding: 2rem;
+            border: 1px solid #333;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="brasserie.html" class="brand-logo">Le Pont Noir</a>
+            <div class="mobile-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="brasserie.html" class="nav-link">Accueil</a></li>
+                <li><a href="menu.html" class="nav-link">La Carte</a></li>
+                <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="histoire.html" class="nav-link">Histoire</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="section text-center"
+        style="background-color: var(--color-surface); padding-top: 8rem; padding-bottom: 4rem;">
+        <div class="container fade-in">
+            <h1 style="font-size: 4rem; margin-bottom: 1rem;">Contact & Réservation</h1>
+            <p style="color: var(--color-text-muted);">Réservez votre table ou posez-nous une question.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+
+                <div class="fade-in">
+                    <h2 style="margin-bottom: 2rem;">Envoyez-nous un message</h2>
+                    <form class="contact-form"
+                        onsubmit="event.preventDefault(); alert('Merci pour votre message ! (Simulation)');">
+                        <input type="text" placeholder="Votre Nom" required>
+                        <input type="email" placeholder="Votre Email" required>
+                        <textarea rows="5" placeholder="Votre Message ou Demande de Réservation" required></textarea>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+
+                <div class="fade-in">
+                    <h2 style="margin-bottom: 2rem;">Informations</h2>
+                    <div class="info-card">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Adresse</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+                            12 Rue du Pont Noir<br>
+                            1950 Sion, Suisse
+                        </p>
+
+                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Téléphone</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 2rem;">
+                            +41 27 123 45 67
+                        </p>
+
+                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Horaires</h3>
+                        <ul style="color: var(--color-text-muted);">
+                            <li><strong>Lundi - Vendredi:</strong> 11h30 - 15h00 / 19h00 - 23h00</li>
+                            <li><strong>Samedi - Dimanche:</strong> 11h30 - 00h00</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer style="background: #000; padding: 4rem 0 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div class="container text-center">
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">© 2026 Brasserie du Pont Noir. Tous droits
+                réservés.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

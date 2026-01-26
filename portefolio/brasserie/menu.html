@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasserie du Pont Noir | La Carte</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
+    <style>
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+        }
+
+        .menu-category h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-primary);
+            display: inline-block;
+        }
+
+        .menu-item {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .item-details {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
+        .item-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .item-desc {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="brasserie.html" class="brand-logo">Le Pont Noir</a>
+            <div class="mobile-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="brasserie.html" class="nav-link">Accueil</a></li>
+                <li><a href="menu.html" class="nav-link active">La Carte</a></li>
+                <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+                <li><a href="histoire.html" class="nav-link">Histoire</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="section text-center"
+        style="background-color: var(--color-surface); padding-top: 8rem; padding-bottom: 4rem;">
+        <div class="container fade-in">
+            <h1 style="font-size: 4rem; margin-bottom: 1rem;">Notre Carte</h1>
+            <p style="color: var(--color-text-muted);">Une cuisine de saison, faite maison avec passion.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="menu-grid fade-in">
+
+                <div class="menu-category">
+                    <h2>Entrées</h2>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Œufs Mayo "Pont Noir"</div>
+                            <div class="item-desc">Mayonnaise à l'ancienne, pointe de moutarde de Dijon, ciboulette.
+                            </div>
+                        </div>
+                        <div class="item-price">9.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Os à Moelle Rôti</div>
+                            <div class="item-desc">Fleur de sel, pain grillé, salade d'herbes folles.</div>
+                        </div>
+                        <div class="item-price">14.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Soupe à l'Oignon Gratinée</div>
+                            <div class="item-desc">Gruyère AOP, croûtons dorés.</div>
+                        </div>
+                        <div class="item-price">12.-</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h2>Plats</h2>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Tartare de Bœuf Suisse</div>
+                            <div class="item-desc">Préparé devant vous, frites maison, salade verte.</div>
+                        </div>
+                        <div class="item-price">34.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Suprême de Volaille Jaune</div>
+                            <div class="item-desc">Sauce aux morilles, purée de pommes de terre au beurre.</div>
+                        </div>
+                        <div class="item-price">32.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Filets de Perche</div>
+                            <div class="item-desc">Meunière, légumes de saison glacés, beurre blanc.</div>
+                        </div>
+                        <div class="item-price">36.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Risotto aux Champignons</div>
+                            <div class="item-desc">Sbrinz AOP, huile de truffe blanche.</div>
+                        </div>
+                        <div class="item-price">28.-</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h2>Fromages & Desserts</h2>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Plateau de Fromages Affinés</div>
+                            <div class="item-desc">Sélection de notre fromager, confiture de cerises noires.</div>
+                        </div>
+                        <div class="item-price">16.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Profiteroles au Chocolat</div>
+                            <div class="item-desc">Choux maison, glace vanille Bourbon, sauce chocolat chaud.</div>
+                        </div>
+                        <div class="item-price">12.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Crème Brûlée</div>
+                            <div class="item-desc">À la gousse de vanille de Madagascar.</div>
+                        </div>
+                        <div class="item-price">11.-</div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h2>Boissons</h2>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Vins au Verre</div>
+                            <div class="item-desc">Sélection du sommelier (Rouge, Blanc, Rosé).</div>
+                        </div>
+                        <div class="item-price">dès 7.-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-details">
+                            <div class="item-title">Bières Pression</div>
+                            <div class="item-desc">Blonde, Blanche, Ambrée (25cl / 50cl).</div>
+                        </div>
+                        <div class="item-price">5.- / 9.-</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #000; padding: 4rem 0 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div class="container text-center">
+            <p style="font-size: 0.9rem; color: var(--color-text-muted);">© 2026 Brasserie du Pont Noir. Tous droits
+                réservés.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
