@@ -1760,6 +1760,28 @@
             transform: translateY(-2px);
         }
 
+        /* Click / press animation: scale down on active/pressed */
+        /* Click / press animation: scale down on active/pressed for all buttons */
+        button:active,
+        button.pressed,
+        .btn:active,
+        .btn.pressed,
+        .toolbar-btn:active,
+        .toolbar-btn.pressed,
+        .modal-btn:active,
+        .modal-btn.pressed,
+        .toolbar-action:active,
+        .toolbar-action.pressed,
+        .style-examples-btn:active,
+        .style-examples-btn.pressed,
+        .style-card:active,
+        .style-card.pressed,
+        .example-card-btn:active,
+        .example-card-btn.pressed {
+            transform: scale(0.95) !important;
+            transition: all 0.3s ease !important;
+        }
+
         .toolbar-btn.active {
             background: var(--primary-color);
             color: white;
@@ -3600,6 +3622,7 @@
             updateColorPreview();
             updateTypoPreview();
             updateSettingDemos();
+            initButtonPressAnimations();
         });
 
         // ============================================
@@ -4025,6 +4048,20 @@
                     designState.typography = option.dataset.typo;
                     updateTypoPreview();
                 });
+            });
+        }
+
+        // Attach press handlers to toolbar buttons to ensure visual feedback on click/touch
+        function initButtonPressAnimations() {
+            const selectors = 'button, .btn, .toolbar-btn, .modal-btn, .toolbar-action, .style-examples-btn, .style-card, .example-card-btn, .example-card .example-card-btn';
+            document.querySelectorAll(selectors).forEach(el => {
+                // mouse
+                el.addEventListener('mousedown', () => el.classList.add('pressed'));
+                el.addEventListener('mouseup', () => el.classList.remove('pressed'));
+                el.addEventListener('mouseleave', () => el.classList.remove('pressed'));
+                // touch
+                el.addEventListener('touchstart', () => el.classList.add('pressed'), { passive: true });
+                el.addEventListener('touchend', () => el.classList.remove('pressed'));
             });
         }
 
