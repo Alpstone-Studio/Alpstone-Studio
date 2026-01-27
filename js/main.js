@@ -257,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Site vitrine pour une brasserie artisanale suisse'
         },
         {
-            title: 'Corporate Website',
+            title: 'Locus Architects',
             category: 'UI/UX Design',
-            description: 'Professional presence with elegant design'
+            description: 'Portfolio minimaliste pour cabinet d\'architecture'
         },
         {
             title: 'Mobile App Landing',
