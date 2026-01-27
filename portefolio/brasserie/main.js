@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Back to Alpstone Button
     const backBtn = document.createElement('a');
-    backBtn.href = '../../index.html';
+    backBtn.href = '../../index.html#portfolio';
     backBtn.className = 'alpstone-back-btn';
     // Using simple white styling for logo if it's an image, or just keeping the pill effect.
     // Assuming the path is correct relative to current location.

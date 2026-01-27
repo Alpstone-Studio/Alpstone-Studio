@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Back to Alpstone Button (Same implementation)
     const backBtn = document.createElement('a');
-    backBtn.href = '../../index.html';
+    backBtn.href = '../../index.html#portfolio';
     backBtn.className = 'alpstone-back-btn';
     backBtn.innerHTML = `
         <img src="../../Logos/Alpstone-studio-vertical/White-vertical.png" alt="AS" class="alpstone-btn-logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:20px;\'>🔙</span>' + this.parentElement.innerHTML.split('</span>')[1]">

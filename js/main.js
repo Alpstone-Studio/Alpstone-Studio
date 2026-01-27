@@ -148,7 +148,9 @@ if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
 }
 
-window.scrollTo(0, 0);
+if (!window.location.hash) {
+    window.scrollTo(0, 0);
+}
 
 // Ensure hero background video does not loop and stays on last frame when finished
 document.addEventListener('DOMContentLoaded', () => {
@@ -156,13 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroVideo) {
         try {
             heroVideo.loop = false;
-        } catch (e) {}
+        } catch (e) { }
 
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
             try {
                 heroVideo.currentTime = heroVideo.duration;
-            } catch (err) {}
+            } catch (err) { }
         });
     }
 });
@@ -234,9 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Card data
     const cardData = [
         {
-            title: 'E-Commerce Platform',
+            title: 'Brasserie du Pont Noir',
             category: 'Web Development',
-            description: 'Modern online shopping experience with seamless checkout'
+            description: 'Site vitrine pour une brasserie artisanale suisse'
         },
         {
             title: 'Corporate Website',
@@ -305,6 +307,51 @@ document.addEventListener('DOMContentLoaded', () => {
             nextCard();
         }
     });
+    // Generate Grid View from Card Data
+    function generateGridView() {
+        const gridViewContainer = document.getElementById('portfolioGridView');
+        if (!gridViewContainer) return;
+
+        // Clear existing content
+        gridViewContainer.innerHTML = '';
+
+        cardData.forEach((data, index) => {
+            const card = document.querySelector(`.portfolio-card[data-index="${index}"]`);
+            if (!card) return;
+
+            // Extract content from card
+            const cardImageContent = card.querySelector('.portfolio-card-image').innerHTML;
+            const cardOnClick = card.getAttribute('onclick');
+            const cardStyle = card.getAttribute('style'); // For cursor: pointer
+
+            // Create grid item
+            const gridItem = document.createElement('div');
+            gridItem.className = 'portfolio-grid-item';
+
+            if (cardOnClick) {
+                gridItem.setAttribute('onclick', cardOnClick);
+            }
+
+            if (cardStyle && cardStyle.includes('cursor: pointer')) {
+                gridItem.style.cursor = 'pointer';
+            }
+
+            gridItem.innerHTML = `
+                <div class="portfolio-grid-image">
+                    ${cardImageContent}
+                </div>
+                <div class="portfolio-grid-content">
+                    <h3 class="portfolio-grid-title">${data.title}</h3>
+                    <p class="portfolio-grid-description">${data.description}</p>
+                </div>
+            `;
+
+            gridViewContainer.appendChild(gridItem);
+        });
+    }
+
+    // Call generate on load
+    generateGridView();
 });
 
 // ==========================================
