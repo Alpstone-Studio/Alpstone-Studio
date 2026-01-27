@@ -141,7 +141,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ==========================================
-// SCROLL TO TOP ON PAGE LOAD
+// SCROLL TO TOP ON PAGE LOAD OR TO HASH TARGET
 // ==========================================
 
 if (history.scrollRestoration) {
@@ -150,6 +150,22 @@ if (history.scrollRestoration) {
 
 if (!window.location.hash) {
     window.scrollTo(0, 0);
+} else {
+    // Scroll to hash target after page load (e.g., coming from portfolio pages)
+    document.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash;
+        const target = document.querySelector(hash);
+        if (target) {
+            // Small delay to ensure page is fully rendered
+            setTimeout(() => {
+                const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    });
 }
 
 // Ensure hero background video does not loop and stays on last frame when finished
