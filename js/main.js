@@ -49,6 +49,25 @@ setTimeout(() => {
     }
 }, 10000);
 
+// Show navbar when mouse approaches top of screen
+let mouseNearTop = false;
+const topZoneHeight = 80; // Height of the zone that triggers navbar appearance
+
+window.addEventListener('mousemove', (e) => {
+    const isNearTop = e.clientY <= topZoneHeight;
+
+    // If mouse is near top and navbar is not visible due to scroll
+    if (isNearTop && window.scrollY === 0) {
+        mouseNearTop = true;
+        navbar.classList.add('visible');
+    }
+    // If mouse leaves top zone and we're still at top of page
+    else if (!isNearTop && mouseNearTop && window.scrollY === 0) {
+        mouseNearTop = false;
+        navbar.classList.remove('visible');
+    }
+});
+
 // ==========================================
 // SMOOTH SCROLLING
 // ==========================================
@@ -290,13 +309,93 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextCard() {
-        currentIndex = (currentIndex + 1) % portfolioCards.length;
-        updateCardPositions();
+        const newIndex = (currentIndex + 1) % portfolioCards.length;
+
+        // Check if we're looping back to the start
+        if (newIndex === 0) {
+            // Find the card that will become the front card (card at index 0)
+            const cardThatWillBeFront = Array.from(portfolioCards).find(
+                (card) => parseInt(card.getAttribute('data-index')) === 0
+            );
+
+            if (cardThatWillBeFront) {
+                // Add entering class BEFORE changing position
+                cardThatWillBeFront.classList.add('entering');
+
+                // Disable transition temporarily
+                cardThatWillBeFront.style.transition = 'none';
+
+                // Move it to position -1 (left side) immediately
+                cardThatWillBeFront.setAttribute('data-position', '-1');
+
+                // Force reflow to ensure the change is applied
+                void cardThatWillBeFront.offsetHeight;
+
+                // Re-enable transition
+                cardThatWillBeFront.style.transition = '';
+            }
+
+            // Small delay to ensure the card is positioned before animating
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    currentIndex = newIndex;
+                    updateCardPositions();
+
+                    // Clean up entering class after animation completes
+                    setTimeout(() => {
+                        if (cardThatWillBeFront) {
+                            cardThatWillBeFront.classList.remove('entering');
+                        }
+                    }, 650); // Slightly longer than CSS transition (600ms)
+                });
+            });
+        } else {
+            // Normal next (no loop)
+            currentIndex = newIndex;
+            updateCardPositions();
+        }
     }
 
     function prevCard() {
-        currentIndex = (currentIndex - 1 + portfolioCards.length) % portfolioCards.length;
-        updateCardPositions();
+        // Calculate the new index
+        const newIndex = (currentIndex - 1 + portfolioCards.length) % portfolioCards.length;
+
+        // Find the card that will become the front card
+        const cardThatWillBeFront = Array.from(portfolioCards).find(
+            (card) => parseInt(card.getAttribute('data-index')) === newIndex
+        );
+
+        if (cardThatWillBeFront) {
+            // Add entering class BEFORE changing position
+            cardThatWillBeFront.classList.add('entering');
+
+            // Disable transition temporarily
+            cardThatWillBeFront.style.transition = 'none';
+
+            // Move it to position -1 (left side) immediately
+            cardThatWillBeFront.setAttribute('data-position', '-1');
+
+            // Force reflow to ensure the change is applied
+            void cardThatWillBeFront.offsetHeight;
+
+            // Re-enable transition
+            cardThatWillBeFront.style.transition = '';
+        }
+
+        // Small delay to ensure the card is positioned before animating
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                currentIndex = newIndex;
+                updateCardPositions();
+
+                // Clean up entering class after animation completes
+                setTimeout(() => {
+                    if (cardThatWillBeFront) {
+                        cardThatWillBeFront.classList.remove('entering');
+                    }
+                }, 650); // Slightly longer than CSS transition (600ms)
+            });
+        });
     }
 
     // Initialize positions

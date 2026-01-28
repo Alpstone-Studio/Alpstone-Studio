@@ -1071,6 +1071,23 @@ body {
     pointer-events: none;
 }
 
+/* Entering from left animation */
+.portfolio-card.entering[data-position="-1"] {
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.portfolio-card[data-position="-2"],
+.portfolio-card[data-position="-3"],
+.portfolio-card[data-position="-4"],
+.portfolio-card[data-position*="-"] {
+    z-index: 0;
+    transform: translateX(-200px) translateY(0) rotate(-20deg) scale(0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Card Info Below */
 .portfolio-card-info {
     text-align: center;
