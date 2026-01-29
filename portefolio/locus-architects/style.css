@@ -36,10 +36,7 @@ h3 {
 
 /* Header */
 header {
-    padding: 3rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 2.5rem 0;
 }
 
 .logo {
@@ -48,20 +45,11 @@ header {
     text-transform: uppercase;
     text-decoration: none;
     color: var(--text-color);
+    font-weight: 400;
 }
 
-nav ul {
-    display: flex;
-    gap: 3rem;
-    list-style: none;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.logo:hover {
+    color: var(--accent-color);
 }
 
 /* Hero */
@@ -396,4 +384,356 @@ nav a.active {
     width: 100%;
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+/* Large screens (1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .projects {
+        gap: 2rem;
+    }
+
+    .project-image {
+        height: 450px;
+    }
+
+    .studio-content {
+        gap: 2rem;
+    }
+}
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+        padding: 1.5rem 0;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    /* Hero */
+    .hero {
+        height: 70vh;
+        margin-bottom: 4rem;
+    }
+
+    .hero-content {
+        padding: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* Projects Grid */
+    .projects {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .project-card.large {
+        grid-column: span 1;
+    }
+
+    .project-image {
+        height: 350px;
+    }
+
+    .project-info h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Page Header */
+    .page-header {
+        padding: 4rem 0 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Work Page Grid */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .project-thumb {
+        height: 300px;
+    }
+
+    /* Studio Page */
+    .studio-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .studio-text h3 {
+        font-size: 1.6rem;
+    }
+
+    .studio-image {
+        height: 350px;
+    }
+
+    /* Team */
+    .team-grid {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .member-photo {
+        height: 250px;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 4rem 0;
+    }
+
+    .contact h2 {
+        font-size: 2rem;
+    }
+
+    /* Alpstone Back Button */
+    .alpstone-back-btn {
+        bottom: 15px;
+        left: 15px;
+    }
+}
+
+/* Intermediate (600px) */
+@media (max-width: 600px) {
+    .hero {
+        height: 60vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .project-image {
+        height: 300px;
+    }
+
+    .contact h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+        padding: 1rem 0;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    /* Hero */
+    .hero {
+        height: 55vh;
+        margin-bottom: 3rem;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Projects */
+    .projects {
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .project-image {
+        height: 260px;
+        margin-bottom: 1rem;
+    }
+
+    .project-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .project-info p {
+        font-size: 0.8rem;
+    }
+
+    /* Page Header */
+    .page-header {
+        padding: 3rem 0 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .page-header p {
+        font-size: 0.75rem;
+    }
+
+    /* Work Grid */
+    .project-thumb {
+        height: 250px;
+    }
+
+    .project-meta h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Studio */
+    .studio-text h3 {
+        font-size: 1.4rem;
+    }
+
+    .studio-text p {
+        font-size: 1rem;
+    }
+
+    .studio-image {
+        height: 280px;
+    }
+
+    /* Team */
+    .team h3 {
+        font-size: 1.5rem;
+    }
+
+    .member-photo {
+        height: 220px;
+    }
+
+    .team-member h4 {
+        font-size: 1rem;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 3rem 0;
+    }
+
+    .contact h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-btn {
+        padding: 0.8rem 2rem;
+        font-size: 0.8rem;
+    }
+
+    /* Alpstone Back Button */
+    .alpstone-back-btn {
+        height: 44px;
+        font-size: 0.85rem;
+        bottom: 12px;
+        left: 12px;
+        min-width: 44px;
+    }
+
+    .alpstone-btn-logo {
+        height: 20px;
+        width: 20px;
+    }
+
+    .alpstone-back-btn.collapsed:not(:hover) {
+        max-width: 44px;
+        width: 44px;
+        padding: 0 12px;
+        border-radius: 50%;
+    }
+}
+
+/* Small Mobile (360px) */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .hero {
+        height: 50vh;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-info h3 {
+        font-size: 1.15rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .contact h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
 }

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Back to Alpstone Button (Same implementation)
+    // Back to Alpstone Button
     const backBtn = document.createElement('a');
     backBtn.href = '../../index.html#portfolio';
     backBtn.className = 'alpstone-back-btn';

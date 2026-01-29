@@ -2936,6 +2936,214 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* ============================================
+           RESPONSIVE DESIGN - SMALL MOBILE (360px)
+           ============================================ */
+        @media (max-width: 360px) {
+            /* Container */
+            .onboarding-container {
+                padding: 70px 8px 90px;
+            }
+
+            /* Header */
+            .onboarding-header {
+                padding: 6px 10px;
+            }
+
+            .onboarding-title {
+                font-size: 0.9rem;
+            }
+
+            .onboarding-subtitle {
+                display: none;
+            }
+
+            .onboarding-logo {
+                height: 24px;
+            }
+
+            /* Back button */
+            .back-button {
+                width: 40px;
+                height: 40px;
+                top: 8px;
+                left: 8px;
+                border-radius: 8px;
+            }
+
+            /* Content */
+            .content-main {
+                padding: 20px 12px;
+                border-radius: 14px;
+            }
+
+            .step-title {
+                font-size: 1.2rem;
+            }
+
+            .step-description {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            /* Style cards */
+            .style-card {
+                padding: 14px;
+            }
+
+            .style-preview {
+                height: 60px;
+            }
+
+            .style-name {
+                font-size: 0.9rem;
+            }
+
+            .style-description {
+                font-size: 0.7rem;
+            }
+
+            /* Navigation buttons */
+            .btn-nav {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            /* Step indicator */
+            .step-indicator {
+                padding: 6px 10px;
+                gap: 4px;
+            }
+
+            .step-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75rem;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            /* Welcome screen */
+            .welcome-screen .onboarding-title {
+                font-size: 1.6rem;
+            }
+
+            .welcome-screen .onboarding-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .welcome-screen .onboarding-logo {
+                height: 50px;
+            }
+
+            .welcome-btn {
+                padding: 16px 20px;
+            }
+
+            .welcome-btn i {
+                font-size: 1.6rem;
+            }
+
+            .welcome-btn span:not(.welcome-btn-subtitle) {
+                font-size: 0.95rem;
+            }
+
+            /* Toolbar */
+            .toolbar-tab-icon {
+                width: 24px;
+                height: 24px;
+                font-size: 0.7rem;
+            }
+
+            .toolbar-tab-label {
+                display: none;
+            }
+
+            /* Modal */
+            .modal-content {
+                padding: 24px 16px;
+            }
+
+            .modal-title {
+                font-size: 1.1rem;
+            }
+
+            /* Color picker */
+            .color-presets {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .color-preset {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Typography options */
+            .typo-option {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .typo-sample {
+                font-size: 1.6rem;
+                min-width: 50px;
+            }
+
+            .typo-name {
+                font-size: 0.85rem;
+            }
+
+            .typo-desc {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ============================================
+           LANDSCAPE MODE - MOBILE
+           ============================================ */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .onboarding-container {
+                padding: 70px 20px 80px;
+            }
+
+            .step-indicator {
+                bottom: 8px;
+                padding: 6px 12px;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            .welcome-screen {
+                padding: 60px 20px;
+            }
+
+            .welcome-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .welcome-btn {
+                flex: 1;
+                min-width: 200px;
+                max-width: 280px;
+            }
+
+            .content-main {
+                max-height: calc(100vh - 150px);
+                overflow-y: auto;
+            }
+
+            .style-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
     </style>
 </head>
 

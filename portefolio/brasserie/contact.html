@@ -17,6 +17,8 @@
             border: 1px solid #333;
             color: var(--color-text);
             font-family: var(--font-sans);
+            font-size: 1rem;
+            border-radius: 4px;
         }
 
         .contact-form input:focus,
@@ -30,6 +32,56 @@
             padding: 2rem;
             border: 1px solid #333;
             height: 100%;
+            border-radius: 4px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 4rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .contact-grid {
+                gap: 3rem;
+            }
+
+            header h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .info-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-grid {
+                gap: 2rem;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                padding: 0.875rem;
+                font-size: 0.95rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem !important;
+            }
+
+            header {
+                padding-top: 6rem !important;
+            }
+
+            .info-card h3 {
+                font-size: 1.1rem !important;
+            }
+
+            .info-card ul li {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -60,7 +112,7 @@
 
     <section class="section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;">
+            <div class="contact-grid">
 
                 <div class="fade-in">
                     <h2 style="margin-bottom: 2rem;">Envoyez-nous un message</h2>

@@ -7,6 +7,64 @@
     <title>Brasserie du Pont Noir | Histoire</title>
     <link rel="stylesheet" href="main.css">
     <script src="main.js" defer></script>
+    <style>
+        .histoire-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .histoire-image,
+        .histoire-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .histoire-image img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .histoire-content {
+                gap: 2rem;
+            }
+
+            header h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .histoire-image,
+            .histoire-text {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem !important;
+            }
+
+            header {
+                padding-top: 6rem !important;
+            }
+
+            .histoire-text h2 {
+                font-size: 1.5rem !important;
+            }
+
+            .histoire-text p {
+                font-size: 0.95rem;
+            }
+
+            .section[style*="background-color"] p {
+                font-size: 1rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -35,12 +93,11 @@
 
     <section class="section">
         <div class="container">
-            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4rem;">
-                <div style="flex: 1; min-width: 300px;" class="fade-in">
-                    <img src="images/interior.png" alt="Intérieur Historique"
-                        style="width: 100%; border-radius: 4px; box-shadow: var(--shadow-lg);">
+            <div class="histoire-content">
+                <div class="histoire-image fade-in">
+                    <img src="images/interior.png" alt="Intérieur Historique">
                 </div>
-                <div style="flex: 1; min-width: 300px;" class="fade-in">
+                <div class="histoire-text fade-in">
                     <h2 style="margin-bottom: 1.5rem;">L'Origine</h2>
                     <p style="margin-bottom: 1.5rem; color: #ccc;">
                         Fondée au début du siècle, la <strong>Brasserie du Pont Noir</strong> tire son nom du célèbre
